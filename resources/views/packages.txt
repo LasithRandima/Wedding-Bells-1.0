@@ -1,0 +1,3 @@
+https://filamentphp.com/plugins/curator
+https://github.com/happytodev/filament-social-networks
+https://filamentphp.com/plugins/laravel-modules

@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class Vendor extends Model
+{
+    use HasFactory;
+
+
+    public function user(): BelongsTo {
+        return $this -> belongsTo(User::class);
+    }
+
+    public function vendorsocials(): HasMany {
+        return $this -> hasMany(VendorSocial::class);
+    }
+
+    // public function vendortps(): HasMany {
+    //     return $this -> hasMany(VendorTp::class);
+    // }
+
+    public function vendorfaqs(): HasMany {
+        return $this -> hasMany(VendorFaq::class);
+    }
+
+    public function vendorpackage():HasOne {
+        return $this -> hasOne(VendorPackage::class);
+    }
+
+    public function advertisements():HasMany {
+        return $this -> hasMany(Advertisement::class);
+    }
+
+    public function reviews(): HasMany {
+        return $this -> hasMany(Review::class);
+    }
+
+    public function vendorgalleries(): HasMany {
+        return $this -> hasMany(VendorGallery::class);
+    }
+
+    public function vendorpayments(): HasMany {
+        return $this -> hasMany(VendorPayment::class);
+    }
+
+
+    public function vendorcategory(): BelongsTo {
+        return $this -> belongsTo(VendorCategory::class);
+    }
+
+    protected $casts = [
+        'v_phone' => 'array',
+    ];
+}
