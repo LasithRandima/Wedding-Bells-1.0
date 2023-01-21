@@ -19,7 +19,9 @@ class VendorFaqResource extends Resource
 {
     protected static ?string $model = VendorFaq::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+
+    protected static ?string $navigationGroup = 'Vendor Dashboard';
 
     public static function form(Form $form): Form
     {

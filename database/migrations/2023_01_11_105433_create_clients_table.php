@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('partner_name');
             $table->string('partner_email')->unique()->nullable();
             $table->string('c_location');
-            $table->string('c_tpno');
+            $table->json('c_tpno');
             $table->unsignedInteger('guest_count');
             $table->date('wed_date');
             $table->time('wed_start_time')->nullable();

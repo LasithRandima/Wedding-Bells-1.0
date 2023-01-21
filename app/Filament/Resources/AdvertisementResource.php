@@ -21,6 +21,9 @@ class AdvertisementResource extends Resource
 {
     protected static ?string $model = Advertisement::class;
 
+
+    protected static ?string $navigationGroup = 'Vendor Dashboard';
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
@@ -77,19 +80,24 @@ class AdvertisementResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+                // Tables\Columns\TextColumn::make('id'),
+                TextColumn::make('index')->rowIndex(),
                 Tables\Columns\ImageColumn::make('ad_image'),
                 Tables\Columns\TextColumn::make('ad_title')
                     ->label("Ad Title")
+                    ->limit(25)
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('about')
+                    ->limit(25)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('service_offered'),
+                Tables\Columns\TextColumn::make('service_offered')
+                    ->limit(35),
                 Tables\Columns\TextColumn::make('v_package_details')
                     ->label("Package"),
                 Tables\Columns\TextColumn::make('category_id'),
-                Tables\Columns\TextColumn::make('discount_deal'),
+                Tables\Columns\TextColumn::make('discount_deal')
+                    ->limit(25),
                 Tables\Columns\TextColumn::make('start_price'),
             ])
             ->filters([
@@ -97,6 +105,7 @@ class AdvertisementResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

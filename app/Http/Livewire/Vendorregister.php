@@ -17,6 +17,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Components\MarkdownEditor;
 
@@ -59,10 +60,13 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                         ->default(Auth::id())
                         ->disabled(),
                     TextInput::make('v_name')
+                        ->default(Auth::user()->name)
                         ->helperText('Your full name here, including any middle names.')
                         ->label('Personal Name')
                         ->required(),
                     TextInput::make('v_email')
+                        ->default(Auth::user()->email)
+                        ->email()
                         ->label('Business Email')
                         ->unique()
                         ->required()
@@ -83,17 +87,39 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                             'sm' => 2,
                     ]),
 
-                    Select::make('v_category')
+                    select::make('v_category')
                         ->label('Business Catagory')
-                        // ->multiple()
-                        ->options(VendorCategory::all()->pluck('Category_name', 'id'))
+                        // ->relationship('v_category', 'Category_name')
+                        ->multiple()
+                        ->options(VendorCategory::all()->pluck('Category_name', 'Category_name'))
+                        // ->preload()
                         ->searchable()
                         ->required(),
 
+                //     TextInput::make('v_bus_branches')
+                //         ->label('Business Branches')
+                //         ->placeholder('Type as comma separated values -> ex : Colombo , Gampaha'),
+                // ]),
+
+                Repeater::make('v_bus_branches')
+                ->label('Business Branches')
+                ->schema([
                     TextInput::make('v_bus_branches')
-                        ->label('Business Branches')
-                        ->placeholder('Type as comma separated values -> ex : Colombo , Gampaha'),
+                    ->label('Business Branches')
+                    ->required(),
+                    ])
+                    ->minItems(1)
+                    ->maxItems(10)
+                    ->collapsible()
+                    ->cloneable()
+                    ->required()
+                    ->columnSpan([
+                        'sm' => 2,
+                        ]),
+
+
                 ]),
+
 
                     Step::make('Contact_Details')
                     ->icon('heroicon-o-globe-alt')
@@ -115,6 +141,7 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                                 'sm' => 2,
                                 ]),
                         Repeater::make('v_phone')
+                            ->label('Contact Numbers')
                             ->schema([
                             TextInput::make('v_phone')
                             ->label('Contact Number')
@@ -126,14 +153,12 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                             ->collapsible()
                             ->cloneable()
                             ->required()
-                            ->columnSpan([
-                            'sm' => 2,
-                            ]),
+
                         ]),
 
+                        ])
 
 
-                ])
 
                 ->columns([
                     'sm' => 2,

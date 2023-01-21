@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Clientregister;
 use App\Http\Livewire\Vendorregister;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,12 @@ Route::get('/vendor/register', function () {
 });
 
 Route::get('/vendor/register', Vendorregister::class);
+
+Route::get('/customer/register', function () {
+    return view('livewire.Clientregister');
+});
+
+Route::get('/customer/register', Clientregister::class);
 
 Route::middleware([
     'auth:sanctum',

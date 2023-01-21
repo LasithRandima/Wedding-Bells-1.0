@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('about');
             $table->text('service_offered');
             $table->text('v_package_details');
-            $table->String('ad_image');
+            $table->String('ad_image')->nullable();
             $table->foreignId('category_id')->constrained('vendor_categories')->cascadeOnDelete();
             $table->text('discount_deal');
             $table->unsignedInteger('start_price');

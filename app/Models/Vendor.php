@@ -55,6 +55,10 @@ class Vendor extends Model
     }
 
     protected $casts = [
+        'v_bus_branches' => 'array',
+        'v_category' => 'array',
         'v_phone' => 'array',
+
     ];
+
 }
