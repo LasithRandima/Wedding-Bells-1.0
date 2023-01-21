@@ -61,6 +61,7 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->required()
                         ->email(),
                     TextInput::make('partner_name')
+                        ->required()
                         ->label('Partner Name')
                         ->placeholder('Partner full name here, including any middle names.'),
                     TextInput::make('partner_email')
@@ -68,9 +69,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->label('Partner Email')
                         ->placeholder('Partner Email'),
                     TextInput::make('c_location')
-                        ->email()
-                        ->label('Your Address')
-                        ->placeholder('Your Address')
+                        ->required()
+                        ->label('Address')
+                        ->placeholder('Home Address')
                         ->columnSpan([
                             'sm' => 2,
                             ]),
