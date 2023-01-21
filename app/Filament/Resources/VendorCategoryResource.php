@@ -18,7 +18,7 @@ class VendorCategoryResource extends Resource
     protected static ?string $model = VendorCategory::class;
 
 
-    protected static ?string $navigationGroup = 'Vendor Dashboard';
+    protected static ?string $navigationGroup = 'Admin Dashboard';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 

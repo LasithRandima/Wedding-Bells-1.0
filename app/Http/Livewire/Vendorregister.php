@@ -20,6 +20,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\TagsInput;
 
 class Vendorregister extends Component implements Forms\Contracts\HasForms
 {
@@ -101,21 +102,26 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                 //         ->placeholder('Type as comma separated values -> ex : Colombo , Gampaha'),
                 // ]),
 
-                Repeater::make('v_bus_branches')
-                ->label('Business Branches')
-                ->schema([
-                    TextInput::make('v_bus_branches')
+                // Repeater::make('v_bus_branches')
+                // ->label('Business Branches')
+                // ->schema([
+                //     TextInput::make('v_bus_branches')
+                //     ->label('Business Branches')
+                //     ->required(),
+                //     ])
+                //     ->minItems(1)
+                //     ->maxItems(10)
+                //     ->collapsible()
+                //     ->cloneable()
+                //     ->required()
+                //     ->columnSpan([
+                //         'sm' => 2,
+                //         ]),
+
+
+                TagsInput::make('v_bus_branches')
                     ->label('Business Branches')
-                    ->required(),
-                    ])
-                    ->minItems(1)
-                    ->maxItems(10)
-                    ->collapsible()
-                    ->cloneable()
-                    ->required()
-                    ->columnSpan([
-                        'sm' => 2,
-                        ]),
+                    ->placeholder('Type your Branches one by one'),
 
 
                 ]),
