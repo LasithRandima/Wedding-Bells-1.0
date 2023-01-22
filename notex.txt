@@ -1,0 +1,2 @@
+composer require saade/filament-fullcalendar
+php artisan vendor:publish --tag="filament-fullcalendar-config"
