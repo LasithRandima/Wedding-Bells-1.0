@@ -14,4 +14,8 @@ class ClientChecklist extends Model
     public function client(): BelongsTo {
         return $this -> belongsTo(Client::class);
     }
+
+
+    protected $fillable = ['c_id', 'task_name', 'description', 'Category', 'timing_period', 'date', 'essential', 'task_status'];
 }
+ 

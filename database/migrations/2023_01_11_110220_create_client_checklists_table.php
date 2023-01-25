@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('client_checklists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
+            $table->foreignId('c_id')->constrained('users')->cascadeOnDelete();
             $table->string('task_name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('category');
             $table->string('timing_period')->nullable();
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
             $table->boolean('essential');
             $table->boolean('task_status');
             $table->timestamps();

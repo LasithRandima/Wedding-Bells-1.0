@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
             $table->string('event_title');
             $table->string('event_desc')->nullable();
-            $table->date('event_date');
+            $table->date('event_start_date');
+            $table->date('event_end_date');
             $table->time('event_start_time')->nullable();
             $table->string('responsible_person')->nullable();
             $table->timestamps();
