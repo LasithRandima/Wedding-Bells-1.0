@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('category');
             $table->string('timing_period')->nullable();
             $table->string('date')->nullable();
-            $table->boolean('essential');
-            $table->boolean('task_status');
+            $table->boolean('essential')->default(0);
+            $table->boolean('task_status')->default(0);
             $table->timestamps();
         });
     }

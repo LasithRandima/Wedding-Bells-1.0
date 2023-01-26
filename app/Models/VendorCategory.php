@@ -10,6 +10,7 @@ class VendorCategory extends Model
 {
     use HasFactory;
 
+
     public function vendors(): HasMany {
         return $this -> hasMany(Vendor::class);
     }

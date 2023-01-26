@@ -5,6 +5,8 @@ use App\Http\Livewire\Vendorregister;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClientEventPlannerController;
+use App\Http\Controllers\ClientChecklistController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,19 @@ use App\Http\Controllers\ClientEventPlannerController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/checklist', function () {
+    return view('customer.checklist');
+});
+
+
+// Route::controller(ClientChecklistController::class)->group(function(){
+//     Route::get('/checklist', 'index');
+//     Route::post("categories","getCategory")->name('get-category');
+//     Route::post('ClientChecklist','store');
+// });
+
 
 Route::get('/vendor/register', function () {
     return view('livewire.Vendorregister');
