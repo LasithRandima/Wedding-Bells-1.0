@@ -7,17 +7,32 @@
     <p class="fw-bold">Before April 2022</p>
   </div>
   <ul class="list-group mb-0">
-@foreach ($TentoTwelve as $TentoTwelveitem)
+@foreach ($TentoTwelves as $index => $TentoTwelve)
+{{-- {{ var_dump($TentoTwelve->task_name); }} --}}
 <li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
 style="background-color: #f4f6f7;">
-<div class="todo_cat align-items-center">
-  <div class="d-flex">
-      <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-      <s>{{ $TentoTwelveitem-> task_name }}</s>
-  </div>
+
+        @if($editedTentoTwelveIndex === $index || $editedTentoTwelveField === $index.'.task_name')
+        <input type="text"
+        @click.away="$wire.editedTentoTwelveField === '{{ $index }}.task_name' ? $wire.saveTentoTwelve({{ $index }}) : null"
+        @keydown.enter="$wire.saveTentoTwelve({{ $index }})"
+        wire:model.defer="tentoTwelves.{{ $index }}.task_name"
+        />
+            @if ($errors->has('TentoTwelves.'.$index.'.task_name') )
+            <span class="badge rounded-pill bg-secondary me-1">{{ $errors->first('TentoTwelves.' .$index.'.task_name') }}</span>
+            @endif
+        @else
+        <div class="todo_cat align-items-center">
+            <div class="d-flex" wire:click="editTentoTwelveField({{ $index }}, 'task_name')">
+                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                {{ $TentoTwelve->task_name }}
+        </div>
+@endif
+
+
 
       <div class="d-flex justify-content-start align-items-center">
-          <span class="badge rounded-pill bg-secondary me-1">{{ $TentoTwelveitem-> category }}</span>
+          <span class="badge rounded-pill bg-secondary me-1">{{ $TentoTwelve-> category }}</span>
       </div>
 </div>
 
