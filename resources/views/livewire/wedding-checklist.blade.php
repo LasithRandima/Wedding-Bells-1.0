@@ -1,5 +1,4 @@
 <div>
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
 @if ($TaskList)
 <div class="d-flex justify-content-between mt-3 text-warning">
@@ -8,35 +7,42 @@
   </div>
   <ul class="list-group mb-0">
 @foreach ($TentoTwelves as $index => $TentoTwelve)
-{{-- {{ var_dump($TentoTwelve->task_name); }} --}}
 <li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
 style="background-color: #f4f6f7;">
+<?php
+
+?>
 
         @if($editedTentoTwelveIndex === $index || $editedTentoTwelveField === $index.'.task_name')
-        <input type="text"
+        {{-- <input type="text"
         @click.away="$wire.editedTentoTwelveField === '{{ $index }}.task_name' ? $wire.saveTentoTwelve({{ $index }}) : null"
         @keydown.enter="$wire.saveTentoTwelve({{ $index }})"
-        wire:model.defer="tentoTwelves.{{ $index }}.task_name"
-        />
+        wire:model.defer="TentoTwelves.{{ $index }}.task_name"
+        /> --}}
             @if ($errors->has('TentoTwelves.'.$index.'.task_name') )
             <span class="badge rounded-pill bg-secondary me-1">{{ $errors->first('TentoTwelves.' .$index.'.task_name') }}</span>
             @endif
         @else
+
+        @endif
+
+
         <div class="todo_cat align-items-center">
-            <div class="d-flex" wire:click="editTentoTwelveField({{ $index }}, 'task_name')">
-                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+            <div class="d-flex" wire:click="editTentoTwelveField({{ $index }},'task_name')">
+                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createTentoTwelve({{ $index }})" {{ $TentoTwelve->task_status == 1 ? 'checked' : '' }} />
+                @if ($TentoTwelve->task_status == 1)
+                <s>{{ $TentoTwelve->task_name }}</s>
+                @else
                 {{ $TentoTwelve->task_name }}
+                @endif
         </div>
-@endif
-
-
-
-      <div class="d-flex justify-content-start align-items-center">
-          <span class="badge rounded-pill bg-secondary me-1">{{ $TentoTwelve-> category }}</span>
+        <div class="d-flex justify-content-start align-items-center">
+            <span class="badge rounded-pill bg-secondary me-1">{{ $TentoTwelve -> category }}</span>
+        </div>
       </div>
-</div>
 
-<button type="button" class="butt" data-mdb-toggle="tooltip" title="Remove item">
+
+<button type="button" class="butt" data-mdb-toggle="tooltip" title="Remove item" wire:click.prevents="deleteTentoTwelve({{ $index }})">
   <i class="fas fa-times text-primary"></i>
 </button>
 </li>
@@ -44,7 +50,36 @@ style="background-color: #f4f6f7;">
 
 </ul>
 
+{{-- @if ($TaskList)
 <div class="d-flex justify-content-between mt-3 text-warning">
+    <h5 class="fw-bold">From 10 to 12 months</h5>
+    <p class="fw-bold">Before April 2022</p>
+  </div>
+  <ul class="list-group mb-0">
+@foreach ($TentoTwelvePlus as $TentoTwelveitem)
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
+style="background-color: #f4f6f7;">
+<div class="todo_cat align-items-center">
+  <div class="d-flex">
+      <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createTentoTwelve({{ $index }})" />
+      <s>{{ $TentoTwelveitem-> task_name }}</s>
+  </div>
+
+      <div class="d-flex justify-content-start align-items-center">
+          <span class="badge rounded-pill bg-secondary me-1">{{ $TentoTwelveitem-> category }}</span>
+      </div>
+</div>
+
+<button type="button" class="butt" data-mdb-toggle="tooltip" title="Remove item" wire:click.prevents="deleteTentoTwelve({{ $index }})">
+  <i class="fas fa-times text-primary"></i>
+</button>
+</li>
+@endforeach
+
+</ul> --}}
+
+
+{{-- <div class="d-flex justify-content-between mt-3 text-warning">
 <h5 class="fw-bold">From 7 to 9 months</h5>
 <p class="fw-bold">Before April 2022</p>
 </div>
@@ -270,7 +305,7 @@ style="background-color: #f4f6f7;">
 </button>
 </li>
 @endforeach
-</ul>
+</ul> --}}
 
 
 {{-- @foreach ($TimePeriod as $times)

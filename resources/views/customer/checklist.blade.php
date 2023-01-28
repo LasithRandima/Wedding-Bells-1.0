@@ -10,14 +10,16 @@
     <link rel="shortcut icon" href="images/favicon/favicon 01 (Copy).png" type="image/x-icon">
     <!-- <link rel="stylesheet" href="css/search.css"> -->
     <!-- <link rel="stylesheet" href="css/aos.css"> -->
-    <link rel="stylesheet" href="css/template.css">
-    <link rel="stylesheet" href="css/fontawesome/css/all.css".css">
+    <link rel="stylesheet" href="css/templae.css">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="css/mdb.min.css">
+    {{-- <link rel="stylesheet" href="css/mk_charts.css"> --}}
+    <link rel="stylesheet" type="text/css" href="loading-bar.min.css"/>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -83,7 +85,7 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 
 /* ---------------------------------Progress Bar css start here---------------------------------------- */
 
-.progress {
+/* .progress {
   height: 20vh;
   display: flex;
   flex-direction: column;
@@ -167,7 +169,7 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
   100% {
     opacity: 1;
   }
-}
+} */
 /* ---------------------------------Progress Bar css end here---------------------------------------- */
 
 
@@ -283,7 +285,7 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
                                     <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
                                     <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
                                 </ul>
-
+                                <div class="mkCharts" data-percent="94" data-color="rgb(0,100,200)" data-size="155" data-stroke="3"></div>
                             </div>
                     </div>
                     <!-- by time-period -->
@@ -327,22 +329,7 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
         <div class="col-lg-9 gradient-custom-2">
 
             <!-- Filter Area -->
-            <div class="row">
 
-                <div class="col-md-12 mt-3 text-center">
-                    <div class="progress_container">
-                        <div class="progress">
-                            <div class="progress_item">
-                                <h3 class="progress_title">You Have Completed 10 out of 20 Tasks</h3>
-                                <div class="progress_barr">
-                                    <div class="barr" data-value="50" data-title="96"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
             <!-- /.Filter Area -->
 
             <!-- Products Grid -->
@@ -352,11 +339,11 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
                 <div class="row">
 
 
+                    @livewireStyles
 
+                    <livewire:progress-bar />
 
-
-
-
+                    @livewireScripts
 
 
 
@@ -538,7 +525,7 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
   var scroll = new SmoothScroll('a[href*="#"]');
 </script>
 
-
+<script type="text/javascript" src="js/loading-bar.min.js"></script>
 
 
 {{-- <script>
@@ -576,7 +563,7 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 });
 });
 </script> --}}
-
+{{-- <script src="js/mk_charts.js"></script> --}}
 
 </body>
 </html>

@@ -13,7 +13,21 @@ class WeddingChecklist extends Component
     public $editedTentoTwelveIndex =null;
     public $editedTentoTwelveField =null;
 
+
+    public $result =null;
+
+    public $taskid;
+    public $selectedtask;
+    public bool $tasks_status;
+    public bool $status;
     public $TentoTwelvePlus;
+    public $allTasks;
+    public $completedTasks;
+
+
+
+
+
 
     // public $SeventoNine =[];
     // public $editedSeventoNineIndex =null;
@@ -67,30 +81,61 @@ public function mount(){
     $this->AfterWedding = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get()->toArray();
     $this->TimePeriod = DB::table('client_checklists')->select('timing_period')->where('c_id', '=', AUTH::id())->groupBy('timing_period')->get();
     $this->TaskList = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
+    $this->allTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
+    $this->completedTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('task_status', '=', 1)->count();
+
 
 }
 
-public function editTentoTwelve($tenToTwelveIndex){
-    $this->editedTentoTwelveIndex = $tenToTwelveIndex;
-}
+// public function editTentoTwelve($tenToTwelveIndex){
+//     $this->editedTentoTwelveIndex = $tenToTwelveIndex;
+// }
 
 public function editTentoTwelveField($tenToTwelveIndex, $fieldName){
     $this->editedTentoTwelveField = $tenToTwelveIndex.'.'.$fieldName;
 }
 
-public function saveTentoTwelve($tenToTwelveIndex){
-    $TentoTwelve = $this->TentoTwelves[$tenToTwelveIndex] ?? NULL;
-    if(!is_Null($TentoTwelve)){
-        optional(ClientChecklist::find($TentoTwelve['id']))->update($TentoTwelve);
+// public function saveTentoTwelve($tenToTwelveIndex){
+//     $TentoTwelve = $this->TentoTwelves[$tenToTwelveIndex] ?? NULL;
+//     if(!is_Null($TentoTwelve)){
+//         optional(ClientChecklist::find($TentoTwelve['id']))->update($TentoTwelve);
+//     }
+
+//     $this->editedTentoTwelveField = null;
+//     $this->editedTentoTwelveIndex = null;
+// }
+
+public function createTentoTwelve($tenToTwelveIndex){
+    $TentoTwelve = $this->TentoTwelves[$tenToTwelveIndex];
+    $task = ClientChecklist::find($TentoTwelve['id']);
+    $selectedtask = $task->task_status;
+    // $tasks_status = DB::table('client_checklists')->where('id', '=', $selectedtask)->where('c_id', '=', AUTH::id())->get();
+    // dd($selectedtask);
+
+    if($selectedtask == 1){
+        $status = 0;
+    }elseif($selectedtask == 0){
+        $status = 1;
     }
 
-    $this->editedTentoTwelveField = null;
-    $this->editedTentoTwelveIndex = null;
+
+
+
+    optional(ClientChecklist::find($TentoTwelve['id'])->update(['task_status' => $status ]));
+    $this->TentoTwelves = ClientChecklist::where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 10 to 12 months')->get();
+
+    $this->emit('taskUpdated');
+}
+
+public function deleteTentoTwelve($tenToTwelveIndex){
+    $TentoTwelve = $this->TentoTwelves[$tenToTwelveIndex];
+    optional(ClientChecklist::find($TentoTwelve['id'])->delete($TentoTwelve));
+    $this->TentoTwelves = ClientChecklist::where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 10 to 12 months')->get();
 }
 
 
 public function taskAdded(){
-    $this->TentoTwelve = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 10 to 12 months')->get();
+    $this->TentoTwelves = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 10 to 12 months')->get();
     $this->SeventoNine = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 7 to 9 months')->get();
     $this->FourtoSix = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 4 to 6 months')->get();
     $this->TwotoThree = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 2 to 3 months')->get();
@@ -101,6 +146,8 @@ public function taskAdded(){
     $this->AfterWedding = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
     $this->TimePeriod = DB::table('client_checklists')->select('timing_period')->where('c_id', '=', AUTH::id())->groupBy('timing_period')->get();
     $this->TaskList = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
+    $this->allTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
+    $this->completedTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('task_status', '=', 1)->count();
 }
 
     public function render()

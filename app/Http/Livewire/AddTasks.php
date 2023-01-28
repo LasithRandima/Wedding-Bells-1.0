@@ -72,6 +72,8 @@ public function updated($field){
 
 
         $this->emit('taskAdded');
+        // $this->emit('taskAdding');
+
     }
 
     public function render()

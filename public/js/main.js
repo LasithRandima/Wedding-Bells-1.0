@@ -57,31 +57,31 @@ $(document).ready(function(){
 
 
 
-window.onload = ()=> {
-  setTimeout(() =>{
-    document.querySelector('body').classList.add('display');
-  }, 100);
+// window.onload = ()=> {
+//   setTimeout(() =>{
+//     document.querySelector('body').classList.add('display');
+//   }, 100);
 
-  let bars = document.querySelectorAll('.barr');
-  bars.forEach((progress) => {
-  let value = progress.getAttribute('data-value');
-  progress.style.width = `${value}%`;
-  let count = 0;
-  let progressAnimation = setInterval(() => {
-    count++;
-    progress.setAttribute('data-text', `${count}%`);
-    if (count >= value) {
-      clearInterval(progressAnimation);
-    }
-  }, 15);
-});
-}  
+//   let bars = document.querySelectorAll('.barr');
+//   bars.forEach((progress) => {
+//   let value = progress.getAttribute('data-value');
+//   progress.style.width = `${value}%`;
+//   let count = 0;
+//   let progressAnimation = setInterval(() => {
+//     count++;
+//     progress.setAttribute('data-text', `${count}%`);
+//     if (count >= value) {
+//       clearInterval(progressAnimation);
+//     }
+//   }, 15);
+// });
+// }
 
 
 $(function(){
     $(".dropdown-item").click(function(){
           var icon_text =$(this).html();
-          $(".dropdown-toggle").html(icon_text)  
+          $(".dropdown-toggle").html(icon_text)
     })
 })
 
@@ -148,7 +148,7 @@ var swiper = new Swiper(".mySwiper", {
 //   longSwipes: false,
 //   allowTouchMove: true,
 //   autoplay: {
-//   delay: 1, 
+//   delay: 1,
 //   },
 //   pagination: {
 //     el: ".swiper-pagination",
@@ -157,8 +157,8 @@ var swiper = new Swiper(".mySwiper", {
 //   navigation: {
 //     nextEl: ".swiper-button-next",
 //     prevEl: ".swiper-button-prev",
-//   }, 
-//   freeMode: true, 
+//   },
+//   freeMode: true,
 //   speed: 8000,
 //   disableOnInteraction: true
 //   });
