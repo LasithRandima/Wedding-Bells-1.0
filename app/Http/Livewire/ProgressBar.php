@@ -16,7 +16,8 @@ class ProgressBar extends Component
     public $allTasks;
     public $completedTasks;
 
-    protected $listeners = ['taskUpdated'];
+    protected $listeners = ['taskUpdated','taskDelete','taskAdding'];
+    // protected $listener = ['taskDelete'];
     // protected $listeners = ['taskAdding'];
 
     public function mount(){
@@ -30,6 +31,19 @@ class ProgressBar extends Component
         $this->allTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
     }
 
+
+    public function taskDelete(){
+
+        $this->completedTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('task_status', '=', 1)->count();
+        $this->allTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
+    }
+
+
+    public function taskAdding(){
+
+        $this->completedTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('task_status', '=', 1)->count();
+        $this->allTasks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->count();
+    }
 
 
     // public function taskAdding(){

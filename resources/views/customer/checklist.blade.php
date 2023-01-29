@@ -10,8 +10,9 @@
     <link rel="shortcut icon" href="images/favicon/favicon 01 (Copy).png" type="image/x-icon">
     <!-- <link rel="stylesheet" href="css/search.css"> -->
     <!-- <link rel="stylesheet" href="css/aos.css"> -->
-    <link rel="stylesheet" href="css/templae.css">
+    <link rel="stylesheet" href="css/template.css">
     <link rel="stylesheet" href="css/fontawesome/css/all.css">
+
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
 
@@ -19,10 +20,10 @@
 
     <link rel="stylesheet" type="text/css" href="css/mdb.min.css">
     {{-- <link rel="stylesheet" href="css/mk_charts.css"> --}}
-    <link rel="stylesheet" type="text/css" href="loading-bar.min.css"/>
+    {{-- <link rel="stylesheet" type="text/css" href="loading-bar.min.css"/> --}}
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
     <style>
 
@@ -83,99 +84,10 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 }
 
 
-/* ---------------------------------Progress Bar css start here---------------------------------------- */
-
-/* .progress {
-  height: 20vh;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  align-items: center;
-  justify-content: center;
-}
-.progress_item {
-  padding: 0.5rem 0;
-}
-.progress_title {
-  color: #000;
-  font-size: 1.6rem;
-  padding-bottom: 2.6rem;
-}
-.progress_barr {
-  position: relative;
-  width: 30rem;
-  height: 8px;
-  border-radius: 2rem;
-  background: rgb(222, 222, 222);
-}
-@media (max-width: 768px) {
-  .progress_barr {
-    width: 25rem;
-  }
-}
-@media (max-width: 440px) {
-  .progress_barr {
-    width: 300px;
-  }
-}
-@media (max-width: 340px) {
-  .progress_barr {
-    width: 280px;
-  }
-}
-.barr {
-  border-radius: inherit;
-  background: linear-gradient(90deg, #5b4dda, #6546ee, #575afc);
-  position: absolute;
-  transition: width 1.5s cubic-bezier(0.1, 0.42, 0.85, 1);
-  width: 0;
-  height: 100%;
-  left: 0;
-}
-.barr::after {
-  content: attr(data-text);
-  position: absolute;
-  right: 0;
-  top: -3rem;
-  width: 4rem;
-  height: 2rem;
-  background: rgb(41, 61, 102);
-  font-size: 18px;
-  line-height: 2rem;
-  color: #fff;
-  text-align: center;
-  border-radius: 0.1rem;
-  animation: text 0.6s ease-in-out;
-  font-weight: bold;
-}
-.barr::before {
-  content: ' ';
-  position: absolute;
-  right: 1rem;
-  top: -1.2rem;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-top: 10px solid rgb(41, 61, 102);
-  animation: text 0.6s ease-in-out;
-}
-@keyframes text {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
-/* ---------------------------------Progress Bar css end here---------------------------------------- */
-
 
     </style>
 
-
+@livewireStyles
 
 </head>
 <body>
@@ -339,11 +251,10 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
                 <div class="row">
 
 
-                    @livewireStyles
+
 
                     <livewire:progress-bar />
 
-                    @livewireScripts
 
 
 
@@ -354,10 +265,10 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 
                               <div class="card gradient-custom-2" style="border-radius: 2em;">
                                 <div class="card-body p-5 mask-custom">
-                                    @livewireStyles
+
                                     <livewire:add-tasks />
 
-                                    @livewireScripts
+
 
                                   <!-- Tabs navs -->
                                   <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
@@ -386,10 +297,10 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
                                       aria-labelledby="ex1-tab-1">
 
 
-                                      @livewireStyles
+
                                       <livewire:wedding-checklist />
 
-                                      @livewireScripts
+
 
 
 
@@ -525,7 +436,9 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
   var scroll = new SmoothScroll('a[href*="#"]');
 </script>
 
-<script type="text/javascript" src="js/loading-bar.min.js"></script>
+
+@livewireScripts
+{{-- <script type="text/javascript" src="js/loading-bar.min.js"></script> --}}
 
 
 {{-- <script>
