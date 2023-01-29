@@ -26,7 +26,7 @@
 
 
         <div class="todo_cat align-items-center">
-            <div class="d-flex" wire:click="editTentoTwelveField({{ $index }},'task_name')">
+            <div class="d-flex">
                 <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createTentoTwelve({{ $index }})" {{ $TentoTwelve->task_status == 1 ? 'checked' : '' }} />
                 @if ($TentoTwelve->task_status == 1)
                 <s>{{ $TentoTwelve->task_name }}</s>

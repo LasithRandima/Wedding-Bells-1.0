@@ -559,7 +559,7 @@ public function deleteAfterWedding($afterWeddingIndex){
     $this->LastDays = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last day')->get();
 
     $this->emit('taskDelete');
-    $this->emit('itemDelete');
+     $this->emit('itemDelete');
 
 }
 
