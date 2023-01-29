@@ -36,11 +36,11 @@
         }
 
         .gradient-custom-2 {
-            /* background: #AA076B;
+            background: #AA076B;
 background: -webkit-linear-gradient(to right, #61045F, #AA076B);
-background: linear-gradient(to right, #61045F, #AA076B); */
+background: linear-gradient(to right, #61045F, #AA076B);
 
-background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+/* background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%); */
 }
 
 
@@ -89,6 +89,10 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 
 .taskcolor{
     background-color: #f4f6f7 !important;
+}
+
+.catHeadings{
+    color: #7e40f6;
 }
 
     </style>
