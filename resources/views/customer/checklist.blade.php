@@ -83,7 +83,13 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 	padding:8px 18px;
 }
 
+.essentialbg{
+    background-color: #fbeec1 !important;
+}
 
+.taskcolor{
+    background-color: #f4f6f7 !important;
+}
 
     </style>
 
@@ -158,24 +164,15 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 
 
     <div class="row pt-1 ">
-
         <!-- Sidebar -->
         <div class="col-lg-3 pt-4">
 
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <!-- Panel -->
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Status</strong></h3>
-                            <div class="row ml-1">
-                            <ul class="rating mb-0">
-                                <li class="dark-grey-text">All <span class="badge rounded-pill bg-dark ms-4 ">20</span></li>
-                                <li class="dark-grey-text">Done <span class="badge rounded-pill bg-dark ms-2">20</span></li>
-                                <li class="dark-grey-text">To Do <span class="badge rounded-pill bg-dark ms-2">20</span></li>
-                            </ul>
-                            </div>
-                    </div>
+                    <!-- by current status -->
+                    <livewire:checklist-current-status />
+                    <!-- by current status -->
 
 
                 </div>
@@ -185,42 +182,14 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
                 <div class="row">
 
                     <!-- by time-period -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>By Time Period</strong></h3>
-                            <div class="divider"></div>
-                            <div class="row ml-1">
-                                <!-- time-period -->
-                                <ul class="rating mb-0">
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                </ul>
-                                <div class="mkCharts" data-percent="94" data-color="rgb(0,100,200)" data-size="155" data-stroke="3"></div>
-                            </div>
-                    </div>
+                    <livewire:checklist-status />
                     <!-- by time-period -->
 
 
 
 
                     <!--  by catagory -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>By Catagory</strong></h3>
-                            <div class="divider"></div>
-                            <div class="row ml-1">
-                                <!-- catagory -->
-                                <ul class="rating mb-0">
-                                    <li>Planning <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                    <li>From 10 to 12 Months <span class="badge rounded-pill bg-secondary ms-3">20</span></li>
-                                </ul>
-
-                            </div>
-                    </div>
+                    <livewire:checklist-category-status />
                     <!--  by catagory -->
 
 
@@ -308,39 +277,12 @@ background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26
 
 <!----------------------------------------Done tab---------------------------------------------- -->
                                     <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                                      <ul class="list-group mb-0">
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                          style="background-color: #f4f6f7;">
-                                          <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                          Morbi leo risus
-                                        </li>
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                          style="background-color: #f4f6f7;">
-                                          <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                          Porta ac consectetur ac
-                                        </li>
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-0 rounded"
-                                          style="background-color: #f4f6f7;">
-                                          <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                          Vestibulum at eros
-                                        </li>
-                                      </ul>
+                                        <livewire:done-checklist />
                                     </div>
 
 <!----------------------------------------To Do tab---------------------------------------------- -->
                                     <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                                      <ul class="list-group mb-0">
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                          style="background-color: #f4f6f7;">
-                                          <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                                          <s>Cras justo odio</s>
-                                        </li>
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                          style="background-color: #f4f6f7;">
-                                          <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                                          <s>Dapibus ac facilisis in</s>
-                                        </li>
-                                      </ul>
+                                        <livewire:todo-checklist />
                                     </div>
 
 

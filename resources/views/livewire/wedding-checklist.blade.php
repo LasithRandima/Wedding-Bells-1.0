@@ -9,8 +9,7 @@
 
 
 @foreach ($TentoTwelves as $index => $TentoTwelve)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $TentoTwelve->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 
         @if($editedTentoTwelveIndex === $index || $editedTentoTwelveField === $index.'.task_name')
         {{-- <input type="text"
@@ -84,8 +83,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($SeventoNines as $index => $SeventoNine)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $SeventoNine->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 
 
                 {{-- @if($editedSeventoNineIndex === $index || $editedSeventoNineField === $index.'.task_name')
@@ -127,8 +125,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($FourtoSixs as $index => $FourtoSix)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $FourtoSix->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 @if($editedFourtoSixIndex === $index || $editedFourtoSixField === $index.'.task_name')
 
 @if ($errors->has('FourtoSixs.'.$index.'.task_name') )
@@ -170,8 +167,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($TwotoThrees as $index => $TwotoThree)
-    <li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-    style="background-color: #f4f6f7;">
+    <li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $TwotoThree->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 
 
     <div class="todo_cat align-items-center">
@@ -206,8 +202,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($LastMonths as $index => $LastMonth)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $LastMonth->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 <div class="todo_cat align-items-center">
   <div class="d-flex">
       <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createLastMonth({{ $index }})" {{ $LastMonth->task_status == 1 ? 'checked' : '' }}  />
@@ -240,8 +235,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($TwoWeekss as $index => $TwoWeeks)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $TwoWeeks->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 <div class="todo_cat align-items-center">
   <div class="d-flex">
       <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createTwoWeeks({{ $index }})" {{ $TwoWeeks->task_status == 1 ? 'checked' : '' }} />
@@ -273,8 +267,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($LastWeeks as $index => $LastWeek)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $LastWeek->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 <div class="todo_cat align-items-center">
   <div class="d-flex">
       <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createLastWeek({{ $index }})" {{ $LastWeek->task_status == 1 ? 'checked' : '' }}  />
@@ -305,8 +298,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($LastDays as $index => $LastDay)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $LastDay->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 <div class="todo_cat align-items-center">
   <div class="d-flex">
       <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createLastDay({{ $index }})" {{ $LastDay->task_status == 1 ? 'checked' : '' }} />
@@ -337,8 +329,7 @@ style="background-color: #f4f6f7;">
 </div>
 <ul class="list-group mb-0">
 @foreach ($AfterWeddings as $index => $AfterWedding)
-<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0"
-style="background-color: #f4f6f7;">
+<li class="list-group-item d-flex justify-content-between align-items-center border-1 mb-0 {{ $AfterWedding->essential == 1 ? 'essentialbg' : 'taskcolor' }}">
 <div class="todo_cat align-items-center">
   <div class="d-flex">
       <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." wire:click.prevents="createAfterWedding({{ $index }})" {{ $AfterWedding->task_status == 1 ? 'checked' : '' }} />

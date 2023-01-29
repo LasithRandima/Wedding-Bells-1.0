@@ -73,6 +73,7 @@ public function updated($field){
 
         $this->emit('taskAdded');
         $this->emit('taskAdding');
+        $this->emit('itemAdding');
 
     }
 

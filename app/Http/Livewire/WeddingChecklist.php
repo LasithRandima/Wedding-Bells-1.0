@@ -152,18 +152,10 @@ public function createTentoTwelve($tenToTwelveIndex){
     $this->TwoWeekss = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', '2 weeks')->get();
     $this->LastWeeks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last week')->get();
     $this->LastDays = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last day')->get();
-    $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();    $this->TentoTwelves = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 10 to 12 months')->get();
-    $this->SeventoNines = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 7 to 9 months')->get();
-    $this->FourtoSixs = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 4 to 6 months')->get();
-    $this->TwotoThrees = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'From 2 to 3 months')->get();
-    $this->LastMonths = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'The last month')->get();
-    $this->TwoWeekss = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', '2 weeks')->get();
-    $this->LastWeeks = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last week')->get();
-    $this->LastDays = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last day')->get();
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
-    $this->emit('taskAdded');
+    $this->emit('itemUpdated');
 }
 
 public function deleteTentoTwelve($tenToTwelveIndex){
@@ -181,7 +173,7 @@ public function deleteTentoTwelve($tenToTwelveIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskDelete');
-    $this->emit('taskAdded');
+    $this->emit('itemDelete');
 }
 
 
@@ -209,6 +201,7 @@ public function createSeventoNine($sevenToNineIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 
 }
 
@@ -227,6 +220,7 @@ public function deleteSeventoNine($sevenToNineIndex){
    $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -255,6 +249,7 @@ public function createFourtoSix($fourToSixIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 }
 
 public function deleteFourtoSix($fourtoSixIndex){
@@ -273,6 +268,7 @@ public function deleteFourtoSix($fourtoSixIndex){
 
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -300,6 +296,7 @@ public function createTwotoThree($twoToThreeIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 }
 
 public function deleteTwotoThree($twoToThreeIndex){
@@ -318,6 +315,7 @@ public function deleteTwotoThree($twoToThreeIndex){
 
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -347,6 +345,7 @@ public function createLastMonth($lastMonthIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 }
 
 public function deleteLastMonth($lastMonthIndex){
@@ -365,6 +364,7 @@ public function deleteLastMonth($lastMonthIndex){
 
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -395,6 +395,7 @@ public function createTwoWeeks($twoWeeksIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 }
 
 public function deleteTwoWeeks($twoWeeksIndex){
@@ -412,6 +413,7 @@ public function deleteTwoWeeks($twoWeeksIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -441,6 +443,7 @@ public function createLastWeek($lastWeekIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 }
 
 public function deleteLastWeek($lastWeekIndex){
@@ -458,6 +461,7 @@ public function deleteLastWeek($lastWeekIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -488,6 +492,7 @@ public function createLastDay($lastDayIndex){
     $this->AfterWeddings = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'After the wedding')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 }
 
 public function deleteLastDay($lastDayIndex){
@@ -506,6 +511,7 @@ public function deleteLastDay($lastDayIndex){
 
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 }
 
 
@@ -534,6 +540,7 @@ public function createAfterWedding($afterWeddingIndex){
     $this->LastDays = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last day')->get();
 
     $this->emit('taskUpdated');
+    $this->emit('itemUpdated');
 
 }
 
@@ -552,6 +559,7 @@ public function deleteAfterWedding($afterWeddingIndex){
     $this->LastDays = DB::table('client_checklists')->where('c_id', '=', AUTH::id())->where('timing_period', '=', 'Last day')->get();
 
     $this->emit('taskDelete');
+    $this->emit('itemDelete');
 
 }
 
