@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('client_capitals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
+            $table->foreignId('c_id')->constrained('users')->cascadeOnDelete();
             $table->string('budget');
             $table->timestamps();
         });

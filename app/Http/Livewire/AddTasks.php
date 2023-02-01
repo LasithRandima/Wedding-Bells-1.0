@@ -69,7 +69,7 @@ public function updated($field){
         $this->reset('TaskDescription');
         $this->reset('TaskCategory');
         $this->reset('TaskDate');
-
+        $this->reset('EssentialTask');
 
         $this->emit('taskAdded');
         $this->emit('taskAdding');

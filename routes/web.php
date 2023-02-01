@@ -29,6 +29,10 @@ Route::get('/checklist', function () {
 });
 
 
+Route::get('/budgetplanner', function () {
+    return view('customer.budgetplannerfront');
+});
+
 // Route::controller(ClientChecklistController::class)->group(function(){
 //     Route::get('/checklist', 'index');
 //     Route::post("categories","getCategory")->name('get-category');
