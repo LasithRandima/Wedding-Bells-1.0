@@ -19,6 +19,12 @@ $capital = DB::scalar("select budget from client_capitals where c_id = '$client'
     <div class="hero">
 
         @if (session()->has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h5 class="">{{ session('message') }}</h5>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
             <h5 class="alert alert-sucess">{{ session('message') }}</h5>
         @endif
 
@@ -58,7 +64,7 @@ $capital = DB::scalar("select budget from client_capitals where c_id = '$client'
                         <td>
                         <div class="d-flex">
                                 <button type="button" wire:click="editBudget( {{$lists -> id}} )" class="btn btn-primary" data-toggle="modal" data-target="#budgetModal" ><i class="far fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger mx-2"><i class="fas fa-trash-alt"></i></button></td>
+                                <button type="button" wire:click="destroyBudget( {{$lists -> id}} )" class="btn btn-danger mx-2" class="btn btn-primary" data-toggle="modal" data-target="#deleteBudgetModa" ><i class="fas fa-trash-alt"></i></button></td>
                         </div>
                       </tr>
 
@@ -88,6 +94,59 @@ $capital = DB::scalar("select budget from client_capitals where c_id = '$client'
 </div>
 
 </div>
+
+
+<script>
+    @if (session()->has('message'))
+    toastr.options =
+    {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+            toastr.success("{{ session('message') }}");
+    @endif
+
+    @if(Session::has('error'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.error("{{ session('error') }}");
+    @endif
+
+    @if(Session::has('info'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.info("{{ session('info') }}");
+    @endif
+
+    @if(Session::has('warning'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.warning("{{ session('warning') }}");
+    @endif
+  </script>
+
 
 </div>
 

@@ -65,6 +65,11 @@ public function updated($field){
             'essential'=>$this->EssentialTask,
         ]);
 
+
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message' => 'Task Added Successfully',
+        ]);
+
         $this->reset('TaskName');
         $this->reset('TaskDescription');
         $this->reset('TaskCategory');

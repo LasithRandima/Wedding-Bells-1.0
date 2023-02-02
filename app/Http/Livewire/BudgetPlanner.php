@@ -129,9 +129,13 @@ public function addCapital() {
 
 
         // $this->listBudgets = DB::table('client_budgets')->where('c_id', '=', AUTH::id())->orderBy('id','DESC')->get();
-        session()->flash('message', 'Budget listed successfully...');
+        // session()->flash('message', 'Budget listed successfully...');
 
-        // $this->emit('budgetAdded');
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message' => 'Budget listed successfully',
+        ]);
+
+        $this->emit('budgetAdd');
 
     }
 

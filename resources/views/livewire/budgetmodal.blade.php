@@ -123,6 +123,42 @@ $capital = DB::scalar("select budget from client_capitals where c_id = '$client'
   </div>
 
 
+  {{-- delete modal --}}
+
+
+
+  <div wire:ignore.self class="modal fade" id="deleteBudgetModal" tabindex="-1" role="dialog" aria-labelledby="deleteBudgetModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteBudgetModalLabel">Delete Budget Items</h5>
+          <button type="button" class="close" wire:click="closeModal" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal-form">
+            <p class="font-weight-bold mb-2 text-danger"> Are you sure you wanna delete this ?</p><p class="text-muted "> Note -> You can't Recover this</p>
+            <form wire:submit.prevent="destroyBudget">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" wire:click="closeModal" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Delete</button>
+        </div>
+
+            </form>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 
 
 </div>

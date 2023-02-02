@@ -32,8 +32,11 @@ class BudgetData extends Component
 
     public bool $hasPaid;
     public $budget_id;
+    public $budgetNo;
 
+    public $totEstimatedCost, $totFinalCost, $totAdvancePaid, $totAmountToPaid;
 
+    protected $listeners = ['budgetAdd','budgetUpdated','budgetDeleted'];
     // protected function rules()
     // {
     //     return [
@@ -70,6 +73,34 @@ class BudgetData extends Component
 
     //     }
 
+    public function mount(){
+        $this->totEstimatedCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('estimated_cost');
+        $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
+        $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
+        $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+    }
+
+    public function budgetAdd(){
+        $this->totEstimatedCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('estimated_cost');
+        $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
+        $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
+        $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+    }
+
+    public function budgetUpdated(){
+        $this->totEstimatedCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('estimated_cost');
+        $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
+        $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
+        $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+    }
+
+    public function budgetDeleted(){
+        $this->totEstimatedCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('estimated_cost');
+        $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
+        $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
+        $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+    }
+
     public function updated($field){
         $this->validateOnly($field,[
             'expanse' => 'required',
@@ -99,6 +130,16 @@ class BudgetData extends Component
             'has_paid' =>$this->hasPaid,
             'updated_at' => $create_date_time,
         ]);
+
+        // session()->flash('message', 'Item Updated Sucessfully');
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message' => 'Item Updated Successfully',
+        ]);
+
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal');
+
+        $this->emit('budgetUpdated');
     }
 
 
@@ -121,6 +162,33 @@ class BudgetData extends Component
             return redirect()->to('/dashboard');
         }
     }
+
+
+
+
+
+    public function deleteBudget(int $budgetNo)
+    {
+            $this->budget = $budgetNo;
+    }
+
+    public function destroyBudget()
+    {
+        ClientBudget::find($this->budget)->delete();
+        // session()->flash('message', 'Item Deleted Successfully');
+
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message' => 'Item Deleted Successfully',
+        ]);
+
+        $this->emit('budgetDeleted');
+
+        $this->dispatchBrowserEvent('close-modal');
+
+    }
+
+
+
 
 
     public function closeModal(){

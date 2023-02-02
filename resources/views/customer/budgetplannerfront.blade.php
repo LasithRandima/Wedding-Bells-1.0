@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/template.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 
 <style>
@@ -44,7 +46,11 @@
     }
 </style>
 
+
+
     @livewireStyles
+
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
 </head>
 <body>
 
@@ -228,19 +234,50 @@
     {{-- <livewire:list-budget /> --}}
 
 
+    @livewireScripts
 
-
+<script type="text/javascript" src="js/toastr.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/aos.js"></script>
 <script type="text/javascript" src="js/popper.min.js"></script>
 
+
+{{-------------------------Livewire Toastr Notifications-------------------------------- --}}
 <script>
     window.addEventListener('close-modal', event => {
         $('#budgetModal').modal('hide');
-    })
+        $('#deleteBudgetModal').modal('hide');
+    });
+
+
+    window.addEventListener('toastr:info', event => {
+        toastr.info(event.detail.message);
+    });
 </script>
 
+<script>
+    toastr.options =
+    {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-left",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+  </script>
+
+{{-------------------------End of Livewire Toastr Notifications-------------------------------- --}}
           <script>
           AOS.init({
               offset: 180,
