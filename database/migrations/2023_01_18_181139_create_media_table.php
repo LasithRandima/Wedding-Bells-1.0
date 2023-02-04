@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('caption')->nullable();
             $table->longText('curations')->nullable();
-            $table->foreignId('user_id')->constrained('vendors')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

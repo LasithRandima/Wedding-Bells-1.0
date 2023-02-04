@@ -10,16 +10,17 @@ use Filament\Resources\Table;
 use App\Models\VendorCategory;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\VendorResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\VendorResource\RelationManagers;
-use Filament\Tables\Filters\SelectFilter;
 
 class VendorResource extends Resource
 {
@@ -63,7 +64,9 @@ class VendorResource extends Resource
                 //     ->maxLength(255),
 
 
-
+                Hidden::make('user_id')
+                ->default(Auth::id())
+                ->disabled(),
 
                 TextInput::make('v_name')
                         ->default(Auth::user()->name)
