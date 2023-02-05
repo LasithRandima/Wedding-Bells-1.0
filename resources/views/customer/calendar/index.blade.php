@@ -9,8 +9,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/template.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     {{-- <link href="{{ asset('fullcalendar/main.css') }}" rel='stylesheet' />
     <script src="{{ asset('fullcalendar/main.js') }}"></script> --}}
 
@@ -334,7 +336,7 @@
 
 
 
-
+{{-- <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> --}}
 <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 
 <script>
@@ -466,8 +468,9 @@
 
 {{-- <script type="text/javascript" src="{{ asset('js/calendar.js') }}"></script> --}}
 
-{{-- <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> --}}
-{{-- <script type="text/javascript" src="{{ asset('js/aos.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('js/aos.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
 
           <script>
           AOS.init({
@@ -482,7 +485,7 @@
           });
           </script> --}}
 
-    {{-- <script src="js/main.js"></script> --}}
+    <script src="{{ asset('js/main.js') }}"></script>
       {{-- <script src="js/smooth-scroll.js"></script> --}}
       {{-- <script>
           var scroll = new SmoothScroll('a[href*="#"]');
