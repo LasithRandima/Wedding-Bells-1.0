@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->string('social_network')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('user_id')->constrained('vendors')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
