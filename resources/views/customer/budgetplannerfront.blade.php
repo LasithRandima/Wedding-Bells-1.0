@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/template.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 
@@ -43,6 +43,13 @@
         margin-bottom: -40px;
         margin-top: 20px;
 
+    }
+
+    .dash_cards{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-content: center !important;
     }
 </style>
 
@@ -278,7 +285,8 @@
   </script>
 
 {{-------------------------End of Livewire Toastr Notifications-------------------------------- --}}
-          <script>
+
+         <script>
           AOS.init({
               offset: 180,
               delay: 0,

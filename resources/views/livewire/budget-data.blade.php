@@ -20,6 +20,33 @@ use Illuminate\Support\Facades\Auth;
        toastr.success('session('message')')
         @endif
 
+
+        <div class="card bg-light mb-3" style="min-width: 44rem;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-content-center">
+                    <div class="dash_cards">
+                        <img src="{{ asset('images/icons/money_bag_ruble_100px.png') }}" alt="" width="60px">
+                        <h5 class="card-title mt-2">Estimated Budget Line</h5>
+                        <p class="card-text"><strong> Rs. {{ $capital }}</strong></p>
+
+                    </div>
+
+                    <div class="dash_cards">
+                        <img src="{{ asset('images/icons/fund_accounting_100px.png') }}" alt="" width="60px">
+                        <h5 class="card-title mt-2">Total Estimated Cost</h5>
+                        <p class="card-text">Rs. {{ $totEstimatedCost }}</p>
+                    </div>
+
+                    <div class="dash_cards">
+                        <img src="{{ asset('images/icons/fund_accounting_100px.png') }}" alt="" width="60px">
+                        <h5 class="card-title mt-2">Final Cost</h5>
+                        <p class="card-text">Rs. {{ $totFinalCost }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     <div class="container mt-3" style="overflow-x: scroll;">
         <div>
             <table class="table table-striped text-white">

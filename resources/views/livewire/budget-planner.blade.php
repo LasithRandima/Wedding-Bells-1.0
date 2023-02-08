@@ -29,9 +29,9 @@ $budgetlist = DB::table('client_budgets')->get();
         <button type="submit" class="event-btn">Set Budget Line <i class="fa fa-plus" aria-hidden="true"></i></button>
     </form>
     @else
-    <form action="" wire:submit.prevent="addCapital">
+    <form action="" wire:submit.prevent="updateCapital">
         <div class="input-group iconwrapper">
-          <input type="text" id="updatebudgets" class="events" value="" wire:model="updateBudgetLine">
+          <input type="text" id="updatebudgets" class="events"  wire:model="updateBudgetLine">
           <label for="updatebudget"><i class="fa fa-calendar" right-6 aria-hidden="true"></i> Current Budget Line - Rs.{{ $capital }}</label>
           @error('budgetLine')
           <p class="badge badge-danger">{{$message}}</p>

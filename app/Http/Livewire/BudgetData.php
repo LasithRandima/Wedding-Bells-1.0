@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\ClientBudget;
+use App\Models\ClientCapital;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -34,9 +35,9 @@ class BudgetData extends Component
     public $budget_id;
     public $budgetNo;
 
-    public $totEstimatedCost, $totFinalCost, $totAdvancePaid, $totAmountToPaid;
+    public $totEstimatedCost, $totFinalCost, $totAdvancePaid, $totAmountToPaid, $client, $capital, $updateBudgetLine;
 
-    protected $listeners = ['budgetAdd','budgetUpdated','budgetDeleted'];
+    protected $listeners = ['budgetAdd','budgetUpdated','budgetDeleted', 'capitalUpdated'];
     // protected function rules()
     // {
     //     return [
@@ -78,6 +79,8 @@ class BudgetData extends Component
         $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
         $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
         $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+        $this->client = AUTH::id();
+        $this->capital = DB::scalar("select budget from client_capitals where c_id = $this->client");
     }
 
     public function budgetAdd(){
@@ -85,6 +88,8 @@ class BudgetData extends Component
         $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
         $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
         $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+        $this->client = AUTH::id();
+        $this->capital = DB::scalar("select budget from client_capitals where c_id = $this->client");
     }
 
     public function budgetUpdated(){
@@ -92,6 +97,8 @@ class BudgetData extends Component
         $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
         $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
         $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+        $this->client = AUTH::id();
+        $this->capital = DB::scalar("select budget from client_capitals where c_id = $this->client");
     }
 
     public function budgetDeleted(){
@@ -99,6 +106,8 @@ class BudgetData extends Component
         $this->totFinalCost = ClientBudget::where('c_id', '=', AUTH::id())->sum('final_cost');
         $this->totAdvancePaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('advance_paid');
         $this->totAmountToPaid = ClientBudget::where('c_id', '=', AUTH::id())->sum('amount_to_be_paid');
+        $this->client = AUTH::id();
+        $this->capital = DB::scalar("select budget from client_capitals where c_id = $this->client");
     }
 
     public function updated($field){
@@ -161,6 +170,13 @@ class BudgetData extends Component
         }else{
             return redirect()->to('/dashboard');
         }
+    }
+
+
+    public function capitalUpdated(){
+        $this->client = AUTH::id();
+        $this->capital = DB::scalar("select budget from client_capitals where c_id = $this->client");
+        $this->updateBudgetLine = $this->capital;
     }
 
 

@@ -29,7 +29,9 @@ public $paidPersonName;
 public $budgetlist;
 public $budget_id;
 public $listBudgets;
+public $updateBudgetLine, $capitals, $client;
 
+protected $listeners = ['capitalUpdate'];
 
 public function mount() {
     $this->budgetLine = '';
@@ -46,6 +48,9 @@ public function mount() {
     $this->paidPersonName = '';
 
     $this->vendorCategory = DB::table('vendor_categories')->get();
+    $this->client = AUTH::id();
+    $this->capitals = DB::scalar("select budget from client_capitals where c_id = $this->client");
+    $this->updateBudgetLine = $this->capitals;
     // $this->budgetlist = DB::table('client_budgets')->get();
     // $this->listbudget = DB::table('client_budgets')->where('c_id', '=', AUTH::id())->get();
 
@@ -60,6 +65,34 @@ public function updated($field){
         'estimateCost' => 'required|numeric|integer',
         'finalCost' => 'required|numeric|integer',
     ]);
+}
+
+public function updateCapital(){
+    $create_date_time = Carbon::now()->toDateTimeString();
+    $this->validate([
+        'updateBudgetLine' => 'required|numeric|integer',
+    ]);
+
+
+    ClientCapital::where('c_id', AUTH::id())->update([
+        'budget' =>$this->updateBudgetLine,
+    ]);
+
+    $this->dispatchBrowserEvent('toastr:info', [
+        'message' => 'Capital Updated Successfully',
+    ]);
+
+    $this->reset('updateBudgetLine');
+    $this->emit('capitalUpdated');
+    $this->emit('capitalUpdate');
+}
+
+
+
+public function capitalUpdate(){
+    $this->client = AUTH::id();
+    $this->capitals = DB::scalar("select budget from client_capitals where c_id = $this->client");
+    $this->updateBudgetLine = $this->capitals;
 }
 
 
@@ -83,7 +116,7 @@ public function addCapital() {
 
 
 
-    // $this->emit('taskAdded');
+    $this->emit('setCapital');
     // $this->emit('taskAdding');
     // $this->emit('itemAdding');
 
@@ -140,7 +173,11 @@ public function addCapital() {
     }
 
 
-
+public function setCapital(){
+    $this->client = AUTH::id();
+    $this->capitals = DB::scalar("select budget from client_capitals where c_id = $this->client");
+    $this->updateBudgetLine = $this->capitals;
+}
 
 
 
