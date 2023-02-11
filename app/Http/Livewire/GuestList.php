@@ -77,7 +77,7 @@ class GuestList extends Component
             'message' => 'Guests Added successfully',
         ]);
 
-        // $this->emit('guestsAdd');
+        $this->emit('guestsAdd');
 
     }
 
