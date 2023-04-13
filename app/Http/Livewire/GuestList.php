@@ -15,21 +15,22 @@ class GuestList extends Component
     public $guestName, $contactNo, $email, $familyMembers, $drinkingBuddies, $group;
 
     public function mount() {
-        $this->hasConfirm ='';
         $this->guestName = '';
         $this->contactNo = '';
         $this->email = '';
         $this->familyMembers = '';
         $this->drinkingBuddies = '';
         $this->group = '';
+        $this->hasConfirm ='';
+
     }
 
 
     public function updated($field){
         $this->validateOnly($field,[
             'guestName' => 'required',
-            'contactNo' => 'required|numeric|digits:10',
-            'email' => 'required|email',
+            'contactNo' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'email' => 'required|email|unique:client_guest_lists',
             'familyMembers' => 'required|numeric|integer',
         ]);
     }
@@ -40,13 +41,13 @@ class GuestList extends Component
 
         $this->validate([
             'guestName' => 'required',
-            'contactNo' => 'required|numeric|digits:10',
-            'email' => 'required|email',
+            // 'contactNo' => 'required|numeric|digits:10',
+            'contactNo' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'email' => 'required|email|unique:client_guest_lists',
             'familyMembers' => 'required|numeric|integer',
         ]);
 
         ClientGuestList::create([
-            'status' =>$this->hasConfirm,
             'c_id' => AUTH::id(),
             'created_at' => $create_date_time,
             'guest_name' =>$this->guestName,
@@ -55,6 +56,7 @@ class GuestList extends Component
             'no_of_family_members' =>$this->familyMembers,
             'drinking_buddies_count'=>$this->drinkingBuddies,
             'group' =>$this->group,
+            'status' =>$this->hasConfirm,
 
         ]);
 
@@ -68,7 +70,8 @@ class GuestList extends Component
         $this->reset('drinkingBuddies');
         $this->reset('group');
 
-
+        $this->emit('guestAdded');
+        $this->emit('guestAdd');
 
         // $this->listBudgets = DB::table('client_budgets')->where('c_id', '=', AUTH::id())->orderBy('id','DESC')->get();
         // session()->flash('message', 'Budget listed successfully...');
@@ -76,8 +79,6 @@ class GuestList extends Component
         $this->dispatchBrowserEvent('toastr:info', [
             'message' => 'Guests Added successfully',
         ]);
-
-        $this->emit('guestsAdd');
 
     }
 

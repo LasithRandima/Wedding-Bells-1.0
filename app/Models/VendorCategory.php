@@ -18,4 +18,8 @@ class VendorCategory extends Model
     public function advertisements(): HasMany {
         return $this -> hasMany(Advertisement::class);
     }
+
+    public function topadss(): HasMany {
+        return $this -> hasMany(TopAds::class);
+    }
 }

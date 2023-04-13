@@ -16,7 +16,9 @@ return new class extends Migration
     {
         Schema::create('vendor_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            // $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            $table->unsignedBigInteger('v_id');
+            $table->foreign('v_id')->references('user_id')->on('vendors')->onDelete('cascade');
             $table->string('package');
             $table->unsignedInteger('amount_paid');
             $table->timestamp('paid_date')->default(DB::raw('CURRENT_TIMESTAMP'));

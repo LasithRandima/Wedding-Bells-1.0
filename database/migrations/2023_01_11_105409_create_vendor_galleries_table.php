@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('vendor_galleries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('v_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('v_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            $table->unsignedBigInteger('v_id');
+            $table->foreign('v_id')->references('user_id')->on('vendors')->onDelete('cascade');
             $table->string('image_path');
             $table->timestamps();
         });

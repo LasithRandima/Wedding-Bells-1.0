@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Filament\Resources;
 
 use Filament\Forms;
@@ -9,14 +11,27 @@ use App\Models\Advertisement;
 use Filament\Resources\Table;
 use App\Models\VendorCategory;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Repeater;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\AdvertisementResource\Pages;
 use App\Filament\Resources\AdvertisementResource\RelationManagers;
 
+
+$v_bus_name = DB::table('vendors')
+->select('v_bus_name')
+->where('user_id', '=', Auth::id())
+->value('v_bus_name');
 class AdvertisementResource extends Resource
 {
     protected static ?string $model = Advertisement::class;
@@ -26,6 +41,9 @@ class AdvertisementResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public $v_category;
+    public $buisness_branches;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -33,33 +51,44 @@ class AdvertisementResource extends Resource
                 Hidden::make('v_id')
                 ->default(Auth::id())
                 ->disabled(),
+                Hidden::make('vBusinessName')
+                ->default(DB::table('vendors')
+                ->select('v_bus_name')
+                ->where('user_id', '=', Auth::id())
+                ->value('v_bus_name'))
+                ->disabled(),
+                Hidden::make('actual_v_id')
+                ->default(DB::table('vendors')
+                ->select('id')
+                ->where('user_id', '=', Auth::id())
+                ->value('id'))
+                ->disabled(),
                 Forms\Components\TextInput::make('ad_title')
                     ->required()
                     ->maxLength(255)
                     ->columnSpan([
                         'sm' => 2,
                 ]),
-                Forms\Components\MarkdownEditor::make('about')
+                Forms\Components\RichEditor::make('about')
                     ->required()
-                    ->maxLength(400)
+                    ->maxLength(1000)
                     ->columnSpan([
                         'sm' => 2,
                     ]),
-                Forms\Components\MarkdownEditor::make('service_offered')
+                Forms\Components\RichEditor::make('service_offered')
                     ->required()
-                    ->maxLength(255)
+                    ->maxLength(1000)
                     ->columnSpan([
                         'sm' => 2,
                     ]),
-                Forms\Components\MarkdownEditor::make('v_package_details')
+                Forms\Components\RichEditor::make('v_package_details')
                     ->required()
                     ->maxLength(255)
                     ->columnSpan([
                         'sm' => 2,
                     ]),
 
-                Forms\Components\FileUpload::make('ad_image')
-                    ->default('images/favicon/favicon 01.png'),
+                Forms\Components\FileUpload::make('ad_image'),
 
                 Forms\Components\Select::make('category_id')
                     ->label('Ad Category')
@@ -73,6 +102,13 @@ class AdvertisementResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->minLength(1),
+                Forms\Components\TextInput::make('v_bus_location')
+                    ->label('Business Location')
+                    ->placeholder('Business Location')
+                    ->required(),
+                TagsInput::make('v_bus_branches')
+                    ->label('Business Branches')
+                    ->placeholder('Type your Branches one by one'),
             ]);
     }
 
@@ -91,6 +127,10 @@ class AdvertisementResource extends Resource
                 Tables\Columns\TextColumn::make('about')
                     ->limit(25)
                     ->searchable(),
+                Tables\Columns\TextColumn::make('v_bus_location')
+                    ->label('Buisness Location'),
+                Tables\Columns\TagsColumn::make('v_bus_branches')
+                    ->label('Branches'),
                 Tables\Columns\TextColumn::make('service_offered')
                     ->limit(35),
                 Tables\Columns\TextColumn::make('v_package_details')
@@ -101,7 +141,7 @@ class AdvertisementResource extends Resource
                 Tables\Columns\TextColumn::make('start_price'),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

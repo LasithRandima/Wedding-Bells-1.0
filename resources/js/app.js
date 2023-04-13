@@ -6,5 +6,7 @@ Alpine.plugin(FormsAlpinePlugin)
 Alpine.plugin(NotificationsAlpinePlugin)
 
 window.Alpine = Alpine
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
+
 
 Alpine.start()

@@ -37,6 +37,14 @@ class Vendor extends Model
         return $this -> hasMany(Advertisement::class);
     }
 
+    public function topadss():HasMany {
+        return $this -> hasMany(TopAds::class);
+    }
+
+    public function medias():HasMany {
+        return $this -> hasMany(Media::class);
+    }
+
     public function reviews(): HasMany {
         return $this -> hasMany(Review::class);
     }

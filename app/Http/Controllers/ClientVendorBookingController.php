@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClientVendorBooking;
+use App\Models\TopAd;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use App\Models\ClientVendorBooking;
 
 class ClientVendorBookingController extends Controller
 {
@@ -14,7 +18,7 @@ class ClientVendorBookingController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -24,7 +28,7 @@ class ClientVendorBookingController extends Controller
      */
     public function create()
     {
-        //
+        return view('common.vendorbooking');
     }
 
     /**
@@ -33,9 +37,43 @@ class ClientVendorBookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Response $response)
     {
-        //
+        // dd($request->all());
+
+        $request->validate([
+            'c_id' => 'required|numeric',
+            'ad_id' => 'nullable|numeric',
+            'top_ad_id' => 'nullable|numeric',
+            'ad_vid' => 'required|numeric',
+            'top_ad_vid' => 'nullable|numeric',
+            'cName' => 'required|string',
+            'cEmail' => 'required|email',
+            // 'cPhone' => ['nullable', 'string', 'regex:/^\+?\d{8,14}$/'], // Valid phone number format
+            'cMessage' => 'nullable|string',
+            'cEventDate' => 'required|date',
+            'cEventStartTime' => 'nullable|date_format:H:i',
+            'cEventEndTime' => 'nullable|date_format:H:i|after:cEventStartTime',
+        ]);
+
+
+        ClientVendorBooking::create([
+            'c_id' => $request->c_id,
+            'ad_id' => $request->ad_id,
+            'top_ad_id' => $request->top_ad_id,
+            'v_id' => $request->ad_vid,
+            'top_ad_id' => $request->top_ad_vid,
+            'c_name' => $request->cName,
+            'c_email' => $request->cEmail,
+            'c_tpno' => $request->cPhone,
+            'message' => $request->cMessage,
+            'event_date' => $request->cEventDate,
+            'event_start_time' => $request->cEventStartTime,
+            'event_end_time' => $request->cEventEndTime,
+        ]);
+        // ClientVendorBooking::create($request->all());
+
+        return $response;
     }
 
     /**
@@ -44,10 +82,23 @@ class ClientVendorBookingController extends Controller
      * @param  \App\Models\ClientVendorBooking  $clientVendorBooking
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientVendorBooking $clientVendorBooking)
+    public function show($clientVendorBooking)
     {
-        //
+
+        $vendorNormalAds = Advertisement::where('id', $clientVendorBooking)->get();
+        $vendorTopAds = TopAd::where('id', $clientVendorBooking)->get();
+        $mergedAds = $vendorNormalAds->merge($vendorTopAds);
+
+
+        $advertisementsVendorId= DB::table('advertisements')->select('actual_v_id')->where('id', '=', $clientVendorBooking)->value('actual_v_id');
+        $topAdsVendorId= DB::table('top_ads')->select('actual_v_id')->where('id', '=', $clientVendorBooking)->value('actual_v_id');
+        return view('common.vendorbooking', compact('mergedAds','advertisementsVendorId','topAdsVendorId','clientVendorBooking'));
     }
+
+    // public function show(ClientVendorBooking $clientVendorBooking)
+    // {
+    //     return "helloooooooooooo";
+    // }
 
     /**
      * Show the form for editing the specified resource.

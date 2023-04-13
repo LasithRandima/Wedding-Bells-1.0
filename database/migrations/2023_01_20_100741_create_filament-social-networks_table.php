@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->string('social_network')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            $table->unsignedBigInteger('v_id');
+            $table->foreign('v_id')->references('user_id')->on('vendors')->onDelete('cascade');
             $table->timestamps();
         });
     }

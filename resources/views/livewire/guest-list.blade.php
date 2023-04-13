@@ -55,8 +55,8 @@
             </div>
 
             <div class="form-outline mb-4">
-                    <input type="checkbox" id="Status" class="" />
-                    <label class="form-label" for="Status" wire:Model="hasConfirm">Has confirm</label>
+                    <input type="checkbox" id="Status" wire:Model="hasConfirm" class="" />
+                    <label class="form-label" for="Status">Has confirm</label>
                     @error('hasConfirm')
                     <p class="badge badge-danger">{{$message}}</p>
                     @enderror

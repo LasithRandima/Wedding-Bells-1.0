@@ -24,4 +24,10 @@ class Advertisement extends Model
     public function category(): BelongsTo  {
         return $this -> belongsTo(VendorCategory::class);
     }
+
+
+    protected $casts = [
+        'v_bus_branches' => 'array',
+
+    ];
 }

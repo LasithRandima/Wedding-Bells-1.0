@@ -62,7 +62,17 @@ class VendorResource extends Resource
                 //     ->tel(),
                 // Forms\Components\TextInput::make('map')
                 //     ->maxLength(255),
+                // TextInput::make('id')
+                // ->default(Auth::id())
+                // ->helperText('Your full name here, including any middle names.')
+                // ->label('Personal Id')
+                // ->required(),
 
+                // ->disabled(),
+
+                // Hidden::make('v_id')
+                // ->default(Auth::id())
+                // ->disabled(),
 
                 Hidden::make('user_id')
                 ->default(Auth::id())
@@ -176,10 +186,10 @@ class VendorResource extends Resource
                     ->dateTime(),
             ])
             ->filters([
-                SelectFilter::make('v_bus_location')
-                ->multiple()
-                ->label('Buisness Location')
-                ->options(Vendor::all()->pluck('v_bus_location', 'v_bus_location')),
+                // SelectFilter::make('v_bus_location')
+                // ->multiple()
+                // ->label('Buisness Location')
+                // ->options(Vendor::all()->pluck('v_bus_location', 'v_bus_location')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

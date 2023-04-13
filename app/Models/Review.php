@@ -22,4 +22,8 @@ class Review extends Model
     public function advertisement(): BelongsTo {
         return $this -> belongsTo(Advertisement::class);
     }
+
+    public function topadss(): BelongsTo {
+        return $this -> belongsTo(TopAds::class);
+    }
 }

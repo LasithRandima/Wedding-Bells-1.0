@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VendorCategory;
+use App\Models\TopAd;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
+use App\Models\VendorCategory;
 
 class VendorCategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class VendorCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $allCategories = VendorCategory::all();
+        return view('common.categories', compact('allCategories'));
     }
 
     /**
@@ -44,9 +47,62 @@ class VendorCategoryController extends Controller
      * @param  \App\Models\VendorCategory  $vendorCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(VendorCategory $vendorCategory)
+    public function show(VendorCategory $vendorCategory, Request $request)
     {
-        //
+        // return $vendorCategory->id;
+
+        $category = $request->input('category');
+        $location = $request->input('location');
+
+        // Query advertisements with filters
+        $advertisementsQuery = Advertisement::query();
+        $topAdsQuery = TopAd::query();
+
+        if ($category && $location) {
+            $advertisementsQuery->where('category_id', $category)->where(function ($query) use ($location) {
+                $query->where('v_bus_location', 'like', '%'.$location.'%')
+                      ->orWhereJsonContains('v_bus_branches', $location);
+            });
+            $topAdsQuery->where('category_id', $category)->where(function ($query) use ($location) {
+                $query->where('v_bus_location', 'like', '%'.$location.'%')
+                      ->orWhereJsonContains('v_bus_branches', $location);
+            });
+        } elseif ($category && $location == null) {
+            $advertisementsQuery->where('category_id', $category);
+            $topAdsQuery->where('category_id', $category);
+        }
+
+        // Determine which paginator to use
+        $paginator = null;
+        if (!$category && !$location) {
+            $vendorNormalAds = $advertisementsQuery->where('category_id', $vendorCategory->id)->orderBy('id', 'desc')->paginate(5);
+            $vendorTopAds = $topAdsQuery->where('category_id', $vendorCategory->id)->orderBy('id', 'desc')->paginate(1);
+            $allAds = null;
+
+            $paginator = ($vendorNormalAds->lastPage() > $vendorTopAds->lastPage()) ? $vendorNormalAds : $vendorTopAds;
+        } else {
+            $allAdsQuery = $advertisementsQuery->unionAll($topAdsQuery);
+            $allAds = $allAdsQuery->orderBy('id', 'desc')->paginate(8);
+
+            $vendorNormalAds = $allAds->whereInstanceOf(Advertisement::class);
+            $vendorTopAds = $allAds->whereInstanceOf(TopAd::class);
+        }
+
+        // Retrieve all categories
+        $allCategories = VendorCategory::all();
+
+        // Pass results to view
+        return view('common.vendors', [
+            'vendorNormalAds' => ($vendorNormalAds !== null) ? $vendorNormalAds : [],
+            'vendorTopAds' => ($vendorTopAds !== null) ? $vendorTopAds : [],
+            'allCategories' => $allCategories,
+            'paginator' => $paginator,
+            'allAds' => $allAds,
+            'category' => $category,
+            'location' => $location,
+            'request' => $request,
+        ]);
+
     }
 
     /**

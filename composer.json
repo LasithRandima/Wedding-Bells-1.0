@@ -16,7 +16,9 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
-        "savannabits/filament-modules": "^1.0"
+        "power-components/livewire-powergrid": "^3.7",
+        "savannabits/filament-modules": "^1.0",
+        "wire-elements/modal": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

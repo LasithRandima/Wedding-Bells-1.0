@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('client_budgets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('c_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('c_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
+            $table->unsignedBigInteger('c_id');
+            $table->foreign('c_id')->references('user_id')->on('clients')->onDelete('cascade');
             $table->string('exp_name');
             $table->string('exp_category');
             $table->unsignedInteger('estimated_cost');

@@ -299,6 +299,22 @@ header nav input[type="checkbox"]{
 
  }
 
+ .adsMoreBttn{
+    padding: 10px 22px;
+    border: 0;
+    border-radius: 5px;
+    font-weight: 600;
+    background: darkred;
+    letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s;
+    margin-top: 15px;
+
+}
+
  .more-bttn:hover {
      background: #fff;
      color: #000;

@@ -14,14 +14,21 @@
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/jquery.fancybox.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
 
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
     <style>
@@ -58,10 +65,14 @@
 
 <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
 
+@powerGridStyles
+
+
+
 </head>
 <body>
 
-  <div class="spinner-container">
+  <div class="spinner-container">  
     <div class="circles">
       <div></div>
       <div></div>
@@ -231,8 +242,9 @@
 
 <livewire:guest-table/>
 
-
-
+<div style="overflow-x: scroll;" class="px-5 pt-5">
+<livewire:client_guest_lists tableName="Guest List"/>
+</div>
 
 
 
@@ -284,9 +296,11 @@
 
       <!-------------------------------------------Footer End---------------------------------------------->
       @livewireScripts
+      @powerGridScripts
 
-      <script type="text/javascript" src="js/toastr.min.js"></script>
       <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+      <script type="text/javascript" src="js/toastr.min.js"></script>
       <script type="text/javascript" src="js/bootstrap.js"></script>
       <script type="text/javascript" src="js/aos.js"></script>
       <script type="text/javascript" src="js/swiper-bundle.min.js"></script>
@@ -353,10 +367,10 @@
       </script>
       <script src="js/contact.js"></script>
 
+      {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
 
 
-
-      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
@@ -367,7 +381,8 @@
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> --}}
+    <script src="js/sweetalert.min.js"></script>
 
 
     <script>
@@ -381,5 +396,46 @@
                 .appendTo( '#example_wrapper .col-md-6:eq(0)' );
         } );
          </script>
+
+
+        <script>
+            window.addEventListener('swal:confirm', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    // id: event.detail.ids.toString(),
+                    id: event.detail.id,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: true,
+                })
+
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.livewire.emit('bulkDelete', []);
+                        window.livewire.emit('destroy', event.detail.id);
+                    }
+                }) 
+            })
+
+
+            window.addEventListener('swal:confirmDelete', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    // id: event.detail.id,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: true,
+                })
+
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.livewire.emit('guestDelete', event.detail.id);
+                    }
+                }) 
+            })
+        </script>
+
 </body>
 </html>

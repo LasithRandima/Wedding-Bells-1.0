@@ -45,6 +45,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                 ->icon('heroicon-o-identification')
                 ->description('Tell Us About You')
                 ->schema([
+                    // Hidden::make('id')
+                    // ->default(Auth::id())
+                    // ->disabled(),
                     Hidden::make('user_id')
                         ->default(Auth::id())
                         ->disabled(),
@@ -86,7 +89,7 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->collapsible()
                         ->cloneable()
                         ->required()
-                        ->columnSpan([
+                        ->columnSpan([ 
                         'sm' => 2,
                         ]),
 

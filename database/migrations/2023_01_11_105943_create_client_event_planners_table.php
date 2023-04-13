@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('client_event_planners', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('c_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('c_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
+            $table->unsignedBigInteger('c_id');
+            $table->foreign('c_id')->references('user_id')->on('clients')->onDelete('cascade');
             $table->string('event_title');
             $table->string('event_desc')->nullable();
             $table->date('event_start_date');

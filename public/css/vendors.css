@@ -1,12 +1,21 @@
 .card-stats {
-    grid-area: stats; 
+    grid-area: stats;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    background:#333;
+    /* background:#333; */
     margin-top: 30px;
+  }
+
+  .button_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
   }
   .card-stats .stat {
     padding:10px;
@@ -58,7 +67,7 @@
     text-align: center;
     transition: all 0.5s;
     margin-top:15px auto !important;
-    
+
 }
 
 .more-bttn:hover {
@@ -71,10 +80,23 @@
 }
 
 .inner{
+
+    /* width: auto; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 230px !important;
+    max-height: 230px !important;
     overflow: hidden;
 }
 
 .inner img{
+    min-height: 230px !important;
+    max-height: 230px !important;
+    width: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     transition: all 1.5s ease;
 }
 
@@ -87,17 +109,17 @@
     -o-box-shadow: 2px 15px 70px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 15px 70px rgba(0,0,0,0.75);
     -ms-box-shadow: 2px 15px 70px rgba(0,0,0,0.75);
-} 
+}
 
 .col-md-4{
     margin-top: 2%;
-    
+
 }
 
 @media screen and (max-width:1200px) {
   .col-md-4{
-    margin-right: 10%; 
-     
+    margin-right: 10%;
+
 }
 }
 @media only screen and (min-width:320px) and (max-width:768px){
@@ -147,7 +169,7 @@
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-  
+
 }
 
 .search-field{
@@ -235,7 +257,7 @@
   color: white;
   padding-top: 100px;
   padding-bottom: 50px;
-  
+
 }
 
 .color-fff {
@@ -273,11 +295,11 @@
   padding: 30px;
   z-index: 2;
   align-items: center;
-  
+
 }
 
 .badge {
- 
+
   font-family: 'Roboto Condensed', sans-serif;
   color: white;
   padding: 5px 10px;
@@ -294,7 +316,7 @@
 }
 
 .clock {
- 
+
   text-align: center;
   font-size: 50px;
   height: 100px;

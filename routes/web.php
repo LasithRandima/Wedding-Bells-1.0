@@ -3,10 +3,16 @@
 use App\Http\Livewire\Clientregister;
 use App\Http\Livewire\Vendorregister;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdsController;
+use App\Http\Controllers\TopAdController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\ClientEventPlannerController;
+use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\VendorCategoryController;
 use App\Http\Controllers\ClientChecklistController;
-
+use App\Http\Controllers\ClientGuestListController;
+use App\Http\Controllers\ClientEventPlannerController;
+use App\Http\Controllers\ClientVendorBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +26,13 @@ use App\Http\Controllers\ClientChecklistController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('customer.index');
 });
 
 
 Route::get('/checklist', function () {
     return view('customer.checklist');
-});
+})->name('checklist');
 
 
 Route::get('/budgetplanner', function () {
@@ -50,6 +56,10 @@ Route::get('/vendor/register', function () {
 
 Route::get('/vendor/register', Vendorregister::class);
 
+Route::get('/vendorbooking', function () {
+    return view('common.vendorbooking');
+});
+
 
 
 Route::get('/customer/register', function () {
@@ -58,8 +68,22 @@ Route::get('/customer/register', function () {
 
 Route::get('/customer/register', Clientregister::class);
 
+Route::resource('client-guest-lists', ClientGuestListController::class);
+
 //Event Calendar Routes
 Route::resource('clienteventplanners', ClientEventPlannerController::class);
+Route::resource('clientchecklists', ClientChecklistController::class);
+
+Route::resource('topAds', TopAdController::class);
+Route::resource('vendorCategories', VendorCategoryController::class);
+Route::resource('vendors', VendorController::class);
+Route::resource('advertistments', AdvertisementController::class);
+Route::resource('ads', AdsController::class);
+Route::resource('clientVendorBookings', ClientVendorBookingController::class);
+
+
+
+
 Route::get('/customer/calendar/index', [CalendarController::class, 'index'])->name('customer.calendar.index');
 Route::post('/customer/calendar', [CalendarController::class, 'store'])->name('customer.calendar.store');
 Route::patch('/customer/calendar/update/{id}', [CalendarController::class, 'update'])->name('customer.calendar.update');
@@ -72,6 +96,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('customer.index');
     })->name('dashboard');
 });
