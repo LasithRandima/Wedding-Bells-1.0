@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Vendor;
@@ -184,6 +184,10 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
 
     public function submit(): void
     {
+        Notification::make()
+            ->title('Vendor registered successfully')
+            ->success()
+            ->send();
         Vendor::create($this->form->getState());
     }
 

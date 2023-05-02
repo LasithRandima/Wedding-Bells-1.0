@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTopAd extends CreateRecord
 {
     protected static string $resource = TopAdResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

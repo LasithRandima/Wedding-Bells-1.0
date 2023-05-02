@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Client;
@@ -71,7 +71,6 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->label('Partner Email')
                         ->placeholder('Partner Email'),
                     TextInput::make('c_location')
-                        ->email()
                         ->label('Your Address')
                         ->placeholder('Your Address')
                         ->columnSpan([
@@ -89,7 +88,7 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->collapsible()
                         ->cloneable()
                         ->required()
-                        ->columnSpan([ 
+                        ->columnSpan([
                         'sm' => 2,
                         ]),
 
@@ -130,6 +129,10 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
 
     public function submit(): void
     {
+        Notification::make()
+        ->title('Registration successfully')
+        ->success()
+        ->send();
         Client::create($this->form->getState());
     }
 

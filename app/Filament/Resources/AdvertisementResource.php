@@ -28,10 +28,10 @@ use App\Filament\Resources\AdvertisementResource\Pages;
 use App\Filament\Resources\AdvertisementResource\RelationManagers;
 
 
-$v_bus_name = DB::table('vendors')
-->select('v_bus_name')
-->where('user_id', '=', Auth::id())
-->value('v_bus_name');
+// $v_bus_name = DB::table('vendors')
+// ->select('v_bus_name')
+// ->where('user_id', '=', Auth::id())
+// ->value('v_bus_name');
 class AdvertisementResource extends Resource
 {
     protected static ?string $model = Advertisement::class;

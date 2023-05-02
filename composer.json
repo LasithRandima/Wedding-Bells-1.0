@@ -9,6 +9,7 @@
         "awcodes/filament-curator": "^2.0",
         "doctrine/dbal": "^3.5",
         "filament/filament": "^2.0",
+        "filament/notifications": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "happytodev/filament-social-networks": "^0.2.1",
         "laravel/framework": "^9.19",
