@@ -73,7 +73,9 @@ class ClientVendorBookingController extends Controller
         ]);
         // ClientVendorBooking::create($request->all());
 
-        return $response;
+        // return $response;
+
+        return redirect()->route('advertistments.index')->with('message','Booking Request send successfully.');
     }
 
     /**

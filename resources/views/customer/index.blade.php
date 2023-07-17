@@ -2,6 +2,7 @@
 use App\Models\Advertisement;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 $categories= DB::table('vendor_categories')->limit(6)->get();
 $allCategories= DB::table('vendor_categories')->get();
@@ -13,7 +14,7 @@ $topAds= DB::table('advertisements')->limit(8)->get();
 $topAds= DB::table('top_ads')->limit(8)->get();
 $initials ='';
 
-if (Auth::user()->name) {
+if (Auth::user()) {
     $name = Auth::user()->name; // replace this with the actual name from the database
     $parts = explode(' ', $name); // split the name into parts using the space character as the separator
     $first_letter = strtoupper(substr($parts[0], 0, 1)); // get the first letter of the first name and convert it to uppercase
@@ -239,6 +240,7 @@ if (Auth::user()->name) {
           <div class="carousel-caption">
             <h1>Welcome To Wedding Bells</h1>
             <p>The Sri Lankan Premium Wedding Resource Directory. </p>
+
 
             <button type="button"  id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider1">
               Read more
@@ -494,6 +496,7 @@ if (Auth::user()->name) {
 
   <h1 data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="50">Start planning your wedding</h1>
   <h3 data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="50" >Everything you need is right here. Enjoy every moment.</h3>
+  <p>{{ Session::get('redirectUrl') }}</p>
 </div>
 
 <!-- Card deck -->

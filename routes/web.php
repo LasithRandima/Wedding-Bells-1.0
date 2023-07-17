@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\Http\Livewire\Clientregister;
 use App\Http\Livewire\Vendorregister;
@@ -13,6 +15,8 @@ use App\Http\Controllers\ClientChecklistController;
 use App\Http\Controllers\ClientGuestListController;
 use App\Http\Controllers\ClientEventPlannerController;
 use App\Http\Controllers\ClientVendorBookingController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +99,55 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
+
     Route::get('/dashboard', function () {
-        return view('customer.index');
+        $redirectUrl = Session::get('redirectUrl');
+        if ($redirectUrl) {
+            return redirect($redirectUrl);
+            Session::forget('redirectUrl');
+        }else {
+        if(Auth::user()->role_id == '1'){
+            return redirect('/admin');
+        }else if(Auth::user()->role_id == '2'){
+            return redirect('/admin');
+        }else if(Auth::user()->role_id == '3'){
+            return view('customer.index');
+        }
+    }
     })->name('dashboard');
+// });
+
+    // Route::get('/dashboard', function ($request) {
+    //     if ($request->filled('redirect')) {
+    //         return redirect($request->input('redirect'));
+    //     }else{
+    //         if(Auth::user()->role_id == '1'){
+    //             return redirect('/admin');
+    //         }else if(Auth::user()->role_id == '2'){
+    //             return redirect('/admin');
+    //         }else if(Auth::user()->role_id == '3'){
+    //             return view('customer.index');
+    //         }
+    //     }
+
+    // })->name('dashboard');
+
 });
+
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/login', function (Request $request) {
+//         $redirect = $request->input('redirect');
+
+//         if ($redirect && !Str::contains($redirect, 'email/verify')) {
+//             return redirect($redirect);
+//         } else {
+//            return redirect()->intended(config('fortify.home'));
+//         }
+//     })->name('login');
+// });
