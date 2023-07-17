@@ -17,13 +17,21 @@ return new class extends Migration
             $table->id();
             $table->string('ad_title');
             $table->text('about');
-            $table->text('service_offered');
-            $table->text('v_package_details');
+            $table->text('service_offered')->nullable();
+            $table->text('v_package_details')->nullable();
             $table->String('ad_image')->nullable();
+            $table->String('logo_image')->nullable();
             $table->foreignId('category_id')->constrained('vendor_categories')->cascadeOnDelete();
-            $table->text('discount_deal');
+            $table->text('discount_deal')->nullable();
             $table->unsignedInteger('start_price');
-            $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            $table->string('v_bus_location');
+            $table->json('v_bus_branches')->nullable()->default(NULL);
+            // $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            $table->unsignedBigInteger('v_id');
+            $table->foreign('v_id')->references('user_id')->on('vendors')->onDelete('cascade');
+            $table->unsignedBigInteger('actual_v_id');
+            $table->string('vBusinessName');
+            $table->boolean('ad_type')->default(0);
             $table->timestamps();
         });
     }

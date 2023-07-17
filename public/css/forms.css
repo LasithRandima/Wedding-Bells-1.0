@@ -1,0 +1,169 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+    box-sizing: border-box;
+}
+
+.hero{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.3), #4f29cd), url(/images/Advertisement/White_bg.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hero form{
+    width: 90%;
+    max-width: 600px;
+}
+
+.hero .input-group{
+    margin-bottom: 30px;
+    position: relative;
+}
+
+
+.hero input{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #fff;
+    color:#fff;
+    background: transparent;
+    font-size: 15px;
+    text-align: end;
+}
+.hero label{
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px;
+    color: #fff;
+    cursor: text;
+    transition: 0.2s;
+
+}
+
+.hero .event-btn{
+    padding: 10px 0;
+    color: #fff;
+    outline: none;
+    background: transparent;
+    border: 1px solid #fff;
+    width: 100%;
+    cursor: pointer;
+}
+
+.hero .events{
+    width:100%;
+    text-align: left;
+}
+
+.hero textarea{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #fff;
+    color:#fff;
+    background: transparent;
+    font-size: 15px;
+    text-align: end;
+}
+
+.hero textarea::placeholder {
+    color: #fff;
+  }
+
+.hero input:focus~label,
+.hero input:valid~label {
+    top:-35px;
+    font-size: 14px;
+}
+
+
+.modalhero{
+    padding: 5% 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.modalhero form{
+    width: 90%;
+    max-width: 600px;
+}
+
+.modalhero .input-group{
+    margin-bottom: 30px;
+    position: relative;
+}
+
+
+.modalhero input{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #000 !important;
+    color:#000;
+    background: transparent;
+    font-size: 15px;
+    text-align: end;
+}
+.modalhero label{
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px;
+    color: #000 !important;
+    cursor: text;
+    transition: 0.2s;
+
+}
+
+.modalhero .event-btn{
+    padding: 10px 0;
+    color: #000;
+    outline: none;
+    background: transparent;
+    border: 1px solid #000;
+    width: 100%;
+    cursor: pointer;
+}
+
+.modalhero .events{
+    width:100%;
+    text-align: left;
+}
+
+.modalhero textarea{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #000;
+    color:#000;
+    background: transparent;
+    font-size: 15px;
+    text-align: end;
+}
+
+.modalhero textarea::placeholder {
+    color: #000;
+  }
+
+.modalhero input:focus~label,
+.modalhero input:valid~label {
+    top:-35px;
+    font-size: 14px;
+}
+
+
+

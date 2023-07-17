@@ -9,6 +9,7 @@
         "awcodes/filament-curator": "^2.0",
         "doctrine/dbal": "^3.5",
         "filament/filament": "^2.0",
+        "filament/notifications": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "happytodev/filament-social-networks": "^0.2.1",
         "husam-tariq/filament-timepicker": "^1.0",
@@ -17,7 +18,9 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
-        "savannabits/filament-modules": "^1.0"
+        "power-components/livewire-powergrid": "^3.7",
+        "savannabits/filament-modules": "^1.0",
+        "wire-elements/modal": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

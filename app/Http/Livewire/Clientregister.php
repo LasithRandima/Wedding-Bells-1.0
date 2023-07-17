@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Client;
@@ -46,6 +46,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                 ->icon('heroicon-o-identification')
                 ->description('Tell Us About You')
                 ->schema([
+                    // Hidden::make('id')
+                    // ->default(Auth::id())
+                    // ->disabled(),
                     Hidden::make('user_id')
                         ->default(Auth::id())
                         ->disabled(),
@@ -69,7 +72,6 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->label('Partner Email')
                         ->placeholder('Partner Email'),
                     TextInput::make('c_location')
-                        ->email()
                         ->label('Your Address')
                         ->placeholder('Your Address')
                         ->columnSpan([
@@ -129,6 +131,10 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
 
     public function submit(): void
     {
+        Notification::make()
+        ->title('Registration successfully')
+        ->success()
+        ->send();
         Client::create($this->form->getState());
     }
 

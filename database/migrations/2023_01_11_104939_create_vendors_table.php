@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('v_id')->primary();
             $table->string('v_name');
             $table->string('v_email')->unique();
             $table->string('v_bus_name')->unique();
@@ -27,7 +28,9 @@ return new class extends Migration
             $table->json('v_phone')->nullable()->default(NULL);
             // $table->string('v_tpno2')->unique()->nullable();
             $table->string('map')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

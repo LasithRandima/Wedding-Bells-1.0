@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('vendor_packages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            // $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
+            $table->unsignedBigInteger('v_id');
+            $table->foreign('v_id')->references('user_id')->on('vendors')->onDelete('cascade');
             $table->foreignId('package_id')->constrained('site_packages')->cascadeOnDelete();
             $table->date('pkg_start_date');
             $table->date('pkg_end_date');
