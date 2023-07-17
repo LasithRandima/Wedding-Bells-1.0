@@ -12,6 +12,7 @@
         "filament/notifications": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "happytodev/filament-social-networks": "^0.2.1",
+        "husam-tariq/filament-timepicker": "^1.0",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^2.13",
         "laravel/sanctum": "^3.0",
