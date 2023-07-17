@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 $gallery= DB::table('media')->where('v_id', '=', $topAd->v_id)->limit(8)->get();
 // var_dump($gallery);
@@ -25,6 +26,16 @@ $website_url = DB::table('vendors')
     <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
+     alpha/css/bootstrap.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css"
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
     <style>
@@ -297,8 +308,36 @@ $website_url = DB::table('vendors')
       <p class="lead">{!! html_entity_decode($topAd->v_package_details) !!}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
         {{-- <a href="{{ route('clientVendorBookings.create') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a> --}}
+        {{-- @if (Auth::user())
         <a href="{{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+        @else
+            <a href="{{ route('dashboard') }}?redirect={{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+        @endif --}}
+
+        @if (Auth::user())
+            <a href="{{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+        @else
+            @php
+                $redirectUrl = route('clientVendorBookings.show', $topAd->id);
+                Session::put('redirectUrl', $redirectUrl);
+            @endphp
+
+            <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+@endif
+
+
+
+        {{-- @if (Auth::user())
+    <a href="{{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+        @else
+            <a href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('login-form').submit();" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+            <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
+                @csrf
+                <input type="hidden" name="redirect" value="{{ route('clientVendorBookings.show', $topAd->id) }}">
+            </form>
+        @endif --}}
         <button type="button" class="btn btn-outline-secondary btn-lg px-4 mx-2">Add To Wish List</button>
+        {{-- <p>{{ Session::get('redirectUrl') }}</p> --}}
       </div>
     </div>
     <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg vendorLogo">
@@ -780,6 +819,44 @@ $website_url = DB::table('vendors')
            <p>Copyright © 2020 Wedding Bells. All Rights Reserved. | Design and Develop by #UnknownDev</p>
         </div>
       </div>
+
+      <script>
+        @if(Session::has('message'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+                toastr.success("{{ session('message') }}");
+        @endif
+
+        @if(Session::has('error'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+                toastr.error("{{ session('error') }}");
+        @endif
+
+        @if(Session::has('info'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+                toastr.info("{{ session('info') }}");
+        @endif
+
+        @if(Session::has('warning'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+                toastr.warning("{{ session('warning') }}");
+        @endif
+      </script>
 
       <!-------------------------------------------Footer End---------------------------------------------->
 

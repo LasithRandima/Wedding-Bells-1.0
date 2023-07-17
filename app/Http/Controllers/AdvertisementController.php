@@ -242,29 +242,29 @@ class AdvertisementController extends Controller
 
     // Query advertisements with filters
     $advertisementsQuery = Advertisement::query();
-    $topAdsQuery = TopAd::query();
+    $topAdsQuery = Advertisement::query();
 
     if ($category && $location) {
-        $advertisementsQuery->where('category_id', $category)->where(function ($query) use ($location) {
+        $advertisementsQuery->where('category_id', $category)->where('ad_type', 0)->where(function ($query) use ($location) {
             $query->where('v_bus_location', 'like', '%'.$location.'%')
                   ->orWhereJsonContains('v_bus_branches', $location);
         });
-        $topAdsQuery->where('category_id', $category)->where(function ($query) use ($location) {
+        $topAdsQuery->where('category_id', $category)->where('ad_type', 1)->where(function ($query) use ($location) {
             $query->where('v_bus_location', 'like', '%'.$location.'%')
                   ->orWhereJsonContains('v_bus_branches', $location);
         });
     } elseif ($location && $category == null) {
-        $advertisementsQuery->where(function ($query) use ($location) {
+        $advertisementsQuery->where('ad_type', 0)->where(function ($query) use ($location) {
             $query->where('v_bus_location', 'like', '%'.$location.'%')
                   ->orWhereJsonContains('v_bus_branches', $location);
         });
-        $topAdsQuery->where(function ($query) use ($location) {
+        $topAdsQuery->where('ad_type', 1)->where(function ($query) use ($location) {
             $query->where('v_bus_location', 'like', '%'.$location.'%')
                   ->orWhereJsonContains('v_bus_branches', $location);
         });
     } elseif ($category && $location == null) {
-        $advertisementsQuery->where('category_id', $category);
-        $topAdsQuery->where('category_id', $category);
+        $advertisementsQuery->where('category_id', $category)->where('ad_type', 0);
+        $topAdsQuery->where('category_id', $category)->where('ad_type', 1);
     }
 
     // Determine which paginator to use
@@ -280,7 +280,7 @@ class AdvertisementController extends Controller
         $allAds = $allAdsQuery->orderBy('id', 'desc')->paginate(8);
 
         $vendorNormalAds = $allAds->whereInstanceOf(Advertisement::class);
-        $vendorTopAds = $allAds->whereInstanceOf(TopAd::class);
+        $vendorTopAds = $allAds->whereInstanceOf(Advertisement::class);
     }
 
     // Retrieve all categories
