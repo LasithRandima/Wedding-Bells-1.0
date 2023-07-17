@@ -21,7 +21,9 @@ return [
 
     'editable' => true,
 
-    'selectable' => false,
+
+    'selectable' => true,
+
 
     'dayMaxEvents' => true,
 ];
