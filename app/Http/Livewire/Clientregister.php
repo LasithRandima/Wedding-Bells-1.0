@@ -21,6 +21,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\MarkdownEditor;
+use HusamTariq\FilamentTimePicker\Forms\Components\TimePickerField;
 
 class Clientregister extends Component implements Forms\Contracts\HasForms
 {
@@ -107,8 +108,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                             ->minDate(now())
                             ->weekStartsOnMonday(),
 
-                        TimePicker::make('wed_start_time')
-                            ->label('Wedding Start Time'),
+                        // TimePicker::make('wed_start_time')
+                        //     ->label('Wedding Start Time'),
+                        TimePickerField::make('wed_start_time')->label('Wedding Start Time')->okLabel("Confirm")->cancelLabel("Cancel"),
                         TimePicker::make('wed_end_time')
                             ->label('Wedding End Time'),
 
