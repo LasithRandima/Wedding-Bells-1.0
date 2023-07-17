@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('c_id')->primary();
             $table->string('c_name');
             $table->string('c_email')->unique();
             $table->string('partner_name');
@@ -26,7 +27,9 @@ return new class extends Migration
             $table->time('wed_start_time')->nullable();
             $table->time('wed_end_time')->nullable();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -33,6 +33,10 @@ class VendorCategoryResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('Category_description')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('Category_icon')
+                    ->maxLength(255),
+                Forms\Components\FileUpload::make('Category_image')
+                    ->directory('categories'),
             ]);
     }
 
@@ -41,6 +45,7 @@ class VendorCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\ImageColumn::make('Category_image'),
                 Tables\Columns\TextColumn::make('Category_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Category_description'),

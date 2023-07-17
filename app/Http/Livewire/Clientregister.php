@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Client;
@@ -21,6 +21,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\MarkdownEditor;
+use HusamTariq\FilamentTimePicker\Forms\Components\TimePickerField;
 
 class Clientregister extends Component implements Forms\Contracts\HasForms
 {
@@ -45,6 +46,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                 ->icon('heroicon-o-identification')
                 ->description('Tell Us About You')
                 ->schema([
+                    // Hidden::make('id')
+                    // ->default(Auth::id())
+                    // ->disabled(),
                     Hidden::make('user_id')
                         ->default(Auth::id())
                         ->disabled(),
@@ -68,7 +72,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->email()
                         ->label('Partner Email')
                         ->placeholder('Partner Email'),
-                    TextInput::make('c_location')
+                    
+                  TextInput::make('c_location')
+
                         ->required()
                         ->label('Address')
                         ->placeholder('Home Address')
@@ -108,8 +114,9 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                             ->minDate(now())
                             ->weekStartsOnMonday(),
 
-                        TimePicker::make('wed_start_time')
-                            ->label('Wedding Start Time'),
+                        // TimePicker::make('wed_start_time')
+                        //     ->label('Wedding Start Time'),
+                        TimePickerField::make('wed_start_time')->label('Wedding Start Time')->okLabel("Confirm")->cancelLabel("Cancel"),
                         TimePicker::make('wed_end_time')
                             ->label('Wedding End Time'),
 
@@ -128,6 +135,10 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
 
     public function submit(): void
     {
+        Notification::make()
+        ->title('Registration successfully')
+        ->success()
+        ->send();
         Client::create($this->form->getState());
     }
 

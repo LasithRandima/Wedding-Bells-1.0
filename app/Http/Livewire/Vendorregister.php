@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Vendor;
@@ -26,6 +26,7 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
 
+    public $vid;
     public $name;
     public $email;
     public $buisness_name;
@@ -36,7 +37,7 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
     public $website_url;
     public $telephone_no;
     public $Contact_no;
-    // public $user_id = Auth::user();
+    // public $user_id = Auth::id();
 
 
 
@@ -57,9 +58,17 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                 ->icon('heroicon-o-identification')
                 ->description('Tell Us About Your Business')
                 ->schema([
+                    // Hidden::make('id')
+                    // ->default(Auth::user()->id)
+                    // ->disabled(),
                     Hidden::make('user_id')
                         ->default(Auth::id())
                         ->disabled(),
+                        // TextInput::make('id')
+                        // ->default(Auth::id())
+                        // ->helperText('Your id.'.Auth::id())
+                        // ->label('Personal Id')
+                        // ->required(),
                     TextInput::make('v_name')
                         ->default(Auth::user()->name)
                         ->helperText('Your full name here, including any middle names.')
@@ -175,6 +184,10 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
 
     public function submit(): void
     {
+        Notification::make()
+            ->title('Vendor registered successfully')
+            ->success()
+            ->send();
         Vendor::create($this->form->getState());
     }
 

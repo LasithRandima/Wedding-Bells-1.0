@@ -2,6 +2,7 @@
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use app\Http\Controllers\Auth\LoginController;
 
 return [
 
@@ -61,7 +62,29 @@ return [
     |
     */
 
+
+
     'home' => RouteServiceProvider::HOME,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fortify Override
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify your own Fortify overrides, such as LoginController,
+    | PasswordController, etc. You may specify the full namespace to your
+    | custom controller if it is not located in the default directory.
+    |
+    */
+
+    'overridden' => [
+        'home' => LoginController::class,
+        // 'password' => PasswordController::class,
+        // Add other overrides here as needed
+    ],
+
+
 
     /*
     |--------------------------------------------------------------------------

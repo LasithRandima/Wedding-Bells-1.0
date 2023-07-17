@@ -35,7 +35,28 @@ class ClientEventPlannerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'clientids' => 'required|Numeric',
+            'event' => 'required|string',
+            'esdate' => 'required|date',
+            'end_date' => 'required|date',
+            'etime' => 'nullable',
+            'rperson' => 'nullable',
+        ]);
+
+        ClientEventPlanner::create([
+            'c_id' => $request->clientids,
+            'event_title' => $request->event,
+            'event_desc' => $request->eventdesc,
+            'event_start_date' => $request->esdate,
+            'event_end_date' => $request->end_date,
+            'event_start_time' => $request->etime,
+            'responsible_person' => $request->rperson,
+        ]);
+
+        return redirect()->route('customer.calendar.index')->with('success','Event created successfully.');
+
     }
 
     /**

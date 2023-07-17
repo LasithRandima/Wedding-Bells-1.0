@@ -1,0 +1,11 @@
+composer require husam-tariq/filament-timepicker
+php artisan vendor:publish --tag="filament-timepicker-views"
+
+
+use HusamTariq\FilamentTimePicker\Forms\Components\TimePickerField;
+
+TimePickerField::make('from_hour')->label('time')->okLabel("Confirm")->cancelLabel("Cancel"),
+
+
+
+
