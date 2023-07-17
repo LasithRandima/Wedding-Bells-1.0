@@ -55,10 +55,10 @@ class ClientGuestListController extends Controller
      * @param  \App\Models\ClientGuestList  $clientGuestList
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClientGuestList $clientGuestList)
-    {
-        //
-    }
+    // public function edit(ClientGuestList $clientGuestList)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -67,10 +67,10 @@ class ClientGuestListController extends Controller
      * @param  \App\Models\ClientGuestList  $clientGuestList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientGuestList $clientGuestList)
-    {
-        //
-    }
+    // public function update(Request $request, ClientGuestList $clientGuestList)
+    // {
+    //     return $clientGuestList;
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +78,27 @@ class ClientGuestListController extends Controller
      * @param  \App\Models\ClientGuestList  $clientGuestList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClientGuestList $clientGuestList)
-    {
-        //
-    }
+    // public function destroy(ClientGuestList $clientGuestList)
+    // {
+    //     return $clientGuestList;
+    // }
+
+
+
+    // public function edit(): bool
+    // {
+    //     return true;
+    // }
+
+    // public function destroy($id)
+    // {
+    //     ClientGuestList::query()->find($id)->delete();
+    //     return redirect()->route('customer.calendar.index')->with('success','Item has been deleted successfully');
+    // }
+
+
+    // public function bulkdelete($Ids) {
+    //     ClientGuestList::query()->whereIn('id', $Ids)->delete();
+
+    // }
 }

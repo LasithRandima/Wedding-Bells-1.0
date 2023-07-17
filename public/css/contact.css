@@ -1,0 +1,180 @@
+/* --------------------------------------------------------Begin Of Contact Us------------------------------------------------------ */
+
+.contacts{
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background:  url(../images/contactus/flower.jpg);
+    background-color: rgba(153, 51, 248, 0.3)!important;
+    background-blend-mode: saturation ;
+    background-size: cover;
+}
+.contacts .contents{
+    max-width: 800px;
+    text-align: center;
+}
+.contacts .contents h2{
+    font-size:36px;
+    font-weight: 500;
+    color:#f50756;
+    margin-top: 30px;
+}
+.contacts .contents p{
+    font-weight: 400;
+    color:#fa2a06;
+    text-align: center;
+    margin-top: 20px;
+}
+.container-contact{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.contactInfo{
+    margin-top: -300px;
+}
+.container-contact .contactInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.container-contact .contactInfo .box{
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+.container-contact .contactInfo .box .icon-c{
+    min-width: 60px;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+.container-contact .contactInfo .box .text{
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #000;
+    flex-direction: column;
+    font-weight: 600;
+    text-align: left;
+}
+.container-contact .contactInfo .box .text h3{
+    font-weight:500px;
+    color: #00bcd4;
+    text-align: justify;
+}
+.container-contact .contactInfo .box .text p{
+    text-align: justify;
+}
+.contactForm{
+    width: 40%;
+    padding: 40px;
+    background: #fff;
+}
+.contactForm h2{
+    font-size:30px;
+    color:#333;
+    font-weight: 500;
+}
+.contactForm .inputBox{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.contactForm .inputBox input,.contactForm .inputBox textarea{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom:2px solid #333 ;
+    resize: none;
+}
+.contactForm .inputBox span{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    columns: #666666;
+}
+.contactForm .inputBox input:focus ~ span,
+.contactForm .inputBox input:valid ~ span,
+.contactForm .inputBox textarea:focus ~ span,
+.contactForm .inputBox textarea:valid ~ span{
+    color:#e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+.contactForm .inputBox input[type="submit"]{
+    width: 100px;
+    background: linear-gradient(to right,#fa2a06,#f3c05b);
+    color:#fff;
+    border:none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+
+}
+
+
+.btn-grad {background-image: linear-gradient(to right, #6190E8 0%, #A7BFE8  51%, #6190E8  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 10px 20px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+
+.social{
+    margin-top: 8px;
+    text-align: center;
+}
+.social a {
+    margin: 0 5px;
+    color: black;
+}
+@media (max-width:991px){
+    .contacts{
+        padding: 50px;
+    }
+    .container-contact{
+        flex-direction: column;
+    }
+    .contactInfo{
+        margin-top: 30px;
+    }
+    .container-contact .contactInfo{
+        margin-bottom: 40px;
+    }
+    .container-contact .contactInfo,.contactForm{
+        width: 100%;
+    }
+}
+
+/* --------------------------------------------------------End of Contact Us ------------------------------------------------------ */

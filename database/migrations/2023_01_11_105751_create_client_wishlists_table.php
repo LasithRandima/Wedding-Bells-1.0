@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('client_wishlists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
+            // $table->foreignId('c_id')->constrained('clients')->cascadeOnDelete();
+            $table->unsignedBigInteger('c_id');
+            $table->foreign('c_id')->references('user_id')->on('clients')->onDelete('cascade');
             $table->foreignId('ad_id')->constrained('advertisements')->cascadeOnDelete();
             $table->timestamps();
         });
