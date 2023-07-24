@@ -2,15 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\TopAdsResource\Pages;
+use App\Filament\Resources\TopAdsResource\RelationManagers;
+use App\Models\Advertisement;
 use Filament\Forms;
-use Filament\Tables;
-use App\Models\TopAd;
 use Filament\Resources\Form;
+use Filament\Resources\Resource;
 use Filament\Resources\Table;
+use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\VendorCategory;
 
-
-use Filament\Resources\Resource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Hidden;
@@ -22,16 +25,16 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\TopAdResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\TopAdResource\RelationManagers;
 
-class TopAdResource extends Resource
+
+class TopAdsResource extends Resource
 {
-    protected static ?string $model = TopAd::class;
-    protected static ?string $navigationGroup = 'Vendor Dashboard';
+    protected static ?string $model = Advertisement::class;
 
+    protected static ?string $navigationGroup = 'Vendor Dashboard';
+    protected static ?string $label = 'Top Ads News';
+    protected static ?string $navigationLabel = 'Top Ads New';
+    public static ?string $slug = 'topadsnew';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     public $v_category;
     public $buisness_branches;
@@ -40,7 +43,6 @@ class TopAdResource extends Resource
     {
         return static::getModel()::query()->where('v_id', Auth::id());
     }
-
 
     public static function form(Form $form): Form
     {
@@ -113,6 +115,9 @@ class TopAdResource extends Resource
                 TagsInput::make('v_bus_branches')
                     ->label('Business Branches')
                     ->placeholder('Type your Branches one by one'),
+                Hidden::make('ad_type')
+                    ->default(1)
+                    ->disabled(),
             ]);
     }
 
@@ -166,8 +171,8 @@ class TopAdResource extends Resource
     {
         return [
             'index' => Pages\ListTopAds::route('/'),
-            'create' => Pages\CreateTopAd::route('/create'),
-            'edit' => Pages\EditTopAd::route('/{record}/edit'),
+            'create' => Pages\CreateTopAds::route('/create'),
+            'edit' => Pages\EditTopAds::route('/{record}/edit'),
         ];
     }
 }

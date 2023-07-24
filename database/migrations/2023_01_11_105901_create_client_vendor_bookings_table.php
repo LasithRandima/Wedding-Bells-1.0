@@ -38,6 +38,7 @@ return new class extends Migration
             $table->date('event_date');
             $table->time('event_start_time');
             $table->time('event_end_time')->nullable();
+            $table->string('booking_status')->nullable();
             $table->timestamps();
         });
     }
