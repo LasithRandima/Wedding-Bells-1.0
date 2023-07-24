@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\Session;
 
 $categories= DB::table('vendor_categories')->limit(6)->get();
 $allCategories= DB::table('vendor_categories')->get();
-$topAds= DB::table('advertisements')->limit(8)->get();
+$topAds= DB::table('advertisements')->where('ad_type', '=', '1')->limit(8)->get();
 
 // $website_url = DB::scalar('vendors')->select('v_website_url')->where('c_id', '=', AUTH::id());
 
 
-$topAds= DB::table('top_ads')->limit(8)->get();
 $initials ='';
 
 if (Auth::user()) {
@@ -88,6 +87,7 @@ if (Auth::user()) {
             <li><a href="#quicksearch">Quick Search</a></li>
             <li><a href="advertise.html">Advertise</a></li>
             <li><a href="contactus.html">Contact</a></li>
+            <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
             @if (auth()->id())
             <li>
                 {{-- <form method="POST" action="{{ route('logout') }}">
@@ -746,7 +746,7 @@ if (Auth::user()) {
               <span class="post-author">
                 <a href=""><img src="{{ $topAd->logo_image ? asset('/storage/'.$topAd->logo_image) : asset('/storage/default_images/default_category_thumb.jpg')  }}" alt="" class="post-author-img"></a>
               </span>
-              <a href="{{ route('topAds.show', $topAd->id) }}" class="btn btn-outline-secondary btn-block my-1">
+              <a href="{{ route('advertistments.show', $topAd->id) }}" class="btn btn-outline-secondary btn-block my-1">
                 View More
               </a>
               <h3 class="post-title">{{ $topAd->ad_title }}</h3>

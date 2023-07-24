@@ -15,6 +15,9 @@ use App\Http\Controllers\ClientChecklistController;
 use App\Http\Controllers\ClientGuestListController;
 use App\Http\Controllers\ClientEventPlannerController;
 use App\Http\Controllers\ClientVendorBookingController;
+use App\Http\Controllers\CancelBookingController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\SitePackageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -83,8 +86,13 @@ Route::resource('vendorCategories', VendorCategoryController::class);
 Route::resource('vendors', VendorController::class);
 Route::resource('advertistments', AdvertisementController::class);
 Route::resource('ads', AdsController::class);
-Route::resource('clientVendorBookings', ClientVendorBookingController::class);
+Route::resource('sitePackages', SitePackageController::class);
 
+Route::resource('clientVendorBookings', ClientVendorBookingController::class);
+// Route::put('clientVendorBookings/{clientVendorBooking}/cancel', ClientVendorBookingController::class)->name('clientVendorBookings.cancel');
+Route::put('bookings/{booking}/reqcancel', [CancelBookingController::class, 'cancelRequest'])->name('bookings.requestcancel');
+Route::put('bookings/{booking}/cancel', [CancelBookingController::class, 'cancelBooking'])->name('bookings.bookingcancel');
+Route::put('bookings/{booking}/book', BookingController::class)->name('bookings.book');
 
 
 

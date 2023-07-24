@@ -56,27 +56,27 @@ class VendorCategoryController extends Controller
 
         // Query advertisements with filters
         $advertisementsQuery = Advertisement::query();
-        $topAdsQuery = TopAd::query();
+        $topAdsQuery = Advertisement::query();
 
         if ($category && $location) {
-            $advertisementsQuery->where('category_id', $category)->where(function ($query) use ($location) {
+            $advertisementsQuery->where('ad_type', 0)->where('category_id', $category)->where(function ($query) use ($location) {
                 $query->where('v_bus_location', 'like', '%'.$location.'%')
                       ->orWhereJsonContains('v_bus_branches', $location);
             });
-            $topAdsQuery->where('category_id', $category)->where(function ($query) use ($location) {
+            $topAdsQuery->where('ad_type', 1)->where('category_id', $category)->where(function ($query) use ($location) {
                 $query->where('v_bus_location', 'like', '%'.$location.'%')
                       ->orWhereJsonContains('v_bus_branches', $location);
             });
         } elseif ($category && $location == null) {
-            $advertisementsQuery->where('category_id', $category);
-            $topAdsQuery->where('category_id', $category);
+            $advertisementsQuery->where('ad_type', 0)->where('category_id', $category);
+            $topAdsQuery->where('ad_type', 1)->where('category_id', $category);
         }
 
         // Determine which paginator to use
         $paginator = null;
         if (!$category && !$location) {
-            $vendorNormalAds = $advertisementsQuery->where('category_id', $vendorCategory->id)->orderBy('id', 'desc')->paginate(5);
-            $vendorTopAds = $topAdsQuery->where('category_id', $vendorCategory->id)->orderBy('id', 'desc')->paginate(1);
+            $vendorNormalAds = $advertisementsQuery->where('ad_type', 0)->where('category_id', $vendorCategory->id)->orderBy('id', 'desc')->paginate(5);
+            $vendorTopAds = $topAdsQuery->where('ad_type', 1)->where('category_id', $vendorCategory->id)->orderBy('id', 'desc')->paginate(1);
             $allAds = null;
 
             $paginator = ($vendorNormalAds->lastPage() > $vendorTopAds->lastPage()) ? $vendorNormalAds : $vendorTopAds;

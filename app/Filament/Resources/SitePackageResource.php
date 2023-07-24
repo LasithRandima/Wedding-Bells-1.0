@@ -64,6 +64,7 @@ class SitePackageResource extends Resource
                 Tables\Columns\TextColumn::make('pkg_price')
                 ->label('Package Price'),
                 Tables\Columns\TextColumn::make('pkg_description')
+                ->limit(25)
                 ->label('Package Description'),
                 Tables\Columns\TextColumn::make('image_limit'),
                 Tables\Columns\TextColumn::make('ads_limit'),

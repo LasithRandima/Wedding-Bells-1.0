@@ -306,6 +306,7 @@ $website_url = DB::table('vendors')
       <p class="lead">{!! html_entity_decode($topAd->about) !!}</p>
       <p class="lead">{!! html_entity_decode($topAd->service_offered) !!}</p>
       <p class="lead">{!! html_entity_decode($topAd->v_package_details) !!}</p>
+      <p class="lead" style="font-size: 19px">Packages Start From : Rs.{{ $topAd->start_price }}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
         {{-- <a href="{{ route('clientVendorBookings.create') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a> --}}
         {{-- @if (Auth::user())
@@ -315,14 +316,14 @@ $website_url = DB::table('vendors')
         @endif --}}
 
         @if (Auth::user())
-            <a href="{{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+            <a href="{{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Ask For Date</a>
         @else
             @php
                 $redirectUrl = route('clientVendorBookings.show', $topAd->id);
                 Session::put('redirectUrl', $redirectUrl);
             @endphp
 
-            <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Book Now</a>
+            <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Ask For Date</a>
 @endif
 
 

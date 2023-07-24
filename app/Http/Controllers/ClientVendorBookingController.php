@@ -8,6 +8,8 @@ use App\Models\Advertisement;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClientVendorBooking;
+use Illuminate\Support\Facades\Auth;
+use DebugBar\DebugBar;
 
 class ClientVendorBookingController extends Controller
 {
@@ -18,7 +20,31 @@ class ClientVendorBookingController extends Controller
      */
     public function index()
     {
+        $bookings = DB::table('client_vendor_bookings')
+                        ->join('advertisements', function ($join) {
+                            $join->on('client_vendor_bookings.ad_id', '=', 'advertisements.id')
+                                ->where('ad_type', '=', 0)
+                                ->where('c_id', '=', Auth::user()->id);
+                        })
+                        ->select('client_vendor_bookings.*', 'advertisements.ad_title', 'advertisements.ad_title', 'advertisements.about', 'advertisements.ad_image', 'advertisements.vBusinessName')
+                        ->get();
 
+
+
+        $topadsbookings = DB::table('client_vendor_bookings')
+                        ->join('advertisements', function ($join) {
+                            $join->on('client_vendor_bookings.ad_id', '=', 'advertisements.id')
+                                ->where('ad_type', '=', 1)
+                                ->where('c_id', '=', Auth::user()->id);
+                        })
+                        ->select('advertisements.*', 'client_vendor_bookings.*')
+                        ->get();
+
+                        app('debugbar')->info($bookings);
+                        app('debugbar')->info(auth()->user()->role_id );
+
+                        // dd($topadsbookings);
+        return view('customer.manageclientbookings', compact('bookings','topadsbookings'));
     }
 
     /**
@@ -70,12 +96,13 @@ class ClientVendorBookingController extends Controller
             'event_date' => $request->cEventDate,
             'event_start_time' => $request->cEventStartTime,
             'event_end_time' => $request->cEventEndTime,
+            'booking_status' => 'pending',
         ]);
         // ClientVendorBooking::create($request->all());
 
         // return $response;
 
-        return redirect()->route('advertistments.index')->with('message','Booking Request send successfully.');
+        return redirect()->route('clientVendorBooking.index')->with('message','Booking Request send successfully.');
     }
 
     /**
@@ -122,7 +149,10 @@ class ClientVendorBookingController extends Controller
      */
     public function update(Request $request, ClientVendorBooking $clientVendorBooking)
     {
-        //
+        $clientVendorBooking->update(['booking_status' => 'cancelled']);
+
+        // Redirect back to the index page with a success message
+        return redirect()->route('topAds.index')->with('success', 'Booking cancelled successfully.');
     }
 
     /**
@@ -133,6 +163,17 @@ class ClientVendorBookingController extends Controller
      */
     public function destroy(ClientVendorBooking $clientVendorBooking)
     {
-        //
+        $clientVendorBooking->delete();
+        return redirect()->route('clientVendorBookings.index')->with('message','Booking has been deleted successfully');
+    }
+
+
+    public function cancel(ClientVendorBooking $clientVendorBooking)
+    {
+        // Update the booking status to 'cancelled'
+        $clientVendorBooking->update(['booking_status' => 'cancelled']);
+
+        // Redirect back to the index page with a success message
+        return redirect()->route('topAds.index')->with('success', 'Booking cancelled successfully.');
     }
 }

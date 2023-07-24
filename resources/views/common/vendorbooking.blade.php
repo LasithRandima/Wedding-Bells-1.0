@@ -33,8 +33,8 @@
         <form action="{{ route('clientVendorBookings.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <p>topAdVendorId : {{ $topAdsVendorId }} </p>
-            <p>normalAdVendorId : {{ $advertisementsVendorId }}</p>
+            {{-- <p>topAdVendorId : {{ $topAdsVendorId }} </p>
+            <p>normalAdVendorId : {{ $advertisementsVendorId }}</p> --}}
 
             <input type="hidden" name="c_id" value="{{ Auth::id() }}">
             <input type="hidden" name="ad_id" value="{{ $clientVendorBooking }}">

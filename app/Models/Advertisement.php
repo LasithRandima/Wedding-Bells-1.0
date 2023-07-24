@@ -12,7 +12,6 @@ class Advertisement extends Model
     use HasFactory;
 
 
-
     public function vendor(): BelongsTo {
         return $this -> belongsTo(Vendor::class);
     }
@@ -23,6 +22,10 @@ class Advertisement extends Model
 
     public function category(): BelongsTo  {
         return $this -> belongsTo(VendorCategory::class);
+    }
+
+    public function bookings(): HasMany {
+        return $this -> hasMany(ClientVendorBooking::class);
     }
 
 

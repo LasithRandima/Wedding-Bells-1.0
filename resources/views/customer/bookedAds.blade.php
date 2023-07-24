@@ -140,144 +140,25 @@
 
 
 
-    <!-- --------------------------------------------------slider---------------------------------------------------------------------------- -->
 
-<div id="slider">
-    <div id="headerSlider" class="carousel slide carousel-fade" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
-        <li data-target="#headerSlider" data-slide-to="1"></li>
-        <li data-target="#headerSlider" data-slide-to="2"></li>
-        <li data-target="#headerSlider" data-slide-to="3"></li>
-        <li data-target="#headerSlider" data-slide-to="4"></li>
-        <li data-target="#headerSlider" data-slide-to="5"></li>
-        <!-- <li data-target="#headerSlider" data-slide-to="3"></li> -->
-
-
-
-      </ol>
-      <div class="carousel-inner">
-
-        <div class="carousel-item active">
-          <img class="img-fluid" src="images/slider/vendors/v1.jpg" >
-          <div class="carousel-caption">
-            <h1>Welcome To Wedding Bells</h1>
-            <p>The Sri Lankan Premium Wedding Resource Directory.</p>
-
-            <button type="button"  id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider1">
-              Read more
-            </button>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <img class="img-fluid" src="images/slider/vendors/v2.jpg">
-          <div class="carousel-caption">
-            <h1>Browse Suppliers</h1>
-            <p>Search over thousands of professionals in everywhere specialized in different kinds
-                of Wedding Services.</p>
-
-            <button type="button"  id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider2">
-              Read more
-            </button>
-          </div>
-        </div>
-
-
-        <div class="carousel-item">
-          <img class="img-fluid" src="images/slider/vendors/v3.jpg">
-          <div class="carousel-caption">
-            <h1>Are you A Vendor?</h1>
-            <p>We are here to help your grow your business.Come join with us to advertise</p>
-
-            <button type="button"  id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider3">
-              Read more
-            </button>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <img class="img-fluid" src="images/slider/vendors/v4.jpg">
-          <div class="carousel-caption">
-            <h1>Contact Us </h1>
-            <P>Build your team with the best wedding professionals</p>
-
-            <button type="button" id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider4">
-              Read more
-            </button>
-          </div>
-        </div>
-
-
-        <div class="carousel-item">
-          <img class="img-fluid" src="images/slider/vendors/v5.jpg">
-          <div class="carousel-caption">
-            <h1>Who We Are</h1>
-            <p >Begin Planning Your Dream Wedding Day at Wedding Bells & Make Your Big Day Shine</p>
-
-            <button type="button" id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider5">
-              Read more
-            </button>
-          </div>
-        </div>
-
-
-        <div class="carousel-item">
-          <img class="img-fluid" src="images/slider/vendors/v6.jpg">
-          <div class="carousel-caption">
-            <h1>Your Supreme Wedding Planning Solution </h1>
-            <p >A Handpicked Collection Of The Local'S Best Luxary Wedding Suppliers</p>
-
-            <button type="button" id="vidBtn" class="more-bttn" data-toggle="modal" data-target="#slider6">
-              Read more
-            </button>
-          </div>
-        </div>
-
-      </div>
-      <a class="carousel-control-prev" href="#headerSlider" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#headerSlider" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
 
     <div class="container ads" id="vendors">
 
-        <h1 data-aos="zoom-in">Looking For Vendors?</h1>
+        <h1 data-aos="zoom-in">Your Bookings</h1>
             <h3 data-aos="zoom-in">YOU ARE IN RIGHT PLACE</h3>
             <P><h5>A HANDPICKED COLLECTION OF THE WORLD'S BEST LUXURY WEDDING SUPPLIERS</h5>
                <h5> Featuring The Sri Lankan Best wedding professionals, top wedding planners, and the best magnificent venues.</h5>
 
                 We are here to help your wedding dreams come true with a host of wedding planning tips and recommended suppliers for the discerning bride and groom. Make your wedding and honeymoon one to remember with our amazing collection of dream WEDDING SUPPLIERS.
                 From stunning head-turning wedding dresses and dazzling accessories, opulent tableware and floral arrangements, stationery and favours and our amazing wedding venues.</P>
-                 <div class="searchbarheader" id="quicksearch" data-aos="fade-up" data-aos-duration="2000">
-                    <form>
-                      <h1 class="searchh1">Find <span class="searcher">VENDORS</span> THAT YOU <span class="searcher">WANT</span></h1>
-                      <div class="form-box">
-                        <form action="{{ route('advertistments.index') }}" method="GET">
-                              <select class="search-field vendor" name="category" id="select">
-                                <option disable hidden value="">Vendor Categories</option>
-                                @forelse ($allCategories as $category)
-                                <option value="{{ $category->id }}">{{ $category->Category_name }}</option>
-                                @empty
-                                <option value="">No Categories Available</option>
-                                @endforelse
-                                  </select>
-                        <input class="search-field location" name="location" type="text" placeholder="Location"/>
-                        <button type="submit" class="search-btn">Find</button>
-                      </div>
-                    </form>
+
                   </div>
 
 
 
 
         <div class="row justify-content-center" data-aos="zoom-in" data-aos-duration="3000">
-            @forelse ($vendorTopAds as $normalAd)
+            @forelse ($topadsbookings as $normalAd)
             <div class="col-md-4 cards" >
                 <div class="card shadows alert-warning" style="width: 20rem;">
                     {{-- <div class="inner">
@@ -307,17 +188,27 @@
                                 <div class="bg-dark p-1 text-white mt-3">Main Location: {{ ucfirst($normalAd->v_bus_location)  }}</div>
 
                                     @if ($normalAd->v_bus_branches)
-                                    <div class="bg-dark p-1 text-white my-1">
+                                    {{-- <div class="bg-dark p-1 text-white my-1">
                                         Branches : {{ ucfirst(implode(', ', $normalAd->v_bus_branches)) }}<br>
-                                    </div>
+                                    </div> --}}
                                     @endif
 
-                                    <div class="bg-dark p-1 text-white mt-2">Start From : Rs.{{ $normalAd->start_price  }}</div>
+                                    <?php
+                                    $category_name = DB::table('vendor_categories')
+                                        ->select('Category_name')
+                                        ->where('id', '=', $normalAd->category_id)
+                                        ->value('Category_name');
+                                    ?>
+
+                            <div class="bg-secondary p-1 text-white my-1">
+                                Category : {{ ucfirst($category_name) }}<br>
+                            </div>
+
                                 </div>
 
                                 <div class="card-stats">
                                     <div class="button_container">
-                                        <a href="{{ route('advertistments.show', $normalAd->id) }}" class="more-bttn" style="margin-top: 20 !important;">
+                                        <a href="{{ route('topAds.show', $normalAd->id) }}" class="more-bttn" style="margin-top: 20 !important;">
                                             Visit
                                         </a>
                                     </div>
@@ -329,22 +220,16 @@
                 </div>
             </div>
             @empty
-            {{-- <div class="alert alert-danger w-100 text-center" role="alert">
+            <div class="alert alert-danger w-100 text-center" role="alert">
                 No Vendor Top Ads Available.
-            </div> --}}
+            </div>
             @endforelse
 
 
 
 
 
-
-
-
-
-
-
-            @forelse ($vendorNormalAds as $normalAd)
+            @forelse ($bookings as $normalAd)
             <div class="col-md-4 cards" >
                 <div class="card shadows" style="width: 20rem;">
                     <div class="inner">
@@ -352,16 +237,16 @@
                     </div>
                         <div class="card-body text-center">
                             <div class="carddata">
-                            <h5 class="card-title">{{ ucfirst(Str::words($normalAd->ad_title, 8, '...')) }}</h5>
-                            {{-- <h5 class="card-title">{{ ucfirst($normalAd->ad_title) }}</h5> --}}
-                            <div class="card-text">{{ ucfirst(Str::words(strip_tags(html_entity_decode($normalAd->about)), 15, '...')) }}</div>
+                        <h5 class="card-title">{{ ucfirst(Str::words($normalAd->ad_title, 8, '...')) }}</h5>
+
+                           <div class="card-text">{{ ucfirst(Str::words(strip_tags(html_entity_decode($normalAd->about)), 15, '...')) }}</div>
                             <div class="bg-dark p-1 text-white mt-3">Main Location: {{ ucfirst($normalAd->v_bus_location)  }}</div>
 
-                                @if ($normalAd->v_bus_branches)
+                                {{-- @if ($normalAd->v_bus_branches)
                                 <div class="bg-dark p-1 text-white my-1">
                                     Branches : {{ ucfirst(implode(', ', $normalAd->v_bus_branches)) }}<br>
                                 </div>
-                                @endif
+                                @endif --}}
 
 
                                 <?php
@@ -374,8 +259,6 @@
                             <div class="bg-secondary p-1 text-white my-1">
                                 Category : {{ ucfirst($category_name) }}<br>
                             </div>
-
-                            <div class="bg-dark p-1 text-white mt-3">Start From : Rs.{{ $normalAd->start_price  }}</div>
 
                             </div>
 
@@ -400,6 +283,12 @@
 
 
 
+
+
+
+
+
+
         </div>
 
     </div>
@@ -408,11 +297,6 @@
 
     <div class="clearfix"></div>
 
-    @if ($paginator== null)
-    <div class="paginationa my-5"></div>
-    @else
-    <div class="paginationa my-5">{{ $paginator->links('pagination::bootstrap-5') }}</div>
-    @endif
 
     {{-- @if ($allAds== null)
     <div class="paginationa my-5"></div>
@@ -429,13 +313,7 @@
 @endif --}}
 
 
-@if ($allAds == null)
-    <div class="paginationa my-5"></div>
-@else
-    <div class="paginationa my-5">
-        {{ $allAds->appends(['category' => $request->input('category'), 'location' => $request->input('location')])->links('pagination::bootstrap-5') }}
-    </div>
-@endif
+
 
     <!-------------------------------------------Footer Begin---------------------------------------------->
     <footer>
