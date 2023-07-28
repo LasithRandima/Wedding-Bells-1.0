@@ -99,13 +99,15 @@ if (Auth::user()) {
                 </form> --}}
                 <li>
                     <label for="btn-22" class="shows ">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                        class="rounded-circle"
-                        height="25"
-                        alt="Black and White Portrait of a Man"
-                        loading="lazy"
-                      />
+                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+
+                        <img class="rounded-circle"
+                        height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
+
+                @else
+                <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
+                {{-- <div class="user_avatar">{{ $initials }}</div> --}}
+                @endif
                       <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                     </label>
 
@@ -144,9 +146,18 @@ if (Auth::user()) {
 
                         <a href="#">
                         <span>
-                          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy"
-                        /></span>
-                        <span> Hi, User John!</span>
+                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+
+                            <img class="rounded-circle"
+                            height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
+
+                            @else
+                            <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
+                            {{-- <div class="user_avatar">{{ $initials }}</div> --}}
+                            @endif
+
+                        </span>
+                        <span> Hi, User {{ Auth::user()->name }}!</span>
                         </a>
 
 

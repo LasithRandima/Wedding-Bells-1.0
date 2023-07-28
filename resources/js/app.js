@@ -1,3 +1,5 @@
+import './bootstrap';
+import '../css/app.css'
 import Alpine from 'alpinejs'
 import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
 import AlpineFloatingUI from '@awcodes/alpine-floating-ui'
