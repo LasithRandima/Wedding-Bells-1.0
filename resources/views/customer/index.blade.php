@@ -61,7 +61,7 @@ if (Auth::user()) {
 
 <header>
     <nav class="mynav">
-      <a href="#"><img src="assets/logo/Wedding Bells Logo.png" alt="logo" class="logo"></a>
+      <a href="#"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" alt="logo" class="logo"></a>
         <label for="btn" class="icon">
             <span class="fa fa-bars"></span>
         </label>
@@ -163,7 +163,13 @@ if (Auth::user()) {
 
                       </li>
                       <li><a href="#">Manage Profile</a></li>
-                      <li><a href="#">Dashboard</a></li>
+                      @if (auth()->user()->role_id == '3')
+                      <li><a href="{{ route('clients.index') }}">Dashboard</a></li>
+                      @elseif (auth()->user()->role_id == '2')
+                      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                      @elseif (auth()->user()->role_id == '1')
+                      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                      @endif
                       <form method="POST" action="{{ route('logout') }}">
                           @csrf
                           <li>
@@ -1051,7 +1057,7 @@ Do not rush this planning process, there are plenty of wedding businesses advert
           </div>
           <div class="col-sm-6 contact">
               <h4>Contact us</h4>
-              <a href="#"><img src="Assets/logo/Wedding Bells Logo.png" class="footerlogo"></a>
+              <a href="#"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" class="footerlogo"></a>
               <div class="contact-items">
               <p><i class="fas fa-map-marker-alt"></i>Wedding Bells<span class="number"></span></p>
               <p><i class="fas fa-phone"></i>Call Us: <span class="number"><a href=""> 0711234567 </a>/<a href=""> 0771234567 </a></span></p>

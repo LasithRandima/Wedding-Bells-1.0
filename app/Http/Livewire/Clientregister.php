@@ -64,6 +64,11 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                         ->unique()
                         ->required()
                         ->email(),
+                    Select::make('gender')
+                        ->options([
+                            'male' => 'Male',
+                            'female' => 'Female',
+                        ]),
                     TextInput::make('partner_name')
                         ->label('Partner Name')
                         ->placeholder('Partner full name here, including any middle names.'),
@@ -103,7 +108,7 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                     ->schema([
                         TextInput::make('guest_count')
                         ->numeric()
-                        ->minLength(1)
+                        ->minValue(1)
                         ->placeholder('Guest Count'),
                         DatePicker::make('wed_date')
                             ->label('Wedding Date')
@@ -112,6 +117,7 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
 
                         TimePicker::make('wed_start_time')
                             ->label('Wedding Start Time'),
+
                         // TimePickerField::make('wed_start_time')->label('Wedding Start Time')->okLabel("Confirm")->cancelLabel("Cancel"),
                         TimePicker::make('wed_end_time')
                             ->label('Wedding End Time'),

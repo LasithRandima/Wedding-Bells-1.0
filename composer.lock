@@ -4,9 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "ff3564ed397b3353884adcd7ce749886",
-
+    "content-hash": "11250f6c5935a980dd282473912dbfcf",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -2110,16 +2108,16 @@
         },
         {
             "name": "husam-tariq/filament-timepicker",
-            "version": "v1.0.1",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/husam-tariq/filament-timepicker.git",
-                "reference": "5e1d8bab65ac44b79a97ec4d3f88c1fc8d4076a8"
+                "reference": "ac8b9913c435b81753b10e8c138c18df6c0672f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/husam-tariq/filament-timepicker/zipball/5e1d8bab65ac44b79a97ec4d3f88c1fc8d4076a8",
-                "reference": "5e1d8bab65ac44b79a97ec4d3f88c1fc8d4076a8",
+                "url": "https://api.github.com/repos/husam-tariq/filament-timepicker/zipball/ac8b9913c435b81753b10e8c138c18df6c0672f3",
+                "reference": "ac8b9913c435b81753b10e8c138c18df6c0672f3",
                 "shasum": ""
             },
             "require": {
@@ -2150,9 +2148,9 @@
             "homepage": "https://github.com/husam-tariq/filament-timepicker",
             "support": {
                 "issues": "https://github.com/husam-tariq/filament-timepicker/issues",
-                "source": "https://github.com/husam-tariq/filament-timepicker/tree/v1.0.1"
+                "source": "https://github.com/husam-tariq/filament-timepicker/tree/v1.0.4"
             },
-            "time": "2022-12-18T23:20:45+00:00"
+            "time": "2023-04-17T03:24:54+00:00"
         },
         {
             "name": "intervention/image",

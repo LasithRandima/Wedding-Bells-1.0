@@ -102,7 +102,7 @@ class ClientVendorBookingController extends Controller
 
         // return $response;
 
-        return redirect()->route('clientVendorBooking.index')->with('message','Booking Request send successfully.');
+        return redirect()->route('clientVendorBookings.index')->with('message','Booking Request send successfully.');
     }
 
     /**

@@ -23,6 +23,11 @@ class VendorFaqResource extends Resource
 
     protected static ?string $navigationGroup = 'Vendor Dashboard';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::query()->where('v_id', Auth::id());
+    }
+
     public static function form(Form $form): Form
     {
         return $form

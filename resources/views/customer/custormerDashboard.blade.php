@@ -1,4 +1,32 @@
+<?php
+use App\Models\Advertisement;
+use App\Models\ClientVendorBooking;
+use App\Models\ClientGuestList;
+use App\Models\ClientCapital;
+use App\Models\ClientBudget;
+use App\Models\ClientChecklist;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
+// $guestlistcount= DB::select('select sum(no_of_family_members) as GuestListCount from client_guest_lists where c_id = ?', [Auth::id()]);
+
+
+$currentDate = Carbon::now()->toDateString();
+
+
+$guestlistcount = ClientGuestList::where('c_id', Auth::id())->sum('no_of_family_members');
+$pendingBooking = ClientVendorBooking::where('c_id', Auth::id())->where('booking_status', 'pending')->count();
+$totalBooked = ClientVendorBooking::where('c_id', Auth::id())->where('booking_status', 'Booked')->count();
+$TodayBooking = ClientVendorBooking::where('c_id', Auth::id())->whereDate('created_at', $currentDate)->count();
+
+$estimatedBudget = ClientCapital::where('c_id', Auth::id())->value('budget');
+$currentBudget = ClientBudget::where('c_id', Auth::id())->sum('final_cost');
+
+
+$todoCount = ClientChecklist::where('c_id', Auth::id())->where('task_status', 0)->count();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -392,35 +420,30 @@
 
 
     <!-- ----------------------------------------------------numbers------------------------------------------------ -->
+@if ($clientdata == null)
+<div class="container" style="margin-top: 150px">
+    <div class="row">
+        <div class="col-md-12 col-md-offset-2 text-center fh5co-heading welcome">
+            <h2>Hello!</h2>
+            <h4>This Your Dashboard</h4>
+            <p>Everything you need is right here. But First You need to logged in and complete your registeration process </p>
 
+            <a href="{{ route('login') }}" class="btn btn-primary">
+                Login
+            </a>
+
+            <a href="{{ route('customerreg') }}" class="btn btn-primary">
+                Complete Registration
+            </a>
+
+        </div>
+    </div>
+</div>
+@else
     <section class="numbers text-center" id="testimonials">
         <br><br>
         <div class="container">
         <div class="row" data-aos="zoom-in" data-aos-duration="2000" >
-
-            <!-- <div class="col-md-3 cols-sm-7">
-            <img src="images/cus_dashboard/pngwing.com (8) (2).png" alt="" srcset="" width="180px">
-            <p class="count fs-30 color-fff fw-700">10471</p>
-            <h3 class="color-aaa"> + REGISTERED VENDORS</h3>
-            </div>
-
-            <div class="col-md-3 cols-sm-7">
-            <i class="fas fa-sitemap"></i>
-            <p class="count fs-35 color-fff fw-700">17</p>
-            <h3 class="color-aaa"> + CATEGORIES</h3>
-            </div>
-
-            <div class="col-md-3 cols-sm-7">
-            <i class="fa fa-users"></i>
-            <p class="count fs-35 color-fff fw-700">1,21,236</p>
-            <h3 class="color-aaa"> + AVERAGE MONTHLY VISITORS</h3>
-            </div>
-
-            <div class="col-md-3 cols-sm-7">
-            <i class="fas fa-chart-line"></i>
-            <p class=" count fs-35 color-fff fw-700">5</p>
-            <h3 class="color-aaa"> +YEARS OF EXPERIENCE</h3>
-            </div> -->
 
 
             <div class="col-md-12 d-flex justify-content-center animate__animated animate__bounceInDown animate__delay-1.5s animate_duration-2s">
@@ -432,31 +455,14 @@
             </div>
             </div>
             <div class="col-md-12 couple-header d-flex justify-content-center animate__animated animate__bounceInDown animate__delay-1.5s">
-                <h2>John & Shona</h2>
+                <h2>{{ ucfirst(strtok($clientdata->c_name, ' ')) }} & {{ ucfirst(strtok($clientdata->partner_name, ' ')) }}</h2>
             </div>
 
             <div class="col-md-12 d-flex justify-content-center align-content-center mb-3">
-                <div class="wedding_date"> 2023/01/28</div>
+                <div class="wedding_date">{{ $clientdata->wed_date }}</div>
             </div>
 
             <div class="col-md-12 d-flex justify-content-center align-content-center">
-                <!-- <div class="rounded-circle text-center nums animate__animated animate__pulse animate__delay-2s mx-4" style="width: 100px; height: 100px;">
-                    <span>11</span>
-                    <span class="desc">Days</span>
-                </div>
-                <div class="rounded-circle text-center nums animate__animated animate__pulse animate__delay-2s mx-4" style="width: 100px; height: 100px;">
-                    <span>11</span>
-                    <span class="desc">Hours</span>
-                </div>
-                <div class="rounded-circle text-center nums animate__animated animate__pulse animate__delay-2s mx-4" style="width: 100px; height: 100px;">
-                    <span>11</span>
-                    <span class="desc">Minutes</span>
-                </div>
-                <div class="rounded-circle text-center nums animate__animated animate__pulse animate__delay-2s mx-4" style="width: 100px; height: 100px;">
-                    <span>11</span>
-                    <span class="desc">Seconds</span>
-                </div> -->
-
                 <div class="simply-countdown simply-countdown-one"></div>
             </div>
 
@@ -499,16 +505,26 @@
     <div class="row d-flex justify-content-center align-content-center my-5">
 
         <div class="col-md-3 col-sm-12 pt-5">
-            <h3 class="welcome_couple">John</h3>
+            <h3 class="welcome_couple">
+                    {{ ucfirst(strtok($clientdata->c_name, ' ')) }}
+            </h3>
         </div>
         <div class="col-md-5">
+            @if($clientdata->gender == 'female')
             <img class="rounded-circle animate__animated animate__pulse profile_img" alt="avatar1" src="images/cus_dashboard/pngwing.com (8) (2).png" width="220px" />
-            <p class="heart text-center"><i class="fas fa-heart"></i></p>
+            @else
             <img class="rounded-circle animate__animated animate__pulse profile_img" alt="avatar1" src="images/cus_dashboard/pngwing.com (8) (4).png" width="220px" />
+            @endif
+            <p class="heart text-center"><i class="fas fa-heart"></i></p>
+            @if($clientdata->gender == 'female')
+            <img class="rounded-circle animate__animated animate__pulse profile_img" alt="avatar1" src="images/cus_dashboard/pngwing.com (8) (4).png" width="220px" />
+            @else
+            <img class="rounded-circle animate__animated animate__pulse profile_img" alt="avatar1" src="images/cus_dashboard/pngwing.com (8) (2).png" width="220px" />
+            @endif
         </div>
 
         <div class="col-md-3 col-sm-12 py-5">
-            <h3 class="welcome_couple">Shonaa</h3>
+            <h3 class="welcome_couple">{{ ucfirst(strtok($clientdata->partner_name, ' ')) }}</h3>
         </div>
 
     </div>
@@ -526,8 +542,8 @@
             <i class="fas fa-heart text-primary fa-3x"></i>
             </div>
             <div class="text-end">
-              <h3>70</h3>
-              <p class="mb-0">Total Guests</p>
+              <h3>{{ $clientdata->guest_count }}</h3>
+              <p class="mb-0">Estimated Guest Count</p>
             </div>
           </div>
         </div>
@@ -542,8 +558,8 @@
               <i class="fas fa-heart text-primary fa-3x"></i>
               </div>
               <div class="text-end">
-                <h3>70</h3>
-                <p class="mb-0">Total Guests</p>
+                <h3>{{ 2 + $guestlistcount }}</h3>
+                <p class="mb-0">Current Guest Count</p>
               </div>
             </div>
           </div>
@@ -559,8 +575,8 @@
               <i class="fas fa-heart text-primary fa-3x"></i>
               </div>
               <div class="text-end">
-                <h3>70</h3>
-                <p class="mb-0">Total Guests</p>
+                <h3>{{ $TodayBooking }}</h3>
+                <p class="mb-0">Today Bookings</p>
               </div>
             </div>
           </div>
@@ -575,8 +591,25 @@
               <i class="fas fa-heart text-primary fa-3x"></i>
               </div>
               <div class="text-end">
-                <h3>70</h3>
-                <p class="mb-0">Total Guests</p>
+                <h3>{{ $pendingBooking }}</h3>
+                <p class="mb-0">Pending Bookings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+              <i class="fas fa-heart text-primary fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>{{ $totalBooked }}</h3>
+                <p class="mb-0">Total Bookings</p>
               </div>
             </div>
           </div>
@@ -723,9 +756,13 @@
                         <img src="images/icons/joining_queue_100px.png" alt="" width="60px">
                     </div>
                 <div class="mt-4">
+                    @if ($guestlistcount == 0)
                     <h5 class="card-title ms-4 text-center">You haven't added any guests yet</h5>
+                    @endif
+
+                    <h5 class="card-title ms-4 text-center">Current Guests : {{ 2 + $guestlistcount }}</h5>
                 </div>
-                <button type="button" class="btn btn-outline-secondary">Add Guests</button>
+                <a href="{{ route('guestlist') }}" class="btn btn-outline-secondary">Add Guests</a>
                 </div>
             </div>
 
@@ -737,23 +774,51 @@
                         <div class="dash_cards">
                             <img src="images/icons/money_bag_ruble_100px.png" alt="" width="60px">
                             <h5 class="card-title mt-2">Estimated Cost</h5>
-                            <p class="card-text">10 Laks</p>
+                            <p class="card-text">Rs. {{ $estimatedBudget }}</p>
 
                         </div>
 
                         <div class="dash_cards">
                             <img src="images/icons/fund_accounting_100px.png" alt="" width="60px">
                             <h5 class="card-title mt-2">Final Cost</h5>
-                            <p class="card-text">14 Laks</p>
+                            <p class="card-text">Rs. {{ $currentBudget }}</p>
                         </div>
                     </div>
                     <div class="dash_cards">
-                        <button type="button" class="btn btn-outline-secondary mt-3">Manage Expanses</button>
+                        <a href="{{ route('budgetplanner') }}" class="btn btn-outline-secondary mt-3">Manage Expanses</a>
                     </div>
 
                 </div>
 
+
+
+
+
+
+
+
             </div>
+
+
+            <div class="card bg-light mb-3" style="max-width: 20rem;">
+                <div class="card-header">Check List</div>
+                    <div class="card-body dash_cards">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/icons/Checklist3.png" alt="" width="60px">
+                        </div>
+                    <div class="mt-4">
+                        @if ($todoCount == 0)
+                        <h5 class="card-title ms-4 text-center">You haven't Create Checklist yet</h5>
+                        @endif
+
+                        <h5 class="card-title ms-4 text-center">Todo : {{ $todoCount }}</h5>
+                    </div>
+                    <a href="{{ route('checklist.index') }}" class="btn btn-outline-secondary">Manage Checklists</a>
+                    </div>
+                </div>
+
+
+
     </div>
 </div>
 
@@ -799,6 +864,23 @@
         </div>
       </div>
 
+
+    @php
+    // Combine wedding date and start time into a single string
+    $dateTimeString = $clientdata->wed_date . ' ' . $clientdata->wed_start_time;
+
+    // Convert the combined string to a JavaScript Date object
+    $jsDate = \Carbon\Carbon::parse($dateTimeString)->toISOString();
+    @endphp
+
+@endif
+
+<?php
+if($clientdata == null){
+    $jsDate = \Carbon\Carbon::now()->toISOString();
+}
+
+?>
       <!-------------------------------------------Footer End---------------------------------------------->
 
 
@@ -830,13 +912,16 @@
 
 <!-- Count down -->
         <script>
-            var d = new Date(new Date().getTime() + 100 * 120 * 120 * 2000);
+            var d = new Date('{{ $jsDate }}');
+
 
             // default example
             simplyCountdown('.simply-countdown-one', {
                 year: d.getFullYear(),
                 month: d.getMonth() + 1,
-                day: d.getDate()
+                day: d.getDate(),
+                hours: d.getHours(),
+                minutes: d.getMinutes()
             });
 
             //jQuery example
@@ -844,6 +929,8 @@
                 year: d.getFullYear(),
                 month: d.getMonth() + 1,
                 day: d.getDate(),
+                hours: d.getHours(),
+                minutes: d.getMinutes(),
                 enableUtc: false
             });
         </script>

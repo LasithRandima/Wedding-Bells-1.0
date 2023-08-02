@@ -30,7 +30,7 @@ class BookingPolicy
      */
     public function view(User $user, ClientVendorBooking $clientVendorBooking)
     {
-        //
+        return auth()->user()->role_id === 1 || auth()->user()->role_id === 2;
     }
 
     /**
@@ -89,6 +89,6 @@ class BookingPolicy
      */
     public function forceDelete(User $user, ClientVendorBooking $clientVendorBooking)
     {
-        //
+        return auth()->user()->role_id === 2;
     }
 }

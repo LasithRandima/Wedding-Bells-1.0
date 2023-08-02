@@ -30,7 +30,7 @@ class VendorsPolicy
      */
     public function view(User $user, Vendor $vendor)
     {
-        //
+        return auth()->user()->role_id === 1;
     }
 
     /**
@@ -41,7 +41,7 @@ class VendorsPolicy
      */
     public function create(User $user)
     {
-        //
+        return auth()->user()->role_id === 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class VendorsPolicy
      */
     public function update(User $user, Vendor $vendor)
     {
-        //
+        return auth()->user()->role_id === 1;
     }
 
     /**
@@ -65,7 +65,7 @@ class VendorsPolicy
      */
     public function delete(User $user, Vendor $vendor)
     {
-        //
+        return auth()->user()->role_id === 1;
     }
 
     /**
@@ -77,7 +77,7 @@ class VendorsPolicy
      */
     public function restore(User $user, Vendor $vendor)
     {
-        //
+        return auth()->user()->role_id === 1;
     }
 
     /**
@@ -89,6 +89,6 @@ class VendorsPolicy
      */
     public function forceDelete(User $user, Vendor $vendor)
     {
-        //
+        return auth()->user()->role_id === 1;
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('c_id')->primary();
             $table->string('c_name');
             $table->string('c_email')->unique();
+            $table->string('gender')->nullable();;
             $table->string('partner_name');
             $table->string('partner_email')->unique()->nullable();
             $table->string('c_location');

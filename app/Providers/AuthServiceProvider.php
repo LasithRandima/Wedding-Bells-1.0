@@ -14,6 +14,14 @@ use App\Models\Vendor;
 use App\Policies\VendorsPolicy;
 use App\Models\ClientVendorBooking;
 use App\Policies\BookingPolicy;
+use App\Models\VendorGallery;
+use App\Policies\VendorGalleryPolicy;
+use App\Models\SocialNetwork;
+use App\Policies\SocialNetworkPolicy;
+use App\Models\VendorFaq;
+use App\Policies\VendorFaqPolicy;
+use App\Models\Media;
+use App\Policies\MediaPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,6 +37,10 @@ class AuthServiceProvider extends ServiceProvider
         VendorCategory::class => CategoriesPolicy::class,
         Vendor::class => VendorsPolicy::class,
         ClientVendorBooking::class => BookingPolicy::class,
+        VendorGallery::class => VendorGalleryPolicy::class,
+        SocialNetwork::class => SocialNetworkPolicy::class,
+        VendorFaq::class => VendorFaqPolicy::class,
+        Media::class => MediaPolicy::class,
     ];
 
     /**
