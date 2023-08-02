@@ -2,16 +2,13 @@
 
 <x-frontend>
 
-
     <?php
     $category_name = DB::table('vendor_categories')
         ->select('Category_name')
         ->where('id', '=', 1)
         ->value('Category_name');
 
-
     ?>
-
 
     <div class="container" style="margin-top: 130px; margin-bottom:130px; padding: 0 100px">
 

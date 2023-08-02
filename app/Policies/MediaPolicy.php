@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Media;
 use App\Models\User;
-use App\Models\VendorCategory;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoriesPolicy
+class MediaPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class CategoriesPolicy
      */
     public function viewAny(User $user)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\VendorCategory  $vendorCategory
+     * @param  \App\Models\Media  $media
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, VendorCategory $vendorCategory)
+    public function view(User $user, Media $media)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 
     /**
@@ -41,54 +41,54 @@ class CategoriesPolicy
      */
     public function create(User $user)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\VendorCategory  $vendorCategory
+     * @param  \App\Models\Media  $media
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, VendorCategory $vendorCategory)
+    public function update(User $user, Media $media)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\VendorCategory  $vendorCategory
+     * @param  \App\Models\Media  $media
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, VendorCategory $vendorCategory)
+    public function delete(User $user, Media $media)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\VendorCategory  $vendorCategory
+     * @param  \App\Models\Media  $media
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, VendorCategory $vendorCategory)
+    public function restore(User $user, Media $media)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\VendorCategory  $vendorCategory
+     * @param  \App\Models\Media  $media
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, VendorCategory $vendorCategory)
+    public function forceDelete(User $user, Media $media)
     {
-        return auth()->user()->role_id === 1;
+        return auth()->user()->role_id === 2;
     }
 }

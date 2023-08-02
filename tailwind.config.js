@@ -1,8 +1,13 @@
-const colors = require('tailwindcss/colors')
+// const colors = require('tailwindcss/colors')
+import colors from 'tailwindcss/colors'
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
 
-module.exports = {
+export default {
     content: [
-        './resources/**/*.blade.php',
+        "./resources/**/*.blade.php",
+        "./resources/views/**/*.blade.php",
+        "./resources/**/*.js",
         './vendor/filament/**/*.blade.php',
 
     ],
@@ -17,7 +22,9 @@ module.exports = {
         },
     },
     plugins: [
-        require('@tailwindcss/forms'),
-        require('@tailwindcss/typography'),
+        // require('@tailwindcss/forms'),
+        // require('@tailwindcss/typography'),
+        forms,
+        typography,
     ],
 }

@@ -46,7 +46,7 @@ class AdvertisementResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return static::getModel()::query()->where('v_id', Auth::id());
+        return static::getModel()::query()->where('v_id', Auth::id())->where('ad_type', 0);
     }
 
     public static function form(Form $form): Form

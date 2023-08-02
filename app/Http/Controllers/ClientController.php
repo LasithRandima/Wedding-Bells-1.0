@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -14,7 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clientdata = Client::where('user_id', Auth::id())->first();
+        // dd($clientdata);
+        return view('customer.custormerDashboard', compact('clientdata'));
     }
 
     /**

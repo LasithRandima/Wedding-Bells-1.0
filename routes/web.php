@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\TopAdController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\VendorCategoryController;
@@ -37,6 +38,10 @@ Route::get('/', function () {
 });
 
 
+Route::get('/adplan', function () {
+    return view('vendor.adplan');
+})->name('adplan');
+
 Route::get('/checklist', function () {
     return view('customer.checklist');
 })->name('checklist');
@@ -44,11 +49,11 @@ Route::get('/checklist', function () {
 
 Route::get('/budgetplanner', function () {
     return view('customer.budgetplannerfront');
-});
+})->name('budgetplanner');
 
 Route::get('/guestlist', function () {
     return view('customer.guestlistfront');
-});
+})->name('guestlist');
 
 // Route::controller(ClientChecklistController::class)->group(function(){
 //     Route::get('/checklist', 'index');
@@ -73,17 +78,18 @@ Route::get('/customer/register', function () {
     return view('livewire.Clientregister');
 });
 
-Route::get('/customer/register', Clientregister::class);
+Route::get('/customer/register', Clientregister::class)->name('customerreg');
 
 Route::resource('client-guest-lists', ClientGuestListController::class);
 
 //Event Calendar Routes
 Route::resource('clienteventplanners', ClientEventPlannerController::class);
-Route::resource('clientchecklists', ClientChecklistController::class);
+Route::resource('checklist', ClientChecklistController::class);
 
 Route::resource('topAds', TopAdController::class);
 Route::resource('vendorCategories', VendorCategoryController::class);
 Route::resource('vendors', VendorController::class);
+Route::resource('clients', ClientController::class);
 Route::resource('advertistments', AdvertisementController::class);
 Route::resource('ads', AdsController::class);
 Route::resource('sitePackages', SitePackageController::class);
@@ -120,7 +126,7 @@ Route::middleware([
         }else if(Auth::user()->role_id == '2'){
             return redirect('/admin');
         }else if(Auth::user()->role_id == '3'){
-            return view('customer.index');
+            return redirect('/');
         }
     }
     })->name('dashboard');

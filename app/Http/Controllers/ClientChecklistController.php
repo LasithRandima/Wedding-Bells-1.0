@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ClientChecklist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ClientChecklistController extends Controller
@@ -17,9 +18,11 @@ class ClientChecklistController extends Controller
     public function index()
     {
         $rowcount = DB::table('users')->count();
-        $cid = DB::scalar('SELECT id FROM users where role_id=3 order by id desc limit 1');
+        $records = DB::table('client_checklists')->where('c_id', Auth::id())->count();
+        // $cid = DB::scalar('SELECT id FROM users where role_id=3 order by id desc limit 1');
+        $cid = Auth::id();
         $create_date_time = Carbon::now()->toDateTimeString();
-
+        app('debugbar')->info($records);
 
 
         // if($cid == $rowcount){
@@ -30,7 +33,8 @@ class ClientChecklistController extends Controller
 
 
 
-if($cid == $rowcount){
+// if($cid == $rowcount)
+if($records == 0){
   DB::insert('INSERT INTO client_checklists (id, c_id, created_at, updated_at, task_name, description, Category, timing_period, date, essential, task_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [NULL,$cid,$create_date_time,$create_date_time,'Announce your engagement to family and friends!','Congratulations on your engagement! Spread the word to family and friends.','Planning','From 10 to 12 months',NULL,0,0]);
   DB::insert('INSERT INTO client_checklists (id, c_id, created_at, updated_at, task_name, description, Category, timing_period, date, essential, task_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -265,8 +269,8 @@ if($cid == $rowcount){
         }
 
 
-        return redirect()->route('checklist')->with('success','Checklist Has Been updated successfully');
-        // return view('customer.checklist');
+        // return redirect()->route('checklist')->with('success','Checklist Has Been updated successfully');
+        return view('customer.checklist')->with('success','Checklist Has Been updated successfully');
 
     }
 

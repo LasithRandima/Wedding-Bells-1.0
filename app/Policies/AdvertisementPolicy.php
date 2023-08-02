@@ -30,7 +30,7 @@ class AdvertisementPolicy
      */
     public function view(User $user, Advertisement $advertisement)
     {
-        //
+        return auth()->user()->role_id === 1 || auth()->user()->role_id === 2;
     }
 
     /**
@@ -41,7 +41,7 @@ class AdvertisementPolicy
      */
     public function create(User $user)
     {
-        //
+        return auth()->user()->role_id === 2;
     }
 
     /**
@@ -53,7 +53,7 @@ class AdvertisementPolicy
      */
     public function update(User $user, Advertisement $advertisement)
     {
-        //
+        return auth()->user()->role_id === 2;
     }
 
     /**
@@ -65,7 +65,7 @@ class AdvertisementPolicy
      */
     public function delete(User $user, Advertisement $advertisement)
     {
-        //
+        return auth()->user()->role_id === 2;
     }
 
     /**
@@ -77,7 +77,7 @@ class AdvertisementPolicy
      */
     public function restore(User $user, Advertisement $advertisement)
     {
-        //
+        return auth()->user()->role_id === 2;
     }
 
     /**
@@ -89,6 +89,6 @@ class AdvertisementPolicy
      */
     public function forceDelete(User $user, Advertisement $advertisement)
     {
-        //
+        return auth()->user()->role_id === 2;
     }
 }

@@ -26,32 +26,32 @@ class AdsController extends Controller
 
     // Query advertisements with filters
     $advertisementsQuery = Advertisement::query();
-    $topAdsQuery = TopAd::query();
+    $topAdsQuery = Advertisement::query();
 
-    if ($vCategory &&$vendorName) {
-        $advertisementsQuery->where('category_id', $vCategory)->where(function ($query) use ($vendorName) {
+    if ($vCategory && $vendorName) {
+        $advertisementsQuery->where('ad_type', 0)->where('category_id', $vCategory)->where(function ($query) use ($vendorName) {
             $query->where('vBusinessName', 'like', '%'.$vendorName.'%');
         });
-        $topAdsQuery->where('category_id', $vCategory)->where(function ($query) use ($vendorName) {
+        $topAdsQuery->where('ad_type', 1)->where('category_id', $vCategory)->where(function ($query) use ($vendorName) {
             $query->where('vBusinessName', 'like', '%'.$vendorName.'%');
         });
     } elseif ($vendorName && $vCategory == null) {
-        $advertisementsQuery->where(function ($query) use ($vendorName) {
+        $advertisementsQuery->where('ad_type', 0)->where(function ($query) use ($vendorName) {
             $query->where('vBusinessName', 'like', '%'.$vendorName.'%');
         });
-        $topAdsQuery->where(function ($query) use ($vendorName) {
+        $topAdsQuery->where('ad_type', 1)->where(function ($query) use ($vendorName) {
             $query->where('vBusinessName', 'like', '%'.$vendorName.'%');
         });
     } elseif ($vCategory &&$vendorName == null) {
-        $advertisementsQuery->where('category_id', $vCategory);
-        $topAdsQuery->where('category_id', $vCategory);
+        $advertisementsQuery->where('ad_type', 0)->where('category_id', $vCategory);
+        $topAdsQuery->where('ad_type', 1)->where('category_id', $vCategory);
     }
 
     // Determine which paginator to use
     $paginator = null;
     if (!$vCategory && !$vendorName) {
-        $vendorNormalAds = $advertisementsQuery->orderBy('id', 'desc')->paginate(5);
-        $vendorTopAds = $topAdsQuery->orderBy('id', 'desc')->paginate(1);
+        $vendorNormalAds = $advertisementsQuery->where('ad_type', 0)->orderBy('id', 'desc')->paginate(5);
+        $vendorTopAds = $topAdsQuery->where('ad_type', 1)->orderBy('id', 'desc')->paginate(1);
         $allAds = null;
 
         $paginator = ($vendorNormalAds->lastPage() > $vendorTopAds->lastPage()) ? $vendorNormalAds : $vendorTopAds;

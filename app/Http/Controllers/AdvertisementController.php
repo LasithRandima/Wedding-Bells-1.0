@@ -270,8 +270,8 @@ class AdvertisementController extends Controller
     // Determine which paginator to use
     $paginator = null;
     if (!$category && !$location) {
-        $vendorNormalAds = $advertisementsQuery->orderBy('id', 'desc')->paginate(5);
-        $vendorTopAds = $topAdsQuery->orderBy('id', 'desc')->paginate(1);
+        $vendorNormalAds = $advertisementsQuery->where('ad_type', 0)->orderBy('id', 'desc')->paginate(5);
+        $vendorTopAds = $topAdsQuery->where('ad_type', 1)->orderBy('id', 'desc')->paginate(1);
         $allAds = null;
 
         $paginator = ($vendorNormalAds->lastPage() > $vendorTopAds->lastPage()) ? $vendorNormalAds : $vendorTopAds;
@@ -279,8 +279,10 @@ class AdvertisementController extends Controller
         $allAdsQuery = $advertisementsQuery->unionAll($topAdsQuery);
         $allAds = $allAdsQuery->orderBy('id', 'desc')->paginate(8);
 
-        $vendorNormalAds = $allAds->whereInstanceOf(Advertisement::class);
-        $vendorTopAds = $allAds->whereInstanceOf(Advertisement::class);
+        app('debugbar')->info($allAds);
+
+        $vendorNormalAds = $allAds->whereInstanceOf(Advertisement::class)->where('ad_type', 0);
+        $vendorTopAds = $allAds->whereInstanceOf(Advertisement::class)->where('ad_type', 1);
     }
 
     // Retrieve all categories
