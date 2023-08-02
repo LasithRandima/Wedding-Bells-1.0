@@ -1,3 +1,7 @@
+
+composer require saade/filament-fullcalendar
+php artisan vendor:publish --tag="filament-fullcalendar-config"
+
 composer require husam-tariq/filament-timepicker
 php artisan vendor:publish --tag="filament-timepicker-views"
 
