@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Hidden;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
-
-
 // $data = DB::select('select * from client_event_planners');
 
 

@@ -162,7 +162,7 @@ if (Auth::user()) {
 
 
                       </li>
-                      <li><a href="#">Manage Profile</a></li>
+                      <li><a href="{{ url('/user/profile') }}">Manage Profile</a></li>
                       @if (auth()->user()->role_id == '3')
                       <li><a href="{{ route('clients.index') }}">Dashboard</a></li>
                       @elseif (auth()->user()->role_id == '2')
@@ -539,7 +539,7 @@ if (Auth::user()) {
       <!--Text-->
       <p class="card-text">Budget Plan tool provide you program to evaluate actual paid and due amount.</p>
       <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="more-bttns">Read more</button>
+      <a href="{{ route('budgetplanner') }}" class="more-bttns">Read more</a>
 
     </div>
 
@@ -566,7 +566,7 @@ if (Auth::user()) {
       <!--Text-->
       <p class="card-text">Make list for your guests and collect email addressses and send free invitation.</p>
       <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="more-bttns">Read more</button>
+      <a href="{{ route('guestlist') }}" type="button" class="more-bttns">Read more</a>
 
     </div>
 
@@ -593,7 +593,7 @@ if (Auth::user()) {
       <!--Text-->
       <p class="card-text">Get your sorted list with Check List planning tool each list status wise.</p>
       <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="more-bttns">Read more</button>
+      <a href="{{ url('/checklist') }}" class="more-bttns">Read more</a>
 
     </div>
 
@@ -619,7 +619,7 @@ if (Auth::user()) {
       <!--Text-->
       <p class="card-text">Get your sorted list with Check List planning tool each list status wise.</p>
       <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="more-bttns">Read more</button>
+      <a href="{{ route('customer.calendar.index') }}" class="more-bttns">Read more</a>
 
     </div>
 
@@ -696,11 +696,11 @@ if (Auth::user()) {
 
              @foreach ($categories as $category)
 
-                <div class="col-md-4 about_grid " style="background-color: rgba(0, 0, 0, 0); background-image: url({{  $category->Category_image != null  ? asset('/storage/'.$category->Category_image)  : asset('/storage/default_images/default_category_thumb.jpg') }} ); background-size: cover; background-position: center center; width: 100%; height: 250px; opacity: 1; visibility: inherit; z-index: 20;" data-aos="zoom-in" data-aos-duration="2000">
-                    <i class="fa fa-heart mb-5"></i>
-                    <h4 class="mb-2">{{$category->Category_name}}</h4>
-                    <p class="cat-pargraph"></p>
-                    <a href="{{ route('vendorCategories.show', $category->id) }}" class="more-bttn my-2">
+                <div class="col-md-4 about_grid " style="background-color: rgba(0, 0, 0, 0); background-image: url({{  $category->Category_image != null  ? asset('/storage/'.$category->Category_image)  : asset('/storage/default_images/default_category_thumb.jpg') }} ); background-size: cover; background-position: center center; width: 100%; height: 265px; opacity: 1; visibility: inherit; z-index: 20;" data-aos="zoom-in" data-aos-duration="2000">
+                    {!! $category->Category_icon ?: '<i class="fa fa-heart"></i>' !!}
+                    <h4 class="mb-3 mt-5">{{$category->Category_name}}</h4>
+                    <p class="cat-pargraph">{{$category->Category_description}}</p>
+                    <a href="{{ route('vendorCategories.show', $category->id) }}" class="more-bttn my-3">
                       View More
                     </a>
                   </div>

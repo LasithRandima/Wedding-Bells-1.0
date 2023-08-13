@@ -2,9 +2,27 @@
 use App\Models\Advertisement;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 $categories= DB::table('vendor_categories')->limit(6)->get();
-$topAds= DB::table('advertisements')->limit(8)->get();
+$allCategories= DB::table('vendor_categories')->get();
+$topAds= DB::table('advertisements')->where('ad_type', '=', '1')->limit(8)->get();
+
+// $website_url = DB::scalar('vendors')->select('v_website_url')->where('c_id', '=', AUTH::id());
+
+
+$initials ='';
+
+if (Auth::user()) {
+    $name = Auth::user()->name; // replace this with the actual name from the database
+    $parts = explode(' ', $name); // split the name into parts using the space character as the separator
+    $first_letter = strtoupper(substr($parts[0], 0, 1)); // get the first letter of the first name and convert it to uppercase
+    $second_letter = isset($parts[1]) ? strtoupper(substr($parts[1], 0, 1)) : ''; // get the first letter of the second name and convert it to uppercase if it exists
+    $initials = $first_letter . $second_letter; // concatenate the two initials
+}
+
+// $categories= DB::table('vendor_categories')->limit(6)->get();
+// $topAds= DB::table('advertisements')->limit(8)->get();
 
 ?>
 <!DOCTYPE html>
@@ -13,16 +31,16 @@ $topAds= DB::table('advertisements')->limit(8)->get();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Bells</title>
-    <link rel="shortcut icon" href="{{ asset('images/favicon/favicon 01 (Copy).png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon/favicon 01 (Copy).png" type="image/x-icon">
 
-    <link rel="stylesheet" href="{{ asset('css/jquery.bxslider.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.theme.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/owl.theme.min.css">
+    <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
@@ -43,7 +61,7 @@ $topAds= DB::table('advertisements')->limit(8)->get();
     </div>
   </div>
 
-<header>
+  <header>
     <nav class="mynav">
       <a href="#"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" alt="logo" class="logo"></a>
         <label for="btn" class="icon">
@@ -54,25 +72,13 @@ $topAds= DB::table('advertisements')->limit(8)->get();
             <li><a href="#">Home</a></li>
             <li>
                 <label for="btn-1" class="shows ">Vendors <span><i class="fa fa-caret-down" aria-hidden="true"></i></span></label>
-                <a href="vendors.html">Vendors</a>
+                <a href="{{ route('advertistments.index') }}">Vendors</a>
                 <input type="checkbox" id="btn-1">
                 <ul>
                   <li class="itemhidden"><a href="#">Vendors</a></li>
-                  <li><a href="#">Bridal Wear</a></li>
-                  <li><a href="#">Groom Wear</a></li>
-                  <li><a href="#">Beauticians/Saloons</a></li>
-                  <li><a href="#">Wedding Jewelry</a></li>
-                  <li><a href="#">Wedding Shoes</a></li>
-                  <li><a href="#">Wedding Planner</a></li>
-                  <li><a href="#">Wedding Venues</a></li>
-                  <li><a href="#">Wedding Decors</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Ashtaka</a></li>
-                  <li><a href="#">Wedding Cakes</a></li>
-                  <li><a href="#">Stationary</a></li>
-                  <li><a href="#">Entertainment</a></li>
-                  <li><a href="#">Vehicle Hire</a></li>
-                  <li><a href="#">Honeymoon Venues</a></li>
+                  @foreach ($allCategories as $category)
+                      <li><a href="{{ route('vendorCategories.show', $category->id) }}">{{ $category->Category_name }}</a></li>
+                 @endforeach
 
                </ul>
            </li>
@@ -83,25 +89,131 @@ $topAds= DB::table('advertisements')->limit(8)->get();
             <li><a href="#quicksearch">Quick Search</a></li>
             <li><a href="advertise.html">Advertise</a></li>
             <li><a href="contactus.html">Contact</a></li>
-            <li><a href="loging-register.html">Login/Register</a></li>
-
+            <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
+            @if (auth()->id())
             <li>
-              <label for="btn-22" class="shows ">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  class="rounded-circle"
-                  height="25"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
-                <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-              </label>
+                {{-- <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    this.closest('form').submit(); " role="button">
+                            Logout
+                        </a>
+                </form> --}}
+                <li>
+                    <label for="btn-22" class="shows ">
+                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+
+                        <img class="rounded-circle"
+                        height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
+
+                @else
+                <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
+                {{-- <div class="user_avatar">{{ $initials }}</div> --}}
+                @endif
+                      <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                    </label>
 
 
-              <!-- large screen avater -->
-              <a
+                    <!-- large screen avater -->
+                    <a
 
-            >
+                  >
+                    {{-- <img
+                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      class="rounded-circle"
+                      height="25"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    /> --}}
+
+
+                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+
+                        <img class="rounded-circle"
+                        height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
+
+                @else
+                <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
+                {{-- <div class="user_avatar">{{ $initials }}</div> --}}
+                @endif
+
+
+                  </a>
+
+                  <!-- end large screen avater -->
+
+                    <input type="checkbox" id="btn-22">
+                    <ul class="u_avatar">
+                      <li class="itemhidden">
+
+                        <a href="#">
+                        <span>
+                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+
+                            <img class="rounded-circle"
+                            height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
+
+                            @else
+                            <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
+                            {{-- <div class="user_avatar">{{ $initials }}</div> --}}
+                            @endif
+
+                        </span>
+                        <span> Hi, User {{ Auth::user()->name }}!</span>
+                        </a>
+
+
+                      </li>
+                      <li><a href="{{ url('/user/profile') }}">Manage Profile</a></li>
+                      @if (auth()->user()->role_id == '3')
+                      <li><a href="{{ route('clients.index') }}">Dashboard</a></li>
+                      @elseif (auth()->user()->role_id == '2')
+                      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                      @elseif (auth()->user()->role_id == '1')
+                      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                      @endif
+                      <form method="POST" action="{{ route('logout') }}">
+                          @csrf
+                          <li>
+                              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                              this.closest('form').submit(); " role="button">
+                          Signout
+                          </a>
+                          </li>
+                      </form>
+
+
+
+
+                   </ul>
+               </li>
+
+            </li>
+            @else
+                <li>
+                    <a href="{{ route('login') }}" role="button">
+                        Login
+                    </a>
+                </li>
+            @endif
+            {{-- <li><a href="loging-register.html">Login/Register</a></li> --}}
+
+
+
+         <!-- <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Right-aligned menu example
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><button class="dropdown-item" type="button">Action</button></li>
+            <li><button class="dropdown-item" type="button">Another action</button></li>
+            <li><button class="dropdown-item" type="button">Something else here</button></li>
+          </ul>
+        </div> -->
+
+        <!-- <div class="d-flex">
+          <div class="dropdown mr-1">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-offset="200,20">
               <img
                 src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
                 class="rounded-circle"
@@ -110,30 +222,13 @@ $topAds= DB::table('advertisements')->limit(8)->get();
                 loading="lazy"
               />
             </a>
-
-            <!-- end large screen avater -->
-
-              <input type="checkbox" id="btn-22">
-              <ul class="u_avatar">
-                <li class="itemhidden">
-
-                  <a href="#">
-                  <span>
-                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy"
-                  /></span>
-                  <span> Hi, User John!</span>
-                  </a>
-
-
-                </li>
-                <li><a href="#">Manage Profile</a></li>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Signout</a></li>
-
-
-
-             </ul>
-         </li>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div> -->
 
 
 
@@ -195,7 +290,7 @@ $topAds= DB::table('advertisements')->limit(8)->get();
 
 
 <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap.js"') }}></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>

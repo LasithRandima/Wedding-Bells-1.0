@@ -10,14 +10,14 @@
 
                  @foreach ($allCategories as $category)
 
-                    <div class="col-md-4 about_grid " style="background-color: rgba(0, 0, 0, 0); background-image: url({{  $category->Category_image != null  ? asset('/storage/'.$category->Category_image)  : asset('/storage/default_images/default_category_thumb.jpg') }} ); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit; z-index: 20;" data-aos="zoom-in" data-aos-duration="2000">
-                        <i class="fa fa-heart"></i>
-                        <h4 style="margin-top: 85px;">{{$category->Category_name}}</h4>
-                        <p class="cat-pargraph"></p>
-                        <a href="{{ route('vendorCategories.show', $category->id) }}" class="more-bttn my-2">
-                            View More
-                          </a>
-                      </div>
+                 <div class="col-md-4 about_grid " style="background-color: rgba(0, 0, 0, 0); background-image: url({{  $category->Category_image != null  ? asset('/storage/'.$category->Category_image)  : asset('/storage/default_images/default_category_thumb.jpg') }} ); background-size: cover; background-position: center center; width: 100%; height: 265px; opacity: 1; visibility: inherit; z-index: 20;" data-aos="zoom-in" data-aos-duration="2000">
+                    {!! $category->Category_icon ?: '<i class="fa fa-heart"></i>' !!}
+                    <h4 class="mb-3 mt-5">{{$category->Category_name}}</h4>
+                    <p class="cat-pargraph">{{$category->Category_description}}</p>
+                    <a href="{{ route('vendorCategories.show', $category->id) }}" class="more-bttn my-3">
+                      View More
+                    </a>
+                  </div>
 
                  @endforeach
 

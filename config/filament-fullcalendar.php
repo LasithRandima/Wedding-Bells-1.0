@@ -3,6 +3,7 @@
 /**
  * Consider this file the root configuration object for FullCalendar.
  * Any configuration added here, will be added to the calendar.
+ *
  * @see https://fullcalendar.io/docs#toc
  */
 
@@ -10,6 +11,15 @@ return [
     'timeZone' => config('app.timezone'),
 
     'locale' => config('app.locale'),
+
+    'plugins' => [
+        'dayGrid' => true,
+        'timeGrid' => true,
+        'interaction' => true,
+        'list' => true,
+        'rrule' => true,
+        'resourceTimeline' => true,
+    ],
 
     'headerToolbar' => [
         'left' => 'prev,next today',
@@ -21,9 +31,7 @@ return [
 
     'editable' => true,
 
-
-    'selectable' => true,
-
+    'selectable' => false,
 
     'dayMaxEvents' => true,
 ];

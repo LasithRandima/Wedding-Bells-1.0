@@ -1,0 +1,118 @@
+/* ------------------------------------------------------------------footer------------------------------------- */
+
+footer {
+	background-color: #2a1b3d;
+	margin-top: 0;
+}
+.footerlogo {
+	float: center;
+	width: 170px;
+	height: 100px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 3px;
+	padding-right: 10px;
+}
+
+.three_clo {
+	margin-top: 0px;
+	text-align: center;
+}
+
+.three_clo h4 {
+	letter-spacing: 2px;
+	color: white;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+.three_clo ul li a {
+	color: white;
+	text-decoration: none;
+}
+
+.three_clo ul li a:hover {
+	color: red;
+}
+
+.three_clo ul li {
+	color: white;
+	margin: 10px;
+}
+
+.mid-row {
+	color: white;
+	padding: 35px;
+	text-align: center;
+	background: #2a1b3d;
+	margin-top: 0px;
+}
+
+.mid-row p {
+	color: white;
+	margin: 40px;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+.mid-row h4 {
+	font-size: 30px;
+	color: white;
+	letter-spacing: 2px;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+.social-icon i {
+	margin-top: 0.5em;
+	margin: 10px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	line-height: 37px;
+	border: 1px solid #ff4f81;
+	font-size: 16px;
+	color: #ff4f81;
+	cursor: pointer;
+}
+
+.social-icon i:hover {
+	color: white;
+	border: 1px solid white;
+}
+
+.contact {
+	color: #fff;
+	padding: 0px;
+	margin-top: 30px;
+	margin-right: 0px;
+	text-align: center;
+	align-items: center;
+}
+
+.contact h4 {
+	letter-spacing: 2px;
+	color: white;
+	font-size: 30px;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+.contact .contact-items {
+	margin-top: 5px;
+}
+
+.contact .contact-items p {
+	margin: 16px;
+	margin-top: 4px;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+.contact i {
+	color: #ff4f81;
+	padding-right: 20px;
+}
+
+.number {
+	color: #ff4f81;
+}
+
+.number a {
+	color: #ff4f81;
+}
