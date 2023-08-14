@@ -36,8 +36,8 @@ class AdvertisementsResource extends Resource
 
     protected static ?string $model = Advertisement::class;
     protected static ?string $navigationGroup = 'Vendor Dashboard';
-    protected static ?string $label = 'Advertisement';
-    protected static ?string $navigationLabel = 'Advertisement';
+    protected static ?string $label = 'Advertisements';
+    protected static ?string $navigationLabel = 'Advertisements';
     public static ?string $slug = 'adsnew';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';

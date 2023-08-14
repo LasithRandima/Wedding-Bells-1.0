@@ -26,11 +26,15 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TopAdResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TopAdResource\RelationManagers;
+use App\Models\Advertisement;
 
 class TopAdResource extends Resource
 {
-    protected static ?string $model = TopAd::class;
-    protected static ?string $navigationGroup = 'Vendor Dashboard';
+    protected static ?string $model = Advertisement::class;
+    protected static ?string $navigationGroup = 'Admin Dashboard';
+    protected static ?string $label = 'Top Ads';
+    protected static ?string $navigationLabel = 'Top Ads';
+    public static ?string $slug = 'topads';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     public $v_category;
@@ -38,7 +42,7 @@ class TopAdResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return static::getModel()::query()->where('v_id', Auth::id());
+        return static::getModel()::query()->where('ad_type', 1);
     }
 
 

@@ -1,35 +1,22 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources\ClientVendorBookingResource\Widgets;
 
-
-// use Filament\Forms;
 
 use App\Models\ClientVendorBooking;
-use Illuminate\Support\Facades\Auth;
+use Filament\Forms;
+use Filament\Widgets\Widget;
+use Illuminate\Http\Request;
+use App\Models\ClientEventPlanner;
+use Doctrine\DBAL\Schema\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Hidden;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
-
-// use Filament\Widgets\Widget;
-
-// class CalendarWidget extends Widget
-// {
-//     // protected static string $view = 'filament.widgets.calendar-widget';
-// }
-
-
-
-class CalendarWidget extends FullCalendarWidget
+class BookingCalendar extends FullCalendarWidget
 {
-
-    // protected static ?string $advertisementsVendorId = DB::table('advertisements')
-    //             ->select('actual_v_id')
-    //             ->where('v_id', '=', Auth::id())
-    //             ->value('actual_v_id');
-
-
-    protected static ?int $sort = 2;
+    // protected static string $view = 'filament.resources.client-vendor-booking-resource.widgets.booking-calendar';
 
     /**
      * Return events that should be rendered statically on calendar.
@@ -93,4 +80,5 @@ class CalendarWidget extends FullCalendarWidget
         // You can use $fetchInfo to filter events by date.
         return [];
     }
+
 }

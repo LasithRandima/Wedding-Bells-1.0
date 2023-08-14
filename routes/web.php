@@ -55,6 +55,10 @@ Route::get('/guestlist', function () {
     return view('customer.guestlistfront');
 })->name('guestlist');
 
+Route::get('/adsplan', function () {
+    return view('vendor.adsplan');
+})->name('adsplan');
+
 // Route::controller(ClientChecklistController::class)->group(function(){
 //     Route::get('/checklist', 'index');
 //     Route::post("categories","getCategory")->name('get-category');

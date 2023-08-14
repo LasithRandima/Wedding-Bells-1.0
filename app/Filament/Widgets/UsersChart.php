@@ -9,6 +9,7 @@ use Filament\Widgets\BarChartWidget;
 class UsersChart extends BarChartWidget
 {
     protected static ?string $heading = 'Customers';
+    // protected static ?int $sort = 3;
 
     public static function canView(): bool
         {

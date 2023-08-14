@@ -59,180 +59,14 @@ if (Auth::user()) {
     </div>
   </div>
 
-<header>
-    <nav class="mynav">
-      <a href="#"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" alt="logo" class="logo"></a>
-        <label for="btn" class="icon">
-            <span class="fa fa-bars"></span>
-        </label>
-        <input type="checkbox"id="btn">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li>
-                <label for="btn-1" class="shows ">Vendors <span><i class="fa fa-caret-down" aria-hidden="true"></i></span></label>
-                <a href="{{ route('advertistments.index') }}">Vendors</a>
-                <input type="checkbox" id="btn-1">
-                <ul>
-                  <li class="itemhidden"><a href="#">Vendors</a></li>
-                  @foreach ($allCategories as $category)
-                      <li><a href="{{ route('vendorCategories.show', $category->id) }}">{{ $category->Category_name }}</a></li>
-                 @endforeach
-
-               </ul>
-           </li>
 
 
 
+  <!-- --------------------------------------------------navbar---------------------------------------------------------------------------- -->
 
-            <li><a href="#quicksearch">Quick Search</a></li>
-            <li><a href="advertise.html">Advertise</a></li>
-            <li><a href="contactus.html">Contact</a></li>
-            <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
-            @if (auth()->id())
-            <li>
-                {{-- <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    this.closest('form').submit(); " role="button">
-                            Logout
-                        </a>
-                </form> --}}
-                <li>
-                    <label for="btn-22" class="shows ">
-                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-
-                        <img class="rounded-circle"
-                        height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
-
-                @else
-                <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
-                {{-- <div class="user_avatar">{{ $initials }}</div> --}}
-                @endif
-                      <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                    </label>
+@include('components.onlynav');
 
 
-                    <!-- large screen avater -->
-                    <a
-
-                  >
-                    {{-- <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                      class="rounded-circle"
-                      height="25"
-                      alt="Black and White Portrait of a Man"
-                      loading="lazy"
-                    /> --}}
-
-
-                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-
-                        <img class="rounded-circle"
-                        height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
-
-                @else
-                <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
-                {{-- <div class="user_avatar">{{ $initials }}</div> --}}
-                @endif
-
-
-                  </a>
-
-                  <!-- end large screen avater -->
-
-                    <input type="checkbox" id="btn-22">
-                    <ul class="u_avatar">
-                      <li class="itemhidden">
-
-                        <a href="#">
-                        <span>
-                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-
-                            <img class="rounded-circle"
-                            height="25" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" loading="lazy" />
-
-                            @else
-                            <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
-                            {{-- <div class="user_avatar">{{ $initials }}</div> --}}
-                            @endif
-
-                        </span>
-                        <span> Hi, User {{ Auth::user()->name }}!</span>
-                        </a>
-
-
-                      </li>
-                      <li><a href="{{ url('/user/profile') }}">Manage Profile</a></li>
-                      @if (auth()->user()->role_id == '3')
-                      <li><a href="{{ route('clients.index') }}">Dashboard</a></li>
-                      @elseif (auth()->user()->role_id == '2')
-                      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                      @elseif (auth()->user()->role_id == '1')
-                      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                      @endif
-                      <form method="POST" action="{{ route('logout') }}">
-                          @csrf
-                          <li>
-                              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                              this.closest('form').submit(); " role="button">
-                          Signout
-                          </a>
-                          </li>
-                      </form>
-
-
-
-
-                   </ul>
-               </li>
-
-            </li>
-            @else
-                <li>
-                    <a href="{{ route('login') }}" role="button">
-                        Login
-                    </a>
-                </li>
-            @endif
-            {{-- <li><a href="loging-register.html">Login/Register</a></li> --}}
-
-
-
-         <!-- <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            Right-aligned menu example
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div> -->
-
-        <!-- <div class="d-flex">
-          <div class="dropdown mr-1">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-offset="200,20">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                class="rounded-circle"
-                height="25"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-            </a>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div> -->
-
-
-
-        </ul>
-    </nav>
-</header>
 
 <!-- --------------------------------------------------slider---------------------------------------------------------------------------- -->
 
@@ -1037,43 +871,9 @@ Do not rush this planning process, there are plenty of wedding businesses advert
 <div class="map" >
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4745.027985058492!2d79.94732771592962!3d6.846012384230547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25044e7acf683%3A0x6513c1923579a890!2sStudio%20X!5e0!3m2!1sen!2slk!4v1603480566808!5m2!1sen!2slk" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 </div>
-<footer>
-  <div class="container" id="contact">
-      <div class="row">
-          <div class="col-sm-6 mid-row">
-              <h4>Follow us</h4>
-              <p>We always have the latest technology to connect and share knowledge with you.
-                So the knowledge you want are here.so keep share your journey with us.
 
-              </p>
-              <div class="social-icon">
-                  <a href="0701234567"><i class="fas fa-phone"></i></a>
-                  <a href="https://www.facebook.com/pages/weddingbells/"><i class="fab fa-facebook-f"></i></a>
-                  <a href="https://www.twitter.com/pages/weddingbells/"><i class="fab fa-twitter"></i></a>
-                  <a href="https://www.googleplus.com/pages/weddingbells/"><i class="fab fa-google-plus-g"></i></a>
-                  <a href="https://www.instagram.com/pages/weddingbells/"><i class="fab fa-instagram"></i></a>
-                  <a href="weddingbells@gmail.com "><i class="fas fa-envelope"></i></a>
-              </div>
-          </div>
-          <div class="col-sm-6 contact">
-              <h4>Contact us</h4>
-              <a href="#"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" class="footerlogo"></a>
-              <div class="contact-items">
-              <p><i class="fas fa-map-marker-alt"></i>Wedding Bells<span class="number"></span></p>
-              <p><i class="fas fa-phone"></i>Call Us: <span class="number"><a href=""> 0711234567 </a>/<a href=""> 0771234567 </a></span></p>
-              <p><i class="fas fa-envelope-open"></i>Email us: <span class="number"><a href="weddingbells.lk@gmail.com" class="info">weddingbells.lk@gmail.com </a></span></p>
+@include('components.onlyfooter')
 
-              </div>
-          </div>
-      </div>
-  </div>
-</footer>
-
-<section id="footer">
-  <div class="container">
-     <p>Copyright © 2020 Wedding Bells. All Rights Reserved. | Design and Develop by #UnknownDev</p>
-  </div>
-</div>
 
    <!-------------------------------------------Footer End---------------------------------------------->
 

@@ -40,50 +40,7 @@
         </div>
       </div>
 
-        <header>
-            <nav class=mynav>
-              <a href="index.html"><img src="assets/logo/Wedding Bells Logo.png" alt="logo" class="logo"></a>
-                <label for="btn" class="icon">
-                    <span class="fa fa-bars"></span>
-                </label>
-                <input type="checkbox"id="btn">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li>
-                        <label for="btn-1" class="shows">Vendors +</label>
-                        <a href="vendors.html">Vendors</a>
-                        <input type="checkbox" id="btn-1">
-                        <ul>
-                          <li class="itemhidden"><a href="vendors.html">Vendors</a></li>
-                          <li><a href="#">Bridal Wear</a></li>
-                          <li><a href="#">Groom Wear</a></li>
-                          <li><a href="#">Beauticians/Saloons</a></li>
-                          <li><a href="#">Wedding Jewelry</a></li>
-                          <li><a href="#">Wedding Shoes</a></li>
-                          <li><a href="#">Wedding Planner</a></li>
-                          <li><a href="#">Wedding Venues</a></li>
-                          <li><a href="#">Wedding Decors</a></li>
-                          <li><a href="#">Studio</a></li>
-                          <li><a href="#">Ashtaka</a></li>
-                          <li><a href="#">Wedding Cakes</a></li>
-                          <li><a href="#">Stationary</a></li>
-                          <li><a href="#">Entertainment</a></li>
-                          <li><a href="#">Vehicle Hire</a></li>
-                          <li><a href="#">Honeymoon Venues</a></li>
-
-                       </ul>
-                   </li>
-
-
-
-                    <li><a href="quicksearch.html">Quick Search</a></li>
-                    <li><a href="advertise.html">Advertise</a></li>
-                    <li><a href="#contactus">Contact</a></li>
-                    <li><a href="loging-register.html">Login/Register</a></li>
-
-                </ul>
-            </nav>
-        </header>
+      @include('components.onlynav');
 
 
 

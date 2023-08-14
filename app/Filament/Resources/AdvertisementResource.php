@@ -37,7 +37,7 @@ class AdvertisementResource extends Resource
     protected static ?string $model = Advertisement::class;
 
 
-    protected static ?string $navigationGroup = 'Vendor Dashboard';
+    protected static ?string $navigationGroup = 'Admin Dashboard';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -46,7 +46,7 @@ class AdvertisementResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return static::getModel()::query()->where('v_id', Auth::id())->where('ad_type', 0);
+        return static::getModel()::query()->where('ad_type', 0);
     }
 
     public static function form(Form $form): Form

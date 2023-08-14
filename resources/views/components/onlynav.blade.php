@@ -23,22 +23,6 @@ if (Auth::user()) {
 
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Bells</title>
-    <link rel="shortcut icon" href="images/favicon/favicon 01 (Copy).png" type="image/x-icon">
-
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
-
-
-
-</head>
-<body>
-
 
 <header>
     <nav class="mynav">
@@ -66,7 +50,7 @@ if (Auth::user()) {
 
 
             <li><a href="#quicksearch">Quick Search</a></li>
-            <li><a href="advertise.html">Advertise</a></li>
+            <li><a href="{{ route('adplan') }}">Advertise</a></li>
             <li><a href="contactus.html">Contact</a></li>
             <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
             @if (auth()->id())

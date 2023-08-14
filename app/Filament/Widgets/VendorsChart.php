@@ -10,6 +10,8 @@ class VendorsChart extends BarChartWidget
 {
     protected static ?string $heading = 'Vendors';
 
+    // protected static ?int $sort = 4;
+
     public static function canView(): bool
     {
         return auth()->user()->role_id === 1;

@@ -16,4 +16,11 @@ class ListClientVendorBookings extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            ClientVendorBookingResource\Widgets\BookingCalendar::class,
+        ];
+    }
 }

@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"> --}}
 
-   
+
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
 
@@ -72,7 +72,7 @@
 </head>
 <body>
 
-  <div class="spinner-container">  
+  <div class="spinner-container">
     <div class="circles">
       <div></div>
       <div></div>
@@ -84,50 +84,7 @@
     </div>
   </div>
 
-    <header>
-        <nav class=mynav>
-          <a href="index.html"><img src="assets/logo/Wedding Bells Logo.png" alt="logo" class="logo"></a>
-            <label for="btn" class="icon">
-                <span class="fa fa-bars"></span>
-            </label>
-            <input type="checkbox"id="btn">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li>
-                    <label for="btn-1" class="shows">Vendors +</label>
-                    <a href="vendors.html">Vendors</a>
-                    <input type="checkbox" id="btn-1">
-                    <ul>
-                      <li class="itemhidden"><a href="vendors.html">Vendors</a></li>
-                      <li><a href="#">Bridal Wear</a></li>
-                      <li><a href="#">Groom Wear</a></li>
-                      <li><a href="#">Beauticians/Saloons</a></li>
-                      <li><a href="#">Wedding Jewelry</a></li>
-                      <li><a href="#">Wedding Shoes</a></li>
-                      <li><a href="#">Wedding Planner</a></li>
-                      <li><a href="#">Wedding Venues</a></li>
-                      <li><a href="#">Wedding Decors</a></li>
-                      <li><a href="#">Studio</a></li>
-                      <li><a href="#">Ashtaka</a></li>
-                      <li><a href="#">Wedding Cakes</a></li>
-                      <li><a href="#">Stationary</a></li>
-                      <li><a href="#">Entertainment</a></li>
-                      <li><a href="#">Vehicle Hire</a></li>
-                      <li><a href="#">Honeymoon Venues</a></li>
-
-                   </ul>
-               </li>
-
-
-
-                <li><a href="quicksearch.html">Quick Search</a></li>
-                <li><a href="advertise.html">Advertise</a></li>
-                <li><a href="#contactus">Contact</a></li>
-                <li><a href="loging-register.html">Login/Register</a></li>
-
-            </ul>
-        </nav>
-    </header>
+  @include('components.onlynav');
 
 
 
@@ -256,43 +213,7 @@
     <!-------------------------------------------Footer Begin---------------------------------------------->
 
 
-    <footer>
-        <div class="container" id="contact">
-            <div class="row">
-                <div class="col-sm-6 mid-row">
-                    <h4 data-aos="zoom-in" data-aos-duration="3000">Follow us</h4>
-                    <p>We always have the latest tecnology to connect and share knowledge with you.
-                      So the knowledge you want are here.so keep share your journey with us.
-
-                    </p>
-                    <div class="social-icon">
-                        <a href="0701234567"><i class="fas fa-phone"></i></a>
-                        <a href="https://www.facebook.com/pages/weddingbells/"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com/pages/weddingbells/"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.googleplus.com/pages/weddingbells/"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="https://www.instagram.com/pages/weddingbells/"><i class="fab fa-instagram"></i></a>
-                        <a href="weddingbells@gmail.com "><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                <div class="col-sm-6 contact">
-                    <h4 data-aos="zoom-in" data-aos-duration="3000">Contact us</h4>
-                    <a href="index.html"><img src="Assets/logo/Wedding Bells Logo.png" class="footerlogo"></a>
-                    <div class="contact-items">
-                    <p><i class="fas fa-map-marker-alt"></i>Wedding Bells<span class="number"></span></p>
-                    <p><i class="fas fa-phone"></i>Call Us: <span class="number"><a href=""> 0711234567 </a>/<a href=""> 0771234567 </a></span></p>
-                    <p><i class="fas fa-envelope-open"></i>Email us: <span class="number"><a href="weddingbells.lk@gmail.com" class="info">weddingbells.lk@gmail.com </a></span></p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-      </footer>
-
-      <section id="footer">
-        <div class="container">
-           <p>Copyright © 2020 Wedding Bells. All Rights Reserved. | Design and Develop by #UnknownDev</p>
-        </div>
-      </div>
+    @include('components.onlyfooter')
 
       <!-------------------------------------------Footer End---------------------------------------------->
       @livewireScripts
@@ -415,7 +336,7 @@
                         window.livewire.emit('bulkDelete', []);
                         window.livewire.emit('destroy', event.detail.id);
                     }
-                }) 
+                })
             })
 
 
@@ -433,7 +354,7 @@
                     if (willDelete) {
                         window.livewire.emit('guestDelete', event.detail.id);
                     }
-                }) 
+                })
             })
         </script>
 
