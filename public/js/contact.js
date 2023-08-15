@@ -4,11 +4,6 @@ function validateForm() {
         document.querySelector('.status').innerHTML = "Name cannot be empty";
         return false;
     }
-    var name =  document.getElementById('lname').value;
-    if (name == "") {
-        document.querySelector('.status').innerHTML = "Please Fill Last Name";
-        return false;
-    }
     var contactnumber =  document.getElementById('phone').value;
     if (contactnumber == "") {
         document.querySelector('.status').innerHTML = "Contact Number cannot be empty";
@@ -34,4 +29,3 @@ function validateForm() {
   }
 
 
-  

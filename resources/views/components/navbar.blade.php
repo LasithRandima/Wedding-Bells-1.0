@@ -66,8 +66,8 @@ if (Auth::user()) {
 
 
             <li><a href="#quicksearch">Quick Search</a></li>
-            <li><a href="advertise.html">Advertise</a></li>
-            <li><a href="contactus.html">Contact</a></li>
+            <li><a href="{{ route('adplan') }}">Advertise</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
             <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
             @if (auth()->id())
             <li>

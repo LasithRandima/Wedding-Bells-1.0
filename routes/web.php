@@ -18,6 +18,7 @@ use App\Http\Controllers\ClientEventPlannerController;
 use App\Http\Controllers\ClientVendorBookingController;
 use App\Http\Controllers\CancelBookingController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SitePackageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -59,6 +60,9 @@ Route::get('/adsplan', function () {
     return view('vendor.adsplan');
 })->name('adsplan');
 
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('contact.send'); 
 // Route::controller(ClientChecklistController::class)->group(function(){
 //     Route::get('/checklist', 'index');
 //     Route::post("categories","getCategory")->name('get-category');

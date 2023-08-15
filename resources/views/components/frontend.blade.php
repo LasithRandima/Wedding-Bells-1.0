@@ -69,7 +69,7 @@ if (Auth::user()) {
         </label>
         <input type="checkbox"id="btn">
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="{{ url('/') }}">Home</a></li>
             <li>
                 <label for="btn-1" class="shows ">Vendors <span><i class="fa fa-caret-down" aria-hidden="true"></i></span></label>
                 <a href="{{ route('advertistments.index') }}">Vendors</a>
@@ -87,8 +87,8 @@ if (Auth::user()) {
 
 
             <li><a href="#quicksearch">Quick Search</a></li>
-            <li><a href="advertise.html">Advertise</a></li>
-            <li><a href="contactus.html">Contact</a></li>
+            <li><a href="{{ route('adplan') }}">Advertise</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
             <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
             @if (auth()->id())
             <li>
@@ -115,18 +115,7 @@ if (Auth::user()) {
 
 
                     <!-- large screen avater -->
-                    <a
-
-                  >
-                    {{-- <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                      class="rounded-circle"
-                      height="25"
-                      alt="Black and White Portrait of a Man"
-                      loading="lazy"
-                    /> --}}
-
-
+                    <a>
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
 
                         <img class="rounded-circle"
@@ -136,7 +125,6 @@ if (Auth::user()) {
                 <span class="bg-light text-secondary border border-danger rounded-circle p-1">{{ $initials }}</span>
                 {{-- <div class="user_avatar">{{ $initials }}</div> --}}
                 @endif
-
 
                   </a>
 
@@ -195,40 +183,12 @@ if (Auth::user()) {
                         Login
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('register') }}" role="button">
+                        register
+                    </a>
+                </li>
             @endif
-            {{-- <li><a href="loging-register.html">Login/Register</a></li> --}}
-
-
-
-         <!-- <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            Right-aligned menu example
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div> -->
-
-        <!-- <div class="d-flex">
-          <div class="dropdown mr-1">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-offset="200,20">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                class="rounded-circle"
-                height="25"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-            </a>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div> -->
 
 
 
