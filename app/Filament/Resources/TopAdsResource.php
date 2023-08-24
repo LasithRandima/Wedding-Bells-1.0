@@ -32,8 +32,8 @@ class TopAdsResource extends Resource
     protected static ?string $model = Advertisement::class;
 
     protected static ?string $navigationGroup = 'Vendor Dashboard';
-    protected static ?string $label = 'Top Ads News';
-    protected static ?string $navigationLabel = 'Top Ads New';
+    protected static ?string $label = 'Top Ads';
+    protected static ?string $navigationLabel = 'Top Ads';
     public static ?string $slug = 'topadsnew';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     public $v_category;

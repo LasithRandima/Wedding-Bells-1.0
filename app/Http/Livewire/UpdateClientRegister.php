@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Livewire;
+
+use Livewire\Component;
+
 use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Client;
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Card;
@@ -23,8 +25,9 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\MarkdownEditor;
 use HusamTariq\FilamentTimePicker\Forms\Components\TimePickerField;
 
-class Clientregister extends Component implements Forms\Contracts\HasForms
+class UpdateClientRegister extends Component implements Forms\Contracts\HasForms
 {
+
     use Forms\Concerns\InteractsWithForms;
 
     public $c_name;
@@ -33,7 +36,22 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
 
     public function mount(): void
     {
-        $this->form->fill();
+        // $this->form->fill();
+
+        $this->form->fill([
+            'user_id' => Auth::user()->id,
+            'c_name' => Client::where('user_id', Auth::user()->id)->first()->c_name,
+            'C_email' => Client::where('user_id', Auth::user()->id)->first()->c_email,
+            'gender' => Client::where('user_id', Auth::user()->id)->first()->gender,
+            'partner_name' => Client::where('user_id', Auth::user()->id)->first()->partner_name,
+            'partner_email' => Client::where('user_id', Auth::user()->id)->first()->partner_email,
+            'c_location' => Client::where('user_id', Auth::user()->id)->first()->c_location,
+            'c_tpno' => Client::where('user_id', Auth::user()->id)->first()->c_tpno,
+            'guest_count' => Client::where('user_id', Auth::user()->id)->first()->guest_count,
+            'wed_date' => Client::where('user_id', Auth::user()->id)->first()->wed_date,
+            'wed_start_time' => Client::where('user_id', Auth::user()->id)->first()->wed_start_time,
+            'wed_end_time' => Client::where('user_id', Auth::user()->id)->first()->wed_end_time,
+        ]);
     }
 
     protected function getFormSchema(): array
@@ -135,7 +153,6 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                 ->columns([
                     'sm' => 2,
                 ])
-                // ->submitAction(new HtmlString('<button type="submit">Submit</button>')),
                 ->submitAction(new HtmlString('<button type="submit" style=" background-color: #7f53ac;
                 background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
                 color: rgb(255, 255, 255);
@@ -147,20 +164,39 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
                 width: 5em;
                 border-radius: 12px;
                 cursor: pointer;
-                transition: all 0.9s ease-in-out;">Register</button>')),
+                transition: all 0.9s ease-in-out;">Update</button>')),
     ];
     }
 
+    // public function submit(): void
+    // {
+    //     Notification::make()
+    //     ->title('Registration successfully')
+    //     ->success()
+    //     ->send();
+    //     Client::create($this->form->getState());
+    // }
+
     public function submit()
     {
-        Notification::make()
-        ->title('Registration successfully')
-        ->success()
-        ->send();
-        Client::create($this->form->getState());
 
 
-        return redirect()->route('clients.index')->with('message','Registered successfully');
+            $client = Client::where('user_id', Auth::user()->id)->first();
+
+            if ($client) {
+                $client->update($this->form->getState());
+
+                Notification::make()
+                    ->title('Registration information updated successfully')
+                    ->success()
+                    ->send();
+
+                    return redirect()->route('dashboard')->with('message','Registration information updated successfully');
+            } else {
+                // Handle the case where no Vendor record exists
+            }
+
+
     }
 
     // public function create(): void
@@ -172,6 +208,10 @@ class Clientregister extends Component implements Forms\Contracts\HasForms
 
     public function render()
     {
-        return view('livewire.clientregister');
+        return view('livewire.update-client-register');
     }
 }
+
+
+
+

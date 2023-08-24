@@ -70,9 +70,9 @@ class ClientVendorBookingController extends Controller
         $request->validate([
             'c_id' => 'required|numeric',
             'ad_id' => 'nullable|numeric',
-            'top_ad_id' => 'nullable|numeric',
+            // 'top_ad_id' => 'nullable|numeric',
             'ad_vid' => 'required|numeric',
-            'top_ad_vid' => 'nullable|numeric',
+            // 'top_ad_vid' => 'nullable|numeric',
             'cName' => 'required|string',
             'cEmail' => 'required|email',
             // 'cPhone' => ['nullable', 'string', 'regex:/^\+?\d{8,14}$/'], // Valid phone number format
@@ -86,9 +86,9 @@ class ClientVendorBookingController extends Controller
         ClientVendorBooking::create([
             'c_id' => $request->c_id,
             'ad_id' => $request->ad_id,
-            'top_ad_id' => $request->top_ad_id,
+            // 'top_ad_id' => $request->top_ad_id,
             'v_id' => $request->ad_vid,
-            'top_ad_id' => $request->top_ad_vid,
+            // 'top_ad_vid' => $request->top_ad_vid,
             'c_name' => $request->cName,
             'c_email' => $request->cEmail,
             'c_tpno' => $request->cPhone,

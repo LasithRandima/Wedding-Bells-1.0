@@ -28,6 +28,10 @@ class Advertisement extends Model
         return $this -> hasMany(ClientVendorBooking::class);
     }
 
+    public function adpackage(): HasMany {
+        return $this -> hasMany(Adpackage::class);
+    }
+
 
     protected $casts = [
         'v_bus_branches' => 'array',

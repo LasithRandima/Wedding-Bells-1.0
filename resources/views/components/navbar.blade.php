@@ -68,7 +68,8 @@ if (Auth::user()) {
             <li><a href="#quicksearch">Quick Search</a></li>
             <li><a href="{{ route('adplan') }}">Advertise</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
-            <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
+            {{-- <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li> --}}
+            <li><a href="{{ route('clientBookings.index') }}">Booking</a></li>
             @if (auth()->id())
             <li>
                 {{-- <form method="POST" action="{{ route('logout') }}">

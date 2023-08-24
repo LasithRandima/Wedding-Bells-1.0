@@ -10,7 +10,7 @@
 
     ?>
 
-    <div class="container" style="margin-top: 130px; margin-bottom:130px; padding: 0 100px">
+    <div class="container" style="margin-top: 130px; margin-bottom:130px; padding: 0 100px;">
 
 
 

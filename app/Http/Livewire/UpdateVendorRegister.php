@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Livewire;
+
+use Livewire\Component;
+
 use Filament\Notifications\Notification;
 
 use Filament\Forms;
 use App\Models\Vendor;
-use Livewire\Component;
 use App\Models\VendorCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
@@ -22,23 +24,11 @@ use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TagsInput;
 
-// if(Auth::id()){
-// $vendor = DB::table('vendors')
-// ->join('users', function ($join) {
-//     $join->on('users.id', '=', 'vendors.user_id')
-//         ->where('user_id', '=', Auth::user()->id)
-//         ->where('users.role_id', '=', Auth::user()->role_id);
-// })
-// ->select('vendors.*', 'users.*')
-// ->get();
-// }else{
-//     return 'You already Has Registered as a Vendor';
-// }
-
-
-class Vendorregister extends Component implements Forms\Contracts\HasForms
+class UpdateVendorRegister extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
+
+    public Vendor $vendor;
 
     public $vid;
     public $name;
@@ -60,7 +50,21 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
 
     public function mount(): void
     {
-        $this->form->fill();
+        // $this->form->fill();
+
+        $this->form->fill([
+            'user_id' => Auth::user()->id,
+            'v_name' => Auth::user()->name,
+            'v_email' => Auth::user()->email,
+            'v_bus_name' => Vendor::where('user_id', Auth::user()->id)->first()->v_bus_name,
+            'v_bus_location' => Vendor::where('user_id', Auth::user()->id)->first()->v_bus_location,
+            'v-description' => Vendor::where('user_id', Auth::user()->id)->first()->v_description,
+            'v_category' => Vendor::where('user_id', Auth::user()->id)->first()->v_category,
+            'v_bus_branches' => Vendor::where('user_id', Auth::user()->id)->first()->v_bus_branches,
+            'v_website_url' => Vendor::where('user_id', Auth::user()->id)->first()->v_website_url,
+            'map' => Vendor::where('user_id', Auth::user()->id)->first()->map,
+            'v_phone' => Vendor::where('user_id', Auth::user()->id)->first()->v_phone,
+        ]);
     }
 
     protected function getFormSchema(): array
@@ -204,35 +208,28 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
                 width: 5em;
                 border-radius: 12px;
                 cursor: pointer;
-                transition: all 0.9s ease-in-out;">Register</button>')),
+                transition: all 0.9s ease-in-out;">Update</button>')),
     ];
     }
 
     public function submit()
     {
 
-        if(Auth::user()->id){
-            $vendor = DB::table('vendors')->where('user_id', '=', Auth::user()->id)->first();
-        }
 
+            $vendor = Vendor::where('user_id', Auth::user()->id)->first();
 
-        if($vendor){
-            Notification::make()
-            ->title('Vendor already registered')
-            ->danger()
-            ->send();
+            if ($vendor) {
+                $vendor->update($this->form->getState());
 
-            return redirect()->route('dashboard')->with('error','Vendor already has registered');
-        }else{
-            Notification::make()
-            ->title('Vendor registered successfully')
-            ->success()
-            ->send();
-            Vendor::create($this->form->getState());
+                Notification::make()
+                    ->title('Vendor information updated successfully')
+                    ->success()
+                    ->send();
 
-            return redirect()->route('dashboard')->with('message','Vendor registered successfully');
-
-        }
+                    return redirect()->route('dashboard')->with('message','Registration information updated successfully');
+            } else {
+                // Handle the case where no Vendor record exists
+            }
 
 
     }
@@ -243,8 +240,9 @@ class Vendorregister extends Component implements Forms\Contracts\HasForms
     // }
 
 
+
     public function render()
     {
-        return view('livewire.vendorregister');
+        return view('livewire.update-vendor-register');
     }
 }

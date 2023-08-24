@@ -22,6 +22,8 @@ use App\Models\VendorFaq;
 use App\Policies\VendorFaqPolicy;
 use App\Models\Media;
 use App\Policies\MediaPolicy;
+use App\Models\Adpackage;
+use App\Policies\AdpackagePolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -41,6 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         SocialNetwork::class => SocialNetworkPolicy::class,
         VendorFaq::class => VendorFaqPolicy::class,
         Media::class => MediaPolicy::class,
+        Adpackage::class => AdPackagePolicy::class,
     ];
 
     /**

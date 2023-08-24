@@ -33,14 +33,14 @@ if (Auth::user()) {
     <title>Wedding Bells</title>
     <link rel="shortcut icon" href="images/favicon/favicon 01 (Copy).png" type="image/x-icon">
 
-    <link rel="stylesheet" href="css/jquery.bxslider.css">
-    <link rel="stylesheet" href="css/fontawesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/owl.theme.min.css">
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="{{ asset('css/jquery.bxslider.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
@@ -89,7 +89,8 @@ if (Auth::user()) {
             <li><a href="#quicksearch">Quick Search</a></li>
             <li><a href="{{ route('adplan') }}">Advertise</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
-            <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
+            {{-- <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li> --}}
+            <li><a href="{{ route('clientBookings.index') }}">Booking</a></li>
             @if (auth()->id())
             <li>
                 {{-- <form method="POST" action="{{ route('logout') }}">

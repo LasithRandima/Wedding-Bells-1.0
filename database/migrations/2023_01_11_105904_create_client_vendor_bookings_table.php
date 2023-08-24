@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('c_id')->references('user_id')->on('clients')->onDelete('cascade');
 
             $table->foreignId('ad_id')->constrained('advertisements')->cascadeOnDelete()->nullable();
-            $table->foreignId('top_ad_id')->constrained('top_ads')->cascadeOnDelete()->nullable();
+            // $table->foreignId('top_ad_id')->constrained('top_ads')->cascadeOnDelete()->nullable();
 
 
             // $table->foreignId('v_id')->constrained('vendors')->cascadeOnDelete();
@@ -28,13 +28,14 @@ return new class extends Migration
             // $table->foreign('v_id')->references('user_id')->on('vendors')->onDelete('cascade');
             $table->foreign('v_id')->references('id')->on('vendors')->onDelete('cascade');
 
-            $table->unsignedBigInteger('top_ad_vid')->nullable();
-            $table->foreign('top_ad_vid')->references('id')->on('vendors')->onDelete('cascade');
+            // $table->unsignedBigInteger('top_ad_vid')->nullable();
+            // $table->foreign('top_ad_vid')->references('id')->on('vendors')->onDelete('cascade');
 
             $table->string('c_name');
             $table->string('c_email');
             $table->string('c_tpno');
             $table->text('message')->nullable();
+            $table->unsignedBigInteger('pkg_id')->nullable();
             $table->date('event_date');
             $table->time('event_start_time');
             $table->time('event_end_time')->nullable();

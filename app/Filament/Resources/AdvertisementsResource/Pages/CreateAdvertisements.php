@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAdvertisements extends CreateRecord
 {
     protected static string $resource = AdvertisementsResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

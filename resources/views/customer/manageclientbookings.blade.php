@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendor Listings</title>
-    <link rel="shortcut icon" href="images/favicon/favicon 01 (Copy).png" type="image/x-icon">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/template2.css">
-    <link rel="stylesheet" href="css/fontawesome/css/all.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="css/jquery.fancybox.css">
+    <link rel="shortcut icon" href="{{ asset('images/favicon/favicon 01 (Copy).png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/template2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.css') }}">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
     alpha/css/bootstrap.css" rel="stylesheet">
@@ -634,11 +634,11 @@
       </script>
 
 
-      <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
-      <script type="text/javascript" src="js/bootstrap.js"></script>
-      <script type="text/javascript" src="js/aos.js"></script>
-      <script type="text/javascript" src="js/swiper-bundle.min.js"></script>
-      <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
+      <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/aos.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
           <script>
           AOS.init({
               offset: 180,
@@ -651,12 +651,12 @@
 
           });
           </script>
-      <script src="js/main.js"></script>
-      <script src="js/smooth-scroll.js"></script>
+      <script src="{{ asset('js/main.js') }}"></script>
+      <script src="{{ asset('js/smooth-scroll.js') }}"></script>
       <script>
           var scroll = new SmoothScroll('a[href*="#"]');
       </script>
-      <script src="js/contact.js"></script>
+      <script src="{{ asset('js/contact.js') }}"></script>
 
 </body>
 </html>

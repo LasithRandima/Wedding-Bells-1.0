@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateClientVendorBooking extends CreateRecord
 {
     protected static string $resource = ClientVendorBookingResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

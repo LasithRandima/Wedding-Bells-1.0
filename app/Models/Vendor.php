@@ -62,6 +62,10 @@ class Vendor extends Model
         return $this -> belongsTo(VendorCategory::class);
     }
 
+    public function adpackage(): HasMany {
+        return $this -> hasMany(Adpackage::class);
+    }
+
     protected $casts = [
         'v_bus_branches' => 'array',
         'v_category' => 'array',

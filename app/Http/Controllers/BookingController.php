@@ -9,7 +9,6 @@ class BookingController extends Controller
 {
     public function __invoke($bookingId)
     {
-
         $booking = ClientVendorBooking::findOrFail($bookingId);
         // dd($bookingId);
         $booking->update(['booking_status' => 'booked']);
@@ -18,3 +17,5 @@ class BookingController extends Controller
         app('debugbar')->info('booking id : '+$booking);
     }
 }
+
+

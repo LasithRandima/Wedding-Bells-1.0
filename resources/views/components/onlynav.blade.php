@@ -26,7 +26,7 @@ if (Auth::user()) {
 
 <header>
     <nav class="mynav">
-      <a href="#"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" alt="logo" class="logo"></a>
+      <a href="{{ url('/') }}"><img src="{{ asset('images/logo/Wedding Bells Logo.png') }}" alt="logo" class="logo"></a>
         <label for="btn" class="icon">
             <span class="fa fa-bars"></span>
         </label>
@@ -52,7 +52,8 @@ if (Auth::user()) {
             <li><a href="#quicksearch">Quick Search</a></li>
             <li><a href="{{ route('adplan') }}">Advertise</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
-            <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li>
+            {{-- <li><a href="{{ route('clientVendorBookings.index') }}">Bookings</a></li> --}}
+            <li><a href="{{ route('clientBookings.index') }}">Booking</a></li>
             @if (auth()->id())
             <li>
                 {{-- <form method="POST" action="{{ route('logout') }}">
