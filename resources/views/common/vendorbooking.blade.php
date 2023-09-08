@@ -8,6 +8,37 @@
         ->where('id', '=', 1)
         ->value('Category_name');
 
+    $wedding_date = DB::table('clients')
+        ->select('wed_date')
+        ->where('user_id', '=', Auth::id())
+        ->value('wed_date');
+
+    $wedding_start_time = DB::table('clients')
+        ->select('wed_start_time')
+        ->where('user_id', '=', Auth::id())
+        ->value('wed_start_time');
+
+    $wedding_end_time = DB::table('clients')
+        ->select('wed_end_time')
+        ->where('user_id', '=', Auth::id())
+        ->value('wed_end_time');
+
+    $phone = DB::table('clients')
+        ->select('c_tpno')
+        ->where('user_id', '=', Auth::id())
+        ->value('c_tpno');
+
+    // Decode the JSON string into a PHP array
+    $data = json_decode($phone, true);
+
+    // Check if the array is not empty and has the "c_tpno" key
+    if (!empty($data) && isset($data[0]['c_tpno'])) {
+        $c_tpno = $data[0]['c_tpno'];
+        echo $c_tpno;
+    } else {
+        echo "No 'c_tpno' found in the JSON array.";
+    }
+
     ?>
 
     <div class="container" style="margin-top: 130px; margin-bottom:130px; padding: 0 100px;">
@@ -53,7 +84,7 @@
             <!-- Number input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form6Example6">Phone</label>
-                <input type="number" min="0" id="form6Example6" name="cPhone" class="form-control" />
+                <input type="number" min="0" id="form6Example6" name="cPhone" class="form-control" value="{{ $c_tpno  }}" />
 
               </div>
 
@@ -68,20 +99,20 @@
             <!-- Text input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form6Example4">Event Date</label>
-              <input type="date" id="form6Example4" name="cEventDate" class="form-control" />
+              <input type="date" id="form6Example4" name="cEventDate" class="form-control" value="{{ $wedding_date }}" />
 
             </div>
 
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="form6Example4">Event Start Time</label>
-                <input type="time" id="form6Example4" name="cEventStartTime" class="form-control" />
+                <input type="time" id="form6Example4" name="cEventStartTime" class="form-control" value="{{ $wedding_start_time }}" />
 
             </div>
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="form6Example4">Event End Time</label>
-                <input type="time" id="form6Example4" name="cEventEndTime" class="form-control" />
+                <input type="time" id="form6Example4" name="cEventEndTime" class="form-control" value="{{ $wedding_end_time }}" />
 
             </div>
 

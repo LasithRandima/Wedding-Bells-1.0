@@ -42,6 +42,17 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
+
+            <div class="my-20 py-10 sm:mt-15 flex justify-center items-center">
+
+                @if(auth()->user()->role_id == '3')
+                        <a href="{{ url('/customer/updateregister') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Update Full Profile Details</a>
+                @else(Auth()->user()->role_id == '2')
+                        <a href="{{ url('/vendor/updateregister') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Update Full Profile Details</a>
+                @endif
+
+
+            </div>
         </div>
     </div>
 

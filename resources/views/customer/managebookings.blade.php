@@ -598,6 +598,10 @@ use Illuminate\Support\Facades\Session;
                         disabled: true,
                         selected: true
                     }));
+                    pkgSelect.append($('<option>', {
+                        value: 'no_package',
+                        text: 'No Specific Package'
+                    }));
 
                     if (response.length === 0) {
                         $('#modalHeaderTitle').text('');
