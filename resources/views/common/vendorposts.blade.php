@@ -9,6 +9,11 @@ $website_url = DB::table('vendors')
      ->select('v_website_url')
      ->where('user_id', '=', $topAd->v_id)
      ->value('v_website_url');
+
+$wedding_date = DB::table('clients')
+        ->select('wed_date')
+        ->where('user_id', '=', Auth::id())
+        ->value('wed_date');
 ?>
 
 
@@ -273,7 +278,11 @@ $website_url = DB::table('vendors')
         @endif --}}
 
         @if (Auth::user())
+            @if($wedding_date)
             <a href="{{ route('clientVendorBookings.show', $topAd->id) }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Ask For Date</a>
+            @else
+            <a href="{{ route('customerreg') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Complete registernation for Booking Process</a>
+            @endif
         @else
             @php
                 $redirectUrl = route('clientVendorBookings.show', $topAd->id);
